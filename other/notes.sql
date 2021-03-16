@@ -29,7 +29,6 @@ create table users (
 
 -- 1 to m relationship
 
-
 create table posts (
 	id serial primary key,
 	creatorid int,
@@ -239,11 +238,27 @@ inner join communities com
 on 1 = com.userid and c.id = com.classid -- where the communities userid is 1 and the classid equals the communities
 
 --delete from multiple tables
-delete users u, communities c --tables you want to delete from
-from users u -- central table
-inner join communities c -- inner join
-on u.id = c.userid -- condition
-where u.id = 1; 
+delete users, communities, posts, friends, favorites, comments --tables you want to delete from
+from users  -- central table
+
+inner join communities on users.id = communities.userid -- condition
+inner join posts on users.id = posts.creatorid
+inner join friends on (users.id = friends.user_id1 or users.id = friends.user_id2)
+inner join favorites on users.id = favorites.user_id
+inner join comments on users.id = comments.user_id
+
+where users.id = 1; 
+
+delete users, communities, posts, friends, favorites, comments 
+from users  -- central table
+
+inner join communities on users.id = communities.userid -- condition
+inner join posts on users.id = posts.creatorid
+inner join friends on (users.id = friends.user_id1 or users.id = friends.user_id2)
+inner join favorites on users.id = favorites.user_id
+inner join comments on users.id = comments.user_id
+
+where users.id = 2; 
 
 -- example from website
 DELETE T1, T2    
