@@ -29,8 +29,24 @@
     
     if($_GET['alert'] == 'missing-value') {
         $alert = 'There seems to be a missing value.';
+    } else if ($_GET['alert'] == 'old-pwd-does-not-match') {
+        $alert = 'The old password entered does not match our records. Please re-enter and try again.';
+    } else if ($_GET['alert'] == 'passwords-do-not-match') {
+        $alert = 'The new passwords entered do not match. Please try again.';
+    } else if ($_GET['alert'] == 'old-equal-new') {
+        $alert = 'Your new password cannot match your previous password. Please try again.';
     } else if ($_GET['alert'] == 'incorrect-password') {
-        $alert = 'The password entered does not match our records. Please re-enter and try again.';
+        $alert = 'The password entered seems to be:<br/>
+            <ul>
+                <br/>
+                <li>Less than 6 characters</li><br/>
+                <li>Greater than 50 characters</li><br/>
+                <li>Written with non-alphabetical -numerical characters.
+            <ul/>';
+    } else if ($_GET['alert'] == 'successful-edit') {
+        $alert = 'Your password has been successfully edited!';
+    } else if ($_GET['alert'] == 'unsuccessful-edit') {
+        $alert = 'Something went wrong! Please try again';
     } else  {
         $alert = 'Edit Password Information Here:';
     }
