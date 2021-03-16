@@ -47,15 +47,17 @@ the fourth query increments class size and then updates the class row
             }
         }
 
-        //checks to see if input is greater than zero aka empty
-        if(count($classid) > 0) {
 
+        //checks to see if input is greater than zero aka empty
+      if(count($classid) > 0) {
+
+            $all_qry_success;
             //intiliazes sql stmts
             $check_qry = "SELECT userid,classid FROM communities WHERE userid = :userid AND classid = :classid";
             $insert = "INSERT INTO communities (classid, userid, joined_at) VALUES (:classid, :userid, NOW());";
             $select = "SELECT class_size FROM class WHERE id = :id;";
             $update = "UPDATE class SET class_size = :size WHERE id = :id;";
-    
+
             //iterates iterative 
             for ($iterative = 0; $iterative < count($classid); $iterative++) { 
 
@@ -79,6 +81,7 @@ the fourth query increments class size and then updates the class row
                     }
                 }
 
+
                 //if taken not true
                 //taken refers to the duplicate check
                 //so if there are no duplicates continue
@@ -90,14 +93,18 @@ the fourth query increments class size and then updates the class row
                     $inst_qry->bindParam(":classid", $classid[$iterative]);
                     //uses $row[] value established in auth-check to set up param
                     $inst_qry->bindParam(":userid", $row['id']);
+
+                    $inst_qry->execute();
                     
-                    if($inst_qry->execute()) { 
+                    if($inst_qry->rowCount() > 0) { 
 
                         //select class size from db
                         $slct_qry = $conn->prepare($select);
                         $slct_qry->bindParam(":id", $classid[$iterative]);
 
-                        if($slct_qry->execute()) {
+                        $slct_qry->execute();
+
+                        if($slct_qry->rowCount() > 0) {
                     
                             //fetch the info
                             while($row_query = $slct_qry->fetch(PDO::FETCH_ASSOC)) {
@@ -111,10 +118,11 @@ the fourth query increments class size and then updates the class row
                             $updt_qry->bindParam(":size", $class_size);
                             $updt_qry->bindParam(":id", $classid[$iterative]);
 
-                            if($updt_qry->execute()) { 
-                                //sends user to feed page aka home
-                                header("Location:http://localhost:8888/themetronetwork/main/feed.php?newuser");
-                                exit();
+                            $updt_qry->execute();
+
+                            if($updt_qry->rowCount() > 0) { 
+                                //allows the for statement to iterate through every number before
+                                $all_qry_success = true;
                             //error-catching
                             //not my first choice on how to do it but easiest way
                             } else {
@@ -126,6 +134,17 @@ the fourth query increments class size and then updates the class row
                     } else {
                         $error = true;
                     }
+                } 
+
+                
+  
+                //checks if every query went through for each class by
+                if($all_qry_success == TRUE && $iterative == (count($classid) - 1)) {
+                    //sends user to feed page aka home
+                    header("Location:http://localhost:8888/themetronetwork/main/feed.php?newuser");
+                    exit();
+                } else {
+                    $error = true;
                 }
             }
 
@@ -145,6 +164,7 @@ the fourth query increments class size and then updates the class row
     if($error) {
         $alert = "Something went wrong. Please try again";
     } 
+
 
 ?>
 
@@ -192,7 +212,7 @@ the fourth query increments class size and then updates the class row
                             </div>
                         </div>
 
-                         <div class="content-box">     
+                        <div class="content-box">     
                             <div class="segment segment1">
                                 <input type="checkbox" name="english12" value="2">
                             </div>
