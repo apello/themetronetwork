@@ -237,3 +237,17 @@ select c.class_name, --select the class name, teacher, and date joined
 from class c -- from both class and communities
 inner join communities com 
 on 1 = com.userid and c.id = com.classid -- where the communities userid is 1 and the classid equals the communities
+
+--delete from multiple tables
+delete users u, communities c --tables you want to delete from
+from users u -- central table
+inner join communities c -- inner join
+on u.id = c.userid -- condition
+where u.id = 1; 
+
+-- example from website
+DELETE T1, T2    
+FROM    T1    
+INNER JOIN T2    
+ON T1.student_id=T2.student.id    
+WHERE   T1.student_id=2;  
