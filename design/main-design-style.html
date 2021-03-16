@@ -1,0 +1,254 @@
+<html>
+
+
+<head>
+    <!-- link to stylesheet -->
+    <title>Home</title>
+    <link href="../css/main-style.css" rel="stylesheet" type="text/css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+</head>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+
+<script type="text/javascript">
+    $(document).ready(function() {
+
+        $(".heart-filled").hide();
+
+        $(".heart-outline").click(function() {
+                $(".heart-filled").show();
+                $(".heart-outline").hide();
+        });
+
+        $(".heart-filled").click(function() {
+            $(".heart-outline").show();
+            $(".heart-filled").hide();
+        });
+    }); 
+
+</script> 
+
+
+<body>
+
+    <div class="flexbox-container">
+        <header>
+            <div class="logo">
+                <h1>TMN</h1>
+            </div>
+
+            <nav>
+                <ul>
+                    <li>Home</li>
+                    <li>Communities</li>
+                    <li>Settings</li>
+                    <li>Logout</li>
+
+                </ul>
+            </nav>
+        </header>
+
+        <div class="content">
+      
+                <div class="container">
+                    <div class="section section1">
+
+                        <div class="title">Settings</div>
+
+                        <div class="links">
+                            <div class="link" style="background-color: rgba(50, 231, 255, 0.7);">Account</div>
+                            <div class="link">Communities</div>
+                            <div class="link">Friends</div>
+                        </div>
+
+
+                    </div>
+                    
+                    <div class="section section2">
+                    
+                        <div class="section-title">Account</div>
+
+
+                        <div class="content-box">
+                        
+                           
+                    
+                            <div class="segment full-content">
+                                <h1>Communities:</h1>
+                                <h3>Pre-Calculus w/ Mrs. Van Fossen</h3>
+                                <h3>English 12 w/ Carlee Beatty</h3>
+
+
+                            </div>
+
+                            
+
+
+                    
+                        </div> 
+
+                        <div class="content-box">
+                            <div class="segment full-content">Add Communities</div>
+                        </div>
+
+                        <div class="content-box">
+                            <div class="segment full-content">Delete Communities</div>
+                        </div>   
+
+                        <div class="input-form">
+                            <h1>Edit Account</h1>
+
+                            <input type="text" placeholder="Edit first name here:">
+                            <input type="text" placeholder="Edit last name here:">
+                            <input type="text" placeholder="Edit email here:">
+                            <input type="text" placeholder="Edit username here:">
+                            <input type="text" placeholder="Edit password here:">
+                            <input type="text" placeholder="Re-enter edited password here:">
+                            <input type="submit" class="submit-btn">
+
+                        </div>
+
+                        <div class="content-box">
+                        
+                            <div class="segment segment1">
+                                <button class="picture"></button>
+                                <button class="heart-outline"></button>
+                                <button class="heart-filled"></button>
+                                <button class="comment"></button>
+                            </div>
+                    
+                            <div class="segment segment2">
+                                 <h1>Abdirahman Nur</h1>
+                                <h3>Lorem ipsum dolor sit amet, </h3>
+                            </div>
+                    
+                        </div> 
+    
+                        
+
+                
+
+                    </div>
+                
+
+                </div>
+            </div>
+
+         
+
+                
+         
+        </div>
+
+        <footer>
+            <h1>The Metro Network</h1>
+            <h1>Created by Abdirahman</h1>
+
+        </footer>
+    </div>
+
+
+   
+
+</body>
+
+
+</html>   
+
+
+
+<!--    <div class="section section1">
+                    <div class="title">
+                        Welcome to the Metro Network, <?php /* outputs name */echo $row['first_name'] . " " . $row['last_name'];?>!
+                    </div>
+                </div>
+
+                <div class="section section2">
+
+                    <div class="section-title"><?php /*outputs alert */ echo $alert ?></div>
+
+                   
+                    <div class="content-box">     
+                        <div class="segment segment1">
+                            <input type="checkbox" name="precalculus" value="1">
+                        </div>
+                        <div class="segment segment2">
+                            Pre-Calculus
+                            <h5>Carol Van Fossen</h5>
+                        </div>
+                    </div>
+
+                     <div class="content-box">     
+                        <div class="segment segment1">
+                            <input type="checkbox" name="english12" value="2">
+                        </div>
+                        <div class="segment segment2">
+                            English 12
+                            <h5>Carlee Beatty</h5>
+                        </div>
+                    </div>
+                
+
+
+                    <input type="submit" name="submit" class="submit-btn" style="margin-bottom: 5px;">
+                    <input type="submit" name="skip" value="Skip" class="submit-btn">
+
+
+
+                </div> -->
+
+
+<!--  
+    main feed
+    
+    <div class="section section1">
+
+                    <div class="alert">Missing Value.</div>
+                
+                
+            <button id="show" class="hidebar">Click to show results</button>
+                    <button id="hide" class="hidebar">Click to hide results</button> 
+
+                
+                    <div class="results"> 
+
+
+                        <div class="result-box">20 results:</div>
+                        <div class="result-box">REsults Results Results Results Results ResultsResultsResutsResultsResults</div>
+                        <div class="result-box">REsults Results Results Results Results ResultsResultsResutsResultsResults</div>
+                        <div class="result-box">REsults Results Results Results Results ResultsResultsResutsResultsResults</div>
+                        <div class="result-box">REsults Results Results Results Results ResultsResultsResutsResultsResults</div>
+                        <div class="result-box">REsults Results Results Results Results ResultsResultsResutsResultsResults</div>
+                
+                
+                    </div>
+                
+                </div>
+                
+                <div class="section section2">
+                
+                    <div class="section-title">Posts - Scroll:</div>
+                
+                
+                    <div class="content-box">
+                        
+                        <div class="segment segment1">
+                            <button class="picture"></button>
+                            <button class="heart-outline"></button>
+                            <button class="heart-filled"></button>
+                            <button class="comment"></button>
+                        </div>
+                
+                        <div class="segment segment2">
+                             <h1>Abdirahman Nur</h1>
+                            <h3>Lorem ipsum dolor sit amet, </h3>
+                        </div>
+                
+                    </div> 
+
+                  
+
+                  
+                    </div>  -->

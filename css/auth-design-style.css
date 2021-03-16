@@ -1,0 +1,439 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+
+* {
+    font-family: 'Fredoka One', Arial, Helvetica, sans-serif;
+
+    padding: 0;
+    border: 0;
+    margin: 0;
+}
+
+body {
+    background: linear-gradient( 
+        to right top, 
+        #33A8FF,
+        #33F6FF);
+
+    color: white;
+}
+
+
+/* 
+
+flex-container holds all of the elements on the page
+probably could have used the body tag
+but that always seems to lead to problems
+
+*/
+
+.flex-container {
+    display: flex;
+    flex-direction: column;
+
+}
+
+/* 
+
+This styles the header, content, and footer
+
+*/
+
+header, .content, footer {
+    width: 100%;
+}
+
+
+/* 
+
+This styles .title and nav which are in the header
+
+*/
+
+
+header {
+    display: flex;
+    align-items: center;
+
+    height: 15vh;
+}
+
+.title, nav {
+    box-sizing: border-box;
+}
+
+.title {
+    float: left;
+
+    width: 20%;
+    text-align: center;
+}
+
+.title h1 {
+    margin-left: 30px;
+    color: white;
+    font-size: 50px;
+}
+
+nav {
+    float: right;
+    width: 80%;
+}
+
+nav ul {
+    list-style-type: none;
+
+    float: right;
+    padding: 20px;
+}
+
+nav li {
+    display: inline-block;
+    margin-right: 30px;
+
+    font-size: 20px;
+}
+
+nav li a {
+    color: white;
+    text-decoration: none;
+}
+
+/* 
+ styling for content
+*/
+
+.content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 70vh;
+}
+
+
+.alert {
+    width: 20%;
+    height: auto;
+    padding: 20px;
+    font-size: 20px;
+    background: linear-gradient(
+        to right bottom,
+        rgba(43, 209, 231, 0.7),
+        rgb(255, 255, 255)
+    );
+
+    border-radius: 30px 0px 0px 30px;
+}
+
+
+
+/*
+styling for register form
+*/
+
+ .register-form {
+    display: flex;
+
+    width: 70%;
+    height: 100%;
+
+    border-radius: 30px;
+
+    background: linear-gradient(
+        to right bottom,
+        rgba(255,255, 255, 0.7),
+        rgba(255, 255, 255, 0.3)
+    );
+
+}
+
+
+.register-section1, .register-section2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;;
+    flex-direction: column;
+    width: 50%;
+}
+
+
+
+/* 
+ styling for inputs
+*/ 
+
+.register-form input {
+    width: 75%;
+    height: 50px;
+
+    margin: 10px;
+    padding: 25px;
+    font-size: 20px;
+
+    border-radius: 20px;
+
+    cursor: pointer;
+}
+
+.register-form select {
+    width: 75%;
+    height: 50px;
+
+    margin: 10px;
+    font-size: 20px;
+    padding: 10px;
+
+    border-radius: 20px;
+} 
+ 
+
+ .register-form input:focus {
+    outline: none;
+}
+
+.register-form .submit-btn {
+    width: 150px;
+    padding: 0;
+    background: linear-gradient( 
+        to right bottom, 
+        #ffffff,
+        #DAFFFF
+    );
+}
+
+
+
+
+/*
+styling for login form
+*/
+
+.login-form {
+    display: flex;
+
+    width: 50%;
+    height: 100%;
+
+    border-radius: 30px;
+
+    background: linear-gradient(
+        to right bottom,
+        rgba(255,255, 255, 0.7),
+        rgba(255, 255, 255, 0.3)
+    );
+
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+/* 
+ styling for inputs
+*/
+
+ .login-form input {
+    width: 75%;
+    height: 50px;
+
+    margin: 10px;
+    padding: 25px;
+    font-size: 20px;
+
+    border-radius: 20px;
+
+    cursor: pointer;
+}
+
+.login-form input:focus {
+    outline: none;
+}
+
+.login-form .submit-btn {
+    width: 30%;
+    padding: 0;
+    background: linear-gradient( 
+        to right bottom, 
+        #ffffff,
+        #DAFFFF
+    );
+} 
+
+/* 
+ styling for multiple posts
+*/
+
+
+
+/* 
+
+This styles the footer
+
+*/ 
+
+
+
+
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    height: 15vh;
+
+}
+
+footer h1 {
+    font-size: 20px;
+
+}
+
+
+/*  
+
+////////////////////////////
+
+responsivness
+
+*/
+
+@media screen and (max-width: 768px) {
+    .login-form {
+        width: 70%;
+    }
+
+    .register-form {
+        width: 80%;
+        overflow-x: hidden;
+    }
+
+    .feed {
+        width: 80%;
+    }
+
+    .alert {
+        width: 100%;
+        border-radius: 0px 0px 0px 0px;
+    }
+
+
+}
+
+@media screen and (max-width: 768px) {
+
+
+    .register-form {
+        flex-direction: column;
+        overflow-y: scroll;
+        width: 90%;
+    }
+
+
+    .register-section1, .register-section2 {
+        
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        width: 100%;
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+
+}
+
+
+@media all and (orientation: landscape) {
+
+    header {
+        margin-bottom: 10px;
+    }
+
+    .flexbox-container {
+        overflow-x: hidden;
+        padding: 20px;
+    }
+
+
+    footer {
+        padding-top: 20px;
+    }
+
+}
+
+
+@media screen and (max-width: 425px) {
+      
+     /* 
+    login
+    */
+    
+    .login-form {
+        width: 90%;
+    }
+
+    .login-form .submit-btn {
+        width: 40%;
+    }
+
+    /* 
+    feed
+    */
+
+    .feed {
+        width: 90%;
+    }
+
+    .feed-container {
+        width: 80%;
+    }
+
+   
+
+    header {
+        flex-direction: column;
+        height: auto;
+
+        padding: 0;
+    }
+
+    .title, nav {
+        width: auto;
+
+    }
+
+    .title h1 {
+        padding-top: 10px;
+        margin: 0;
+        text-align: center;
+    }
+
+    nav {
+        display: flex;
+        height: 50%;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    header ul {
+
+        height: 50%;
+        width: 50%;
+
+        margin: auto;
+        border-radius: 10px;
+
+        background: linear-gradient(
+        to right bottom,
+        rgba(255,255, 255, 0.7),
+        rgba(255, 255, 255, 0.3)
+        );
+    }
+
+    header li {
+        float: none;
+        width: 100%;
+        text-align: center;
+        margin: 10px 10px 0px 0px;
+    }
+
+} */

@@ -1,0 +1,791 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+
+* {
+    /* fredoka is google font font */
+    font-family: 'Fredoka One', Arial, Helvetica, sans-serif;
+    /* gets rid of any base margin,padding,border preset by the browser */
+    padding: 0;
+    border: 0;
+    margin: 0;
+}
+
+/* adds blue gradient background */
+
+body {
+    background: linear-gradient( 
+        to right top, 
+        #33A8FF,
+        #33F6FF);
+
+    color: white;
+}
+
+
+/* 
+
+flex-container holds all of the elements on the page
+probably could have used the body tag
+but that always seems to lead to problems
+
+*/
+
+/* sets the container elements as column */
+.flex-container {
+    display: flex;
+    flex-direction: column;
+
+}
+
+/* 
+
+This styles the header, content, and footer
+
+*/
+
+header, .content, footer {
+    width: 100%;
+}
+
+
+/* 
+
+This styles .title and nav which are in the header
+
+*/
+
+
+header {
+    display: flex;
+    align-items: center;
+
+    height: 15vh;
+}
+
+/* border-box accounts for padding in height and widht to give padding while keeping element size */
+
+.logo, nav {
+    box-sizing: border-box;
+}
+
+/* logo sits left and nav sits right */
+
+.logo {
+    float: left;
+
+    width: 20%;
+    text-align: center;
+}
+
+.logo h1 {
+    margin-left: 30px;
+    color: white;
+    font-size: 50px;
+}
+
+nav {
+    float: right;
+    width: 80%;
+}
+
+nav ul {
+    list-style-type: none;
+
+    float: right;
+    padding: 20px;
+}
+
+nav li {
+    display: inline-block;
+    margin-right: 30px;
+
+    font-size: 20px;
+}
+
+nav li a {
+    color: white;
+    text-decoration: none;
+}
+
+/* 
+ styling for content
+*/
+
+/* content is the middle piece of the page, header -> content -> footer */
+.content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 70vh;
+}
+
+/* 
+container is the visible box that holds the content 
+this sets up display type, size, and color
+*/
+.container {
+    display: flex;
+
+    width: 70%;
+    height: 100%;
+
+    border-radius: 30px;
+
+    background: linear-gradient(
+        to right bottom,
+        rgba(255,255, 255, 0.7),
+        rgba(255, 255, 255, 0.3)
+    );
+}
+
+/* styles input for the whole container */
+.container input {
+    width: 90%;
+    height: 50px;
+
+    margin: 10px;
+    padding: 25px;
+    font-size: 20px;
+
+    border-radius: 20px;
+
+    /* adds cursor on input to let user know they have selected input */
+
+    cursor: pointer;
+}
+
+/* gets rid of the border of input to make it more clean */
+
+.container input:focus {
+    outline: none;
+}
+
+
+/* 
+sections are the halves that make up the container 
+this configures display type and orientations
+*/
+
+.section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+/* 
+section1 is supposed to be a sidebar so its only 30% of the width
+it sits on the left
+*/
+
+.section1 {
+    box-sizing: border-box;
+
+    width: 30%;
+
+    background: linear-gradient(
+        to right bottom,
+        rgba(255,255, 255, 0.7),
+        rgba(255, 255, 255, 0.3)
+    );
+
+    border-radius: 33px 0px 0px 33px;
+}
+
+
+
+/* this title is used when titles are put in section1 */
+/* like the name of a section like setttings or communities */
+.section1 .title {
+    box-sizing: border-box;
+
+    width: 100%;
+
+    padding-top: 30px;
+    padding: 20px;  
+
+    color: rgb(66, 151, 201, 0.6);
+    text-align: left;
+
+    font-size: 30px;
+    word-break: break-all;
+}
+
+/* for the links */
+
+.links {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.link {
+    width: 100%;
+
+    box-sizing: border-box;
+    padding: 20px;
+
+    background-color: rgba(43, 209, 231, 0.7);
+    border-bottom: 1px solid white;
+
+        
+    color: white;
+    text-decoration: none;
+}
+
+
+.link:hover {
+    background-color: rgba(50, 231, 255, 0.7);
+}
+
+/* 
+alert is the error display for inputs
+alerts in auth-form.css are different here
+ */
+.alert {
+    width: 90%;
+    height: auto;
+
+    box-sizing: border-box;
+    padding: 20px;
+
+    font-size: 20px;
+    background: linear-gradient(
+        to right bottom,
+        rgba(43, 209, 231, 0.7),
+        rgb(85, 214, 231)
+    );
+
+    border-radius: 30px;
+    margin: 10px;
+
+}
+
+/* 
+results for seach bars
+ */
+
+.results {
+    height: 80%;
+    width: 90%;
+
+    border-radius: 20px;
+
+
+    background: linear-gradient(
+        to right bottom,
+        rgba(255,255, 255, 0.7),
+        rgba(255, 255, 255, 0.3)
+    );
+
+    margin: auto;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    overflow-y: scroll;
+
+}
+
+.result-box {
+    width: 70%;
+    height: auto;
+    border-radius: 20px;
+
+    word-wrap: break-word;
+
+    background: grey;
+
+    padding: 20px;
+
+    margin: auto;
+    margin-bottom: 20px;
+    margin-top: 20px;
+
+}
+
+/* .hidebar {
+
+    width: 90%;
+    height: 50px;
+
+    margin: 10px;
+    margin-bottom: 15px;
+    padding: 25px;
+
+    font-size: 20px;
+
+    border-radius: 20px;
+
+    outline: none;
+    cursor: pointer;
+    line-height: 0;
+
+    text-align: center;
+
+    color: grey;
+    background-color: white;
+    display: none;
+}
+ */
+/* section2 is where the bulk of the content is so it takes up 70% */
+
+.section2 {
+    display: unset;
+    width: 70%;
+    overflow-y: scroll;
+    align-items: center;
+
+}
+
+/* 
+title is where i can put instructions or headers if section1 is in use
+it is the blue-ish bar
+*/
+
+.section-title {
+    width: 100%;
+    height: auto;
+
+    box-sizing: border-box;
+    padding: 20px;
+
+    font-size: 20px;
+    background: linear-gradient(
+        to right bottom,
+        rgba(43, 209, 231, 0.7),
+        rgb(85, 214, 231)
+    );
+
+    border-top-right-radius: 30px;
+}
+
+/* the input-form holds inputs in section2 */
+
+.input-form {
+
+    display: flex;
+
+    width: 80%;
+    height: auto;
+
+    border-radius: 30px;
+
+
+
+    padding-top: 20px;
+
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+
+
+    margin: auto;
+}
+
+
+.input-form .content-box {
+    width: 90%;
+}
+
+
+/* content-box hold posts and other information */
+
+.content-box {
+    display: flex;
+
+    height: auto;
+    width: 70%;
+
+    border-radius: 20px;
+
+    color: rgb(66, 151, 201, 0.6);
+
+    background: linear-gradient(
+        to right bottom,
+        rgba(255,255, 255, 0.7),
+        rgba(255, 255, 255, 0.3)
+    );
+
+    margin: auto;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    
+    -webkit-box-shadow: 2px 3px 10px 2px rgba(0,0,0,0.09); 
+    box-shadow: 2px 3px 10px 2px rgba(0,0,0,0.09);
+}
+
+
+
+/* styles for h1 and links */
+
+.content-box a {
+    color: rgb(66, 151, 201, 0.6);
+}
+
+.content-box h1 {
+    color: rgba(97, 187, 240, 0.6); 
+    word-break: break-all;
+}
+
+
+
+/* modeled after .section, this splits the content-box into two usable parts */
+
+.content-box .segment {
+    display: flex;
+    flex-direction: row;
+}
+
+
+.content-box .segment1 {
+    background: white;
+    opacity: 0.7;
+
+    width: 25%;
+
+    box-sizing: border-box;
+    padding: 20px;
+
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+
+    border-radius: 20px 0px 0px 20px;
+}
+
+
+
+/* the div style and the three classes are for side icons */
+
+.segment1 button {
+    width: 55px;
+    height: 50px;
+    margin: 10px;
+
+    outline: none;
+    cursor: pointer;
+}
+
+/* .segment1 .picture {
+    border-radius: 100%;
+
+    background-image: url("../pictures/picture.png");
+
+    background-color: white;
+    background-repeat: no-repeat;
+    background-size: 55px 50px;
+}
+ */
+.segment1 .heart-outline {
+    background-image: url("../pictures/heart-outline.png");
+
+    background-color: white;
+    background-repeat: no-repeat;
+    background-size: 50px 50px;
+}
+
+.segment1 .heart-filled {
+    background-image: url("../pictures/heart-filled.png");
+
+    background-color: white;
+    background-repeat: no-repeat;
+    background-size: 50px 50px;
+}
+
+.segment1 .comment {
+    background-image: url("../pictures/bubble.png");
+
+    background-color: white;
+    background-repeat: no-repeat;
+    background-size: 35px 35px;
+
+    margin: 0;
+    margin: 10px 0px 10px 15px;
+}
+
+/* segment2 is where content is held */
+
+.content-box .segment2 {
+    box-sizing: border-box;
+    padding: 20px;
+
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+
+    width: 75%;
+    border-radius: 0px 50px 50px 0px;
+    font-size: 1.25em;
+}
+
+/* increases a div to 100% to keep everything centered */
+
+.segment2 div {
+    width: 100%;
+    height: auto;
+}
+
+/* styles all headers */
+
+.segment2 h1,h2,h3,h4,h5,h6 {
+    box-sizing: border-box;
+    padding-top: 10px;
+}
+
+/* makes h1 a diffrent color to diffrentitate */
+
+.segment2 h1 {
+    color: rgba(97, 187, 240, 0.6); 
+}
+
+/* for when content-box is being used a link box */
+
+
+.section2 .submit-btn  {
+/*  refer to .container input for base styling */  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 30%;
+    margin: auto;
+
+    margin-top: 10px;
+    margin-bottom: 20px;
+
+    padding: 0;
+
+    background: linear-gradient( 
+        to right bottom, 
+        #ffffff,
+        #DAFFFF
+    );
+
+    line-height: 0px;
+}
+
+
+.content-box .full-content {
+    box-sizing: border-box;
+    padding: 20px;
+
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+
+    width: 100%;
+    border-radius: 0px 50px 50px 0px;
+    font-size: 1.25em;
+
+    word-break: break-all;
+}
+
+.full-content li {
+    list-style: none;
+    text-decoration: underline;
+}
+
+.content-box.error {
+    background: linear-gradient(
+        to right bottom,
+        rgba(43, 209, 231, 0.7),
+        rgb(85, 214, 231)
+    );
+    
+    color: white;
+}
+
+
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    height: 15vh;
+
+}
+
+footer h1 {
+    font-size: 20px;
+
+}
+
+
+/*  
+
+////////////////////////////
+
+responsivness
+
+*/
+
+/* this adds padding and margin when the page is height < 600 to help the site function better responsively */
+
+@media all and (orientation: landscape) and (max-height: 600px) {
+
+    header {
+        margin-bottom: 10px;
+    }
+
+    .flexbox-container {
+        overflow-x: hidden;
+        padding: 20px;
+    }
+
+
+    footer {
+        padding-top: 20px;
+    }
+
+}
+
+
+@media screen and (max-width: 1100px) {
+
+    .container {
+        width: 90%;
+    }
+
+    .input-form {
+        width: 100%;
+    }
+
+    .content-box {
+        width: 90%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+
+
+    .container {
+        width: 95%;
+    }
+
+
+}
+
+@media screen and (max-width: 700px) {
+
+
+    header {
+        flex-direction: column;
+        height: auto;
+
+        padding: 0;
+    }
+
+    .logo, nav {
+        width: auto;
+
+    }
+
+    .logo h1 {
+        padding-top: 10px;
+        margin: 0;
+        text-align: center;
+    }
+
+    nav {
+        display: flex;
+        height: 50%;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    header ul {
+
+        height: 50%;
+        width: 50%;
+
+        margin: auto;
+        border-radius: 10px;
+
+        background: linear-gradient(
+        to right bottom,
+        rgba(255,255, 255, 0.7),
+        rgba(255, 255, 255, 0.3)
+        );
+    }
+
+    header li {
+        float: none;
+        width: 100%;
+        text-align: center;
+        margin: 10px 10px 0px 0px;
+    }
+
+}
+
+@media screen and (max-width: 700px) {
+
+    .section1 {
+        width: 35%;
+    }
+
+    .section2 {
+        width: 65%;
+    }
+
+
+
+}
+
+@media all and (orientation: landscape) and (max-height: 600px) {
+
+    .container {
+        flex-direction: column;
+        display: unset;
+        overflow-y: scroll;
+    }
+
+    .section1 {
+        width: 100%;
+        border-radius: 0px 0px 0px;
+    }
+
+    .section-title {
+        border-radius: 0px;
+        margin-bottom: 10px;
+    }
+/* 
+    .hidebar {
+        display: unset;
+    }
+
+
+    .results {
+        display: none;
+    } */
+}
+
+
+@media screen and (max-width: 550px) {
+    .container {
+        flex-direction: column;
+        display: unset;
+        overflow-y: scroll;
+    }
+
+    .section1 {
+        width: 100%;
+        border-radius: 0px 0px 0px;
+    }
+
+    .section-title {
+        border-radius: 0px;
+        margin-bottom: 10px;
+    }
+
+ /*    .hidebar {
+        display: unset;
+    }
+
+    .results {
+        display: none;
+    } */
+
+}
+
