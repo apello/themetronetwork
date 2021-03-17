@@ -27,7 +27,7 @@
     } else if ($_GET['alert'] == 'incorrect-password') {
         $alert = 'The password entered does not match our records. Please re-enter and try again.';
     } else  {
-        $alert = 'Enter Password to Continue:';
+        $alert = 'If You Delete Your Account, All Your Data Will Be Lost. If You Understand, Enter Your Password to Continue:';
     }
 
 ?>
@@ -70,7 +70,7 @@
 
                        
                         <?php 
-                            echo '<div class="content-box error">
+                            echo '<div class="content-box error" style="margin-bottom: 5px;">
                                 <div class="full-content">
                                     '.$alert.'
                                 </div>
