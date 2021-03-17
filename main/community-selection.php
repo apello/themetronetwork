@@ -65,7 +65,7 @@ the fourth query increments class size and then updates the class row
                 $check = $conn->prepare($check_qry);
 
                 $check->bindParam(":userid", $row['id']);
-                $check->bindParam("classid", $classid[$iterative]);
+                $check->bindParam(":classid", $classid[$iterative]);
 
                 $check->execute();
 
