@@ -23,6 +23,39 @@
         }
 
         print_r($classid);
+
+        for ($iterative = 0; $iterative < count($classid); $iterative++) { 
+
+            //checks to see if user is already in the community to prevent duplicates
+            $delete_qry = "DELETE FROM communities where userid = :userid AND classid = :classid";
+
+            $delete = $conn->prepare($delete_qry);
+
+            $delete->bindParam(":userid", $row['id']);
+            $delete->bindParam(":classid", $classid[$iterative]);
+
+            $delete->execute();
+
+            if($delete->rowCount() > 0) {
+                $query_sucess = TRUE;
+            } else {
+                $error = TRUE;
+            }
+
+            echo $iterative;
+            echo count($classid);
+
+            if($query_sucess == TRUE && $iterative == (count($classid) - 1)) {
+                header("Location: http://localhost:8888/themetronetwork/main/settings/communities/edit-communities.php");
+                exit();
+            }           
+        }
+    }
+
+    if($error) {
+        $alert = "Something went wrong! Please try again.";
+    } else {
+        $alert = "Select communit[ies] you want to leave below:";
     }
 
 ?>
@@ -74,11 +107,19 @@
                     
                         <div class="section-title">Edit Communities</div>
 
+                     
+
                         <form action="edit-communities.php" method="post">
 
                         <?php
 
                             if($communities) {
+
+                                echo '<div class="content-box error">
+                                    <div class="full-content">
+                                        '.$alert.'
+                                    </div>
+                                    </div>';
 
                                 while($output = $query->fetch(PDO::FETCH_ASSOC)) {    
                                     echo '
@@ -95,17 +136,22 @@
                                     
                                     ';
                                 }
+
+                                echo '<input type="submit" name="submit" value="Leave" class="submit-btn" style="margin-bottom: 5px;">';
                                 
 
                             } else {
-                                echo '<div class="content-box">You have not joined any communities!</div>';                                
+                                echo '<div class="content-box">
+                                <div class="full-content">
+                                   You have not joined any communities!
+                                </div>
+                                </div>';                   
                             }
 
                         ?>
 
 
         
-                        <input type="submit" name="submit" value="Leave" class="submit-btn" style="margin-bottom: 5px;">
 
                         </form>
 
