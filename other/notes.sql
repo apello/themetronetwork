@@ -31,10 +31,9 @@ create table users (
 
 create table posts (
 	id serial primary key,
-	creatorid int,
+	creatorid int references(users(id)),
 	title text,
 	body text default '...',
-	userid int references(users(id)),
 	community_ref int default NULL,
 	created_at date default now()
 );
