@@ -41,7 +41,7 @@ function myFunction() {
 
             <nav>
                 <ul>
-                    <li><a href="../feed.php">Home</a></li>
+                    <li><a href="../../feed.php">Home</a></li>
                     <li>Communities</li>
                     <li>Settings</li>
                     <li><a href="../../../logout.php">Logout</a></li>
