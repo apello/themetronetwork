@@ -26,6 +26,8 @@
         $alert = 'There seems to be a missing value.';
     } else if ($_GET['alert'] == 'incorrect-password') {
         $alert = 'The password entered does not match our records. Please re-enter and try again.';
+    } else if ($_GET['alert'] == 'error') {
+        $alert = 'Something went wrong! Please try again.';
     } else  {
         $alert = 'If You Delete Your Account, All Your Data Will Be Lost. If You Understand, Enter Your Password to Continue:';
     }
