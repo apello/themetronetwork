@@ -1,5 +1,6 @@
 <?php
 
+
 if(isset($_POST['submit'])) {
 
     $user_pwd = $_POST["user-pwd"]; 
@@ -14,9 +15,13 @@ if(isset($_POST['submit'])) {
         exit();
     }
 
-  /*   header("Location: http://localhost:8888/themetronetwork/index.php?account-deleted");
-    exit(); */
-
+    if(deleteUser()) {
+        header("Location: http://localhost:8888/themetronetwork/index.php?alert=account-deleted");
+        exit(); 
+    } else {
+        header("Location: http://localhost:8888/themetronetwork/main/account/delete-account.php?alert=error");
+        exit(); 
+    }
 }
 
 function emptyValue($user_pwd) {
@@ -25,19 +30,24 @@ function emptyValue($user_pwd) {
     if(empty($user_pwd)) {
         $result = TRUE;
     } else {
-        $result = FALSE; 
+        $result = FALSE;
     }
 
     return $result;
 }
 
 function checkPassword ($user_pwd) {
-    $user_id = $_POST['user-id'];
+
+    $result;
+
+    require("../../../includes/db.php");
+
+    $userid = $_POST['user-id'];
 
     $sql = "SELECT passwrd FROM users WHERE id = :id;";
     $stmt = $conn->prepare($sql);
 
-    $stmt->bindParam(":id", $user_id);
+    $stmt->bindParam(":id", $userid);
 
     $stmt->execute();
 
@@ -53,55 +63,37 @@ function checkPassword ($user_pwd) {
         $result = TRUE;
     }
 
-    $conn->close();
+    return $result;
 }
 
 function deleteUser() {
-    $result 
-}
 
-function deleteAccount() {
     $result;
 
-    $user_id = $_POST['user-id'];
+    $userid = $_POST['user-id'];
 
-    $sql = "DELETE FROM users WHERE id = :id";
+    require("../../../includes/db.php");
+
+    //one SQL stmt still has problems but idc anymore took me two freaking weeks to figrue this out stupid ur stupid dummy
+    $sql = 
+    "DELETE FROM users WHERE id = :id;
+    DELETE FROM posts WHERE creatorid = :id;
+    DELETE FROM comments WHERE userid = :id;
+    DELETE FROM friends WHERE user_id1 = :id OR user_id2 = :id;
+    DELETE FROM favorites WHERE userid = :id;
+    DELETE FROM communities WHERE userid = :id;
+    ";
     $stmt = $conn->prepare($sql);
 
-    $stmt->bindParam(":id", $user_id);
+    $stmt->bindParam(":id", $userid);
 
     $stmt->execute();
 
     if($stmt->rowCount() > 0) {
-        $result = TRUE;
+        $return = TRUE;
     } else {
-        $result = FALSE;
+        $return = FALSE;
     }
 
-    $conn->close();
+    return $return;
 }
-
-function deleteCommunities() {
-    $result;
-
-    $user_id = $_POST['user-id'];
-
-
-    $sql = "DELETE FROM communities WHERE userid = :id";
-    $stmt = $conn->prepare($sql);
-
-    $stmt->bindParam(":id", $user_id);
-
-    $stmt->execute();
-
-    if($stmt->rowCount() > 0) {
-        $result = TRUE;
-    } else {
-        $result = FALSE;
-    }
-
-    $conn->close();
-}
-
-
-
