@@ -9,6 +9,11 @@
     margin: 0;
 }
 
+form {
+    margin: 0px;
+    padding: 0px;
+}
+
 /* adds blue gradient background */
 
 body {
@@ -154,6 +159,8 @@ this sets up display type, size, and color
     cursor: pointer;
 }
 
+
+
 /* gets rid of the border of input to make it more clean */
 
 .container input:focus {
@@ -192,7 +199,20 @@ it sits on the left
     border-radius: 33px 0px 0px 33px;
 }
 
+/* seach section1 elements */
 
+.search {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    height: 100%;
+
+    box-sizing: border-box;
+    padding: 15px;
+}
 
 /* this title is used when titles are put in section1 */
 /* like the name of a section like setttings or communities */
@@ -454,7 +474,30 @@ it is the blue-ish bar
     border-radius: 20px 0px 0px 20px;
 }
 
+/* for links in search */
 
+.segment1 .result1 {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    text-decoration: underline;
+
+    box-sizing: border-box;
+    padding: 15px;
+}
+
+/* see more link on posts */
+
+.segment2 .result2 h5 {
+    font-weight: bold;
+    font-size: inherit;
+    color: rgba(97, 187, 240, 0.6); 
+    text-decoration: underline;
+}
 
 /* the div style and the three classes are for side icons */
 
@@ -565,6 +608,13 @@ it is the blue-ish bar
     line-height: 0px;
 }
 
+/* for search bar submit */
+
+.section1 .submit-btn {
+    background: white;
+    line-height: 0px;
+}
+
 
 .content-box .full-content {
     box-sizing: border-box;
@@ -657,17 +707,8 @@ responsivness
     }
 }
 
-@media screen and (max-width: 768px) {
 
-
-    .container {
-        width: 95%;
-    }
-
-
-}
-
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 800px) {
 
 
     header {
@@ -717,6 +758,9 @@ responsivness
         margin: 10px 10px 0px 0px;
     }
 
+    .container {
+        width: 95%;
+    }
 }
 
 @media screen and (max-width: 700px) {
