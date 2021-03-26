@@ -7,6 +7,28 @@
 
     $_SESSION['LAST_ACTIVITY'] = time();
 
+
+
+    //input checks
+    //put them up here to give space to the search query
+
+
+    $alert;
+    $input_set;
+
+    
+    if($_GET['alert'] == 'missing-value') {
+        $alert = 'There seems to be a missing value. Please try again.';
+    } else if($_GET['alert'] == 'inappropriate-value') {
+        $alert = 'The value entered is inappropriate. Please try again.';
+    } else  {
+        $alert = 'Search for users, communities, or posts here:';
+    }
+
+    if($_GET['alert'] == 'input-set') {
+        $input_set = TRUE;
+    }
+
 ?>
 
 
@@ -19,6 +41,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
       
 </head>
+
+
+
+<?php
+
+    //i have to put this code in the page because its harder to send code across pages
+
+    //intialize var
+  
+
+
+?>
+
 
 
 
@@ -44,96 +79,52 @@
         <div class="content">
       
                 <div class="container">
-
                     <div class="section section1">
 
-                        <div class="search">
-                            <div class="alert">Missing Value</div>
-                            <input type="text" placeholder="Search here:"/>
-                            <input type="submit" name="submit" class="submit-btn" value="Go">
-                        </div>
+                        <form class="search" action="search-form.php" method="post">
+                                <div class="alert"><?php echo $alert; ?></div>
+                                <input type="text" name="search" placeholder="Search here:"/>
+                                <input type="submit" name="submit" class="submit-btn" value="Go">
+                        </form>
+
 
                     </div>
+
 
                 <div class="section section2">
 
-                    <div class="content-box">
-                        <div class="full-content">
-                            <h3 align="center">Results for: Green Boy</h3>
-                        </div>
-                    </div>
+                    <?php
+                        if($input_set) {
+                            if($user) {
+                                while($row = $user->fetch(PDO::FETCH_ASSOC)) {
+                                    echo ' 
+                                    <div class="content-box">
+                                        <div class="segment1">
+                                            <div class="result1">
+                                                <h2>View</h2>
+                                            </div>
+                                        </div>
+            
+                                        <div class="segment2">
+                                            <div class="result2">
+                                                <h1>Abdi</h1>
+                                                <h3>Student</h3>
+                                            </div>
+                                        </div>
+                                    </div>';
+                                }
+                            }
+                        } else {
+                    
+                            echo ' 
+                            <div class="content-box" style="margin-top:30px;">
+                                <div class="full-content">
+                                    Use the search bar to discover users, posts and communities!
+                                 </div>
+                            </div>';
+                        }
 
-                    <div class="content-box">
-                        <div class="full-content">
-                            <h1>Posts</h1>
-                        </div>
-                    </div>
-
-                    <div class="content-box">
-                            <div class="segment1">
-                                <div class="result1">
-                                    <h2>View More</h2>
-                                </div>
-                            </div>
-
-                            <div class="segment2">
-                                <div class="result2">
-                                    <h1>Abdirahman Nur</h1>
-                                    <h3>Student</h3>
-                                </div>
-                            </div>
-                    </div>
-
-
-                    <div style="margin-top:20px;" class="content-box">
-                        <div class="full-content">
-                            <h1>Communities</h1>
-                        </div>
-                    </div>
-
-                    <div class="content-box">
-                            <div class="segment1">
-                                <div class="result1">
-                                    <h2>View More</h2>
-                                </div>
-                            </div>
-
-                            <div class="segment2">
-                                <div class="result2">
-                                    <h1>Algebra 2</h1>
-                                    <h3>Carol Van Fossen</h3>
-
-                                </div>
-                            </div>
-                    </div>
-
-                    <div style="margin-top:20px;" class="content-box">
-                        <div class="full-content">
-                            <h1>Posts</h1>
-                        </div>
-                    </div>
-
-                    <div class="content-box">
-                            <div class="segment1">
-                                <div class="result1">
-                                    <h2>View More</h2>
-                                </div>
-                            </div>
-
-                            <div class="segment2">
-                                <div class="result2">
-                                    <h3>Post by Abdirahman Nur</h3>
-                                    <h1>What is that</h1>
-                                    <h4>
-                                        Lorem ipsum dolor sit amet, consectetur... <h5>See More</h5>
-                                    </h4>
-
-                                </div>
-                            </div>
-                    </div>
-
-
-                
+                    ?>
 
                 </div>
             </div>
