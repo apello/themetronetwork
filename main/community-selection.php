@@ -162,7 +162,7 @@ the fourth query increments class size and then updates the class row
     }
 
     if($error) {
-        $alert = "Something went wrong. Please try again";
+        $alert = "Something went wrong. Please try again.";
     } 
 
 
@@ -192,8 +192,8 @@ the fourth query increments class size and then updates the class row
                 <div class="container">
 
                     <div class="section section1">
-                        <div class="title">
-                            Welcome to the Metro Network, <?php /* outputs name */echo $row['first_name'] . " " . $row['last_name'];?>!
+                        <div class="title title-top">
+                            <h2>Welcome!</h2>
                         </div>
                     </div>
 
@@ -223,9 +223,8 @@ the fourth query increments class size and then updates the class row
                         </div>
                     
 
-
-                        <input type="submit" name="submit" class="submit-btn" style="margin-bottom: 5px;">
-                        <input type="submit" name="skip" value="Skip" class="submit-btn">
+                            <input type="submit" name="submit" class="submit-btn long-submit-btn" style="margin-bottom: 5px;,">
+                            <input type="submit" name="skip" value="Skip" class="submit-btn long-submit-btn">
 
 
 
@@ -237,12 +236,8 @@ the fourth query increments class size and then updates the class row
                     
 
       
+    <?php include("../includes/footer.html"); ?>
 
-  <footer>
-      <h1>The Metro Network</h1>
-      <h1>Created by Abdirahman</h1>
-
-  </footer>
 </div>
 
 

@@ -9,11 +9,6 @@
     margin: 0;
 }
 
-form {
-    margin: 0px;
-    padding: 0px;
-}
-
 /* adds blue gradient background */
 
 body {
@@ -25,6 +20,16 @@ body {
     color: white;
 }
 
+/* ::-webkit-scrollbar {
+    width: 10px;
+    
+}
+
+::-webkit-scrollbar-thumb {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+ */
 
 /* 
 
@@ -231,6 +236,18 @@ it sits on the left
     word-break: break-all;
 }
 
+/* for community-selection to move text to top instead of center */
+
+.section1 .title-top {
+    height: 100%;
+}
+
+.title-top h2 {
+    padding: 20px;
+    color: rgba(97, 187, 240, 0.6); 
+    text-align: center;
+}
+
 /* for the links */
 
 .links {
@@ -371,11 +388,7 @@ it is the blue-ish bar
     padding: 20px;
 
     font-size: 20px;
-    background: linear-gradient(
-        to right bottom,
-        rgba(43, 209, 231, 0.7),
-        rgb(85, 214, 231)
-    );
+    background: rgb(115,194,251, 0.5);
 
     border-top-right-radius: 30px;
 }
@@ -615,6 +628,11 @@ it is the blue-ish bar
     line-height: 0px;
 }
 
+/* long submit btn for community-selection */
+
+.submit-btn.long-submit-btn {
+    width: 50%;
+}
 
 .content-box .full-content {
     box-sizing: border-box;
@@ -659,7 +677,10 @@ footer {
 
 footer h1 {
     font-size: 20px;
+}
 
+footer a {
+    color: white;
 }
 
 
@@ -773,6 +794,9 @@ responsivness
         width: 65%;
     }
 
+    .submit-btn.long-submit-btn {
+        width: 90%;
+    }    
 
 
 }

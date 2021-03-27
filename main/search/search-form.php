@@ -17,7 +17,7 @@ if(isset($_POST['submit'])){
         header("Location: http://localhost:8888/themetronetwork/main/search/search.php?alert=inappropriate-value");
         exit();
     } else {
-        header("Location: http://localhost:8888/themetronetwork/main/search/search.php?alert=input-set");
+        header("Location: http://localhost:8888/themetronetwork/main/search/search.php?alert=input-set&search=".$search_query);
         exit();
     }
 

@@ -48,6 +48,7 @@
                 <ul>
                     <li><a href="index.php">Login</a></li>
                     <li><a href="register.php">Register</a></li>
+                    <li><a href="about.html">About</a></li>
                 </ul>
             </nav>
         </header>
@@ -69,11 +70,8 @@
         </form>     
 
 
-<footer>
-    <h1>The Metro Network</h1>
-    <h1>Created by Abdirahman Nur</h1>
+        <?php include("includes/footer.html"); ?>
 
-</footer>
 </div>
 
 

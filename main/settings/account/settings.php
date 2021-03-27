@@ -22,7 +22,7 @@
 
 <script>
 
-function myFunction() {
+function deleteAlert() {
   if (confirm("If You Want to Delete Your Account, Press Ok. Otherwise, Press Cancel.")) {
       window.location.replace("http://localhost:8888/themetronetwork/main/settings/account/delete-account.php");
   } 
@@ -39,15 +39,8 @@ function myFunction() {
                 <h1>TMN</h1>
             </div>
 
-            <nav>
-                <ul>
-                    <li><a href="../../feed.php">Home</a></li>
-                    <li>Communities</li>
-                    <li>Settings</li>
-                    <li><a href="../../../logout.php">Logout</a></li>
+            <?php include("../../includes/nav-folder-links.html"); ?>
 
-                </ul>
-            </nav>
         </header>
 
         <div class="content">
@@ -106,7 +99,7 @@ function myFunction() {
                         </div>
 
                         <div class="content-box">
-                            <div class="segment full-content" onclick="myFunction()" style="cursor: pointer; text-decoration:underline;">Delete Account</div>
+                            <div class="segment full-content" onclick="deleteAlert()" style="cursor: pointer; text-decoration:underline;">Delete Account</div>
                         </div>   
 
                     
@@ -125,11 +118,8 @@ function myFunction() {
          
         </div>
 
-        <footer>
-            <h1>The Metro Network</h1>
-            <h1>Created by Abdirahman Nur</h1>
+        <?php include("../../../includes/footer.html"); ?>
 
-        </footer>
     </div>
 
 

@@ -313,9 +313,11 @@ footer {
 
 footer h1 {
     font-size: 20px;
-
 }
 
+footer a {
+    color: white;
+}
 
 
 /*  

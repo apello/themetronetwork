@@ -57,8 +57,8 @@ create table friends (
 
 create table favorites (
 	userid int references users(id),
-	post_id int references posts(id),
-	primary key (user_id, post_id)
+	postid int references posts(id),
+	primary key (userid, postid)
 );
 
 create table class (
@@ -249,13 +249,13 @@ inner join comments on users.id = comments.user_id
 where users.id = 1; 
 
 delete users, communities, posts, friends, favorites, comments 
-from users  -- central table
+from users 
 
-inner join communities on users.id = communities.userid -- condition
+inner join communities on users.id = communities.userid 
 inner join posts on users.id = posts.creatorid
 inner join friends on (users.id = friends.user_id1 or users.id = friends.user_id2)
-inner join favorites on users.id = favorites.user_id
-inner join comments on users.id = comments.user_id
+inner join favorites on users.id = favorites.userid
+inner join comments on users.id = comments.userid
 
 where users.id = 2; 
 

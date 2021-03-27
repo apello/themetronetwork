@@ -80,14 +80,8 @@
                 <h1>TMN</h1>
             </div>
 
-            <nav>
-                <ul>
-                    <li><a href="../../feed.php">Home</a></li>
-                    <li>Communities</li>
-                    <li>Settings</li>
-                    <li><a href="../../../logout.php">Logout</a></li>
-                </ul>
-            </nav>
+            <?php include("../../includes/nav-folder-links.html"); ?>
+
         </header>
 
         <div class="content">
@@ -176,11 +170,8 @@
          
         </div>
 
-        <footer>
-            <h1>The Metro Network</h1>
-            <h1>Created by Abdirahman Nur</h1>
+        <?php include("../../../includes/footer.html"); ?>
 
-        </footer>
     </div>
 
 
