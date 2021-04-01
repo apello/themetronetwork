@@ -47,7 +47,7 @@
             <nav>
                 <ul>
                     <li><a href="index.php">Login</a></li>
-                    <li><a href="register.php">Register</a></li>
+                    <li><a href="register.php">Sign Up</a></li>
                     <li><a href="about.html">About</a></li>
                 </ul>
             </nav>
@@ -63,7 +63,7 @@
                 <h1>Login:</h1>
                         <input type="text" name="user-auth-name" placeholder="Enter username here:">
                         <input type="password" name="user-auth-pwd" placeholder="Enter password here:">
-                        <input type="submit" name="submit" class="submit-btn">
+                        <input type="submit" name="submit" value="Login" class="submit-btn">
                 </div>
             </div>
 
