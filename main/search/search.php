@@ -106,7 +106,6 @@
                 <ul>
                     <li><a href="../feed.php">Home</a></li>
                     <li>Search</li>
-                    <li>Communities</li>
                     <li><a href="../settings/account/settings.php">Settings</a></li>
                     <li><a href="../../logout.php">Logout</a></li>
                 </ul>

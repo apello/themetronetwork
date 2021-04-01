@@ -152,6 +152,22 @@ this sets up display type, size, and color
     );
 }
 
+/* full-content for about.html */
+
+
+.container .full-content {
+    width: 100%;
+    height: 100%;
+
+    box-sizing: border-box;
+    padding: 30px;
+
+    overflow-y: scroll;
+}
+
+
+
+
 /* styles input for the whole container */
 .container input {
     width: 90%;
@@ -213,7 +229,7 @@ it sits on the left
 .search {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
 
     width: 100%;
@@ -591,13 +607,13 @@ it is the blue-ish bar
     box-sizing: border-box;
     padding-top: 10px;
 }
-/* makes h1 a diffrent color to diffrentitate */
+/* makes h1,h2 a diffrent color to diffrentitate */
 
-.segment2 h1 {
+.segment2 h1,h2 {
     color: rgba(97, 187, 240, 0.6); 
 }
 
-/* see more link on posts */
+/* 'see more' link on posts */
 
 .segment2 .result2 h5 {
     font-weight: bold;
@@ -812,11 +828,11 @@ responsivness
 @media screen and (max-width: 700px) {
 
     .section1 {
-        width: 35%;
+        width: 40%;
     }
 
     .section2 {
-        width: 65%;
+        width: 60%;
     }
 
     .submit-btn.long-submit-btn {
@@ -843,6 +859,9 @@ responsivness
         border-radius: 0px;
         margin-bottom: 10px;
     }
+
+
+
 /* 
     .hidebar {
         display: unset;

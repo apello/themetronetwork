@@ -98,8 +98,16 @@
                 <h1>TMN</h1>
             </div>
 
-            <?php include("../../includes/nav-folder-links.html"); ?>
+            <nav>
+                <ul>
+                    <li><a href="../../feed.php">Home</a></li>
+                    <li><a href="../../search/search.php">Search</a></li>
+                    <li><a href="../account/settings.php">Settings</a></li>
+                    <li><a href="../../../logout.php">Logout</a></li>
 
+                </ul>
+            </nav>
+            
         </header>
 
         <div class="content">

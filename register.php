@@ -44,7 +44,7 @@
     } else if ($_GET['alert'] == 'registrationfailed') {
         $alert = 'Something went wrong. Please try again.';
     } else  {
-        $alert = 'Welcome to the Metro Network.';
+        $alert = 'Welcome to the Metro Network. <br/> <br/> All values are required.';
     }
 
 ?>
@@ -79,21 +79,20 @@
                     <div class="register-section1">
                         <h1>Register:</h1>
                         <br/>
-
-                        <input type="text" name="user-first-name" placeholder="[Required] Enter first name here:">
-                        <input type="text" name="user-last-name" placeholder="[Required] Enter last name here:">
-                        <input type="text" name="user-name" placeholder="[Required] Enter username here:">
-                        <input type="email" name="user-email" placeholder="[Required] Enter email here:">
+                        <input type="text" name="user-first-name" placeholder="Enter first name here:">
+                        <input type="text" name="user-last-name" placeholder="Enter last name here:">
+                        <input type="text" name="user-name" placeholder="Enter username here:">
+                        <input type="email" name="user-email" placeholder="Enter email here:">
 
                     </div>
 
                     <div class="register-section2">
-                        <input type="password" name="user-pwd" placeholder="[Required] Enter password here:">
+                        <input type="password" name="user-pwd" placeholder="Enter password here:">
 
-                        <input type="password" name="user-rpt-pwd" placeholder="[Required] Re-enter password here:">
+                        <input type="password" name="user-rpt-pwd" placeholder="Re-enter password here:">
 
                         <select name="select">
-                            <option value="question">[Required] -- Student or Teacher? --</option>
+                            <option value="question">-- Student or Teacher? --</option>
                             <option value="student">Student</option>
                             <option value="teacher">Teacher</option>
                         </select>
@@ -105,7 +104,7 @@
         </form>     
 
 
-        <?php include("../../../includes/footer.html"); ?>
+        <?php include("includes/footer.html"); ?>
 
 </div>
 

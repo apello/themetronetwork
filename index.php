@@ -28,9 +28,9 @@
     } else if ($_GET['alert'] == 'account-deleted') {
         $alert = 'Your account has been successfully deleted. We are so sorry to see you go!';
     } else if ($_GET['alert'] == 'error') {
-        $alert = 'Something went wrong. Please log in.';
+        $alert = 'Something went wrong. Please try again.';
     } else  {
-        $alert = 'Welcome to the Metro Network.';
+        $alert = 'Welcome to the Metro Network! Don\'t have an account? <a href="register.php" style="color: white">Sign Up</a>.';
     }
     
 

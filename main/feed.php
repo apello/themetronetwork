@@ -32,7 +32,6 @@
                 <ul>
                     <li>Home</li>
                     <li><a href="search/search.php">Search</a></li>
-                    <li>Communities</li>
                     <li><a href="settings/account/settings.php">Settings</a></li>
                     <li><a href="../logout.php">Logout</a></li>
 

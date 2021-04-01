@@ -44,7 +44,7 @@
     } else if ($_GET['alert'] == 'incorrect-email') {
         $alert = 'Email entered does not seem to be registered @themetroschool.org. Please try again.';
     } else if ($_GET['alert'] == 'successful-edit') {
-        $alert = 'Your information has been succesfully edited!';
+        $alert = 'Your information has been successfully edited!';
     } else if ($_GET['alert'] == 'unsuccessful-edit') {
         $alert = 'Something went wrong! Please try again.';
     } else  {
@@ -63,8 +63,16 @@
                 <h1>TMN</h1>
             </div>
 
-            <?php include("../../includes/nav-folder-links.html"); ?>
+            <nav>
+                <ul>
+                    <li><a href="../../feed.php">Home</a></li>
+                    <li><a href="../../search/search.php">Search</a></li>
+                    <li><a href="settings.php">Settings</a></li>
+                    <li><a href="../../../logout.php">Logout</a></li>
 
+                </ul>
+            </nav>
+            
         </header>
 
         <div class="content">

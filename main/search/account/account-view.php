@@ -88,7 +88,6 @@
 				<ul>
 					<li><a href="../../feed.php">Home</a></li>
 					<li><a href="../search.php">Search</a></li>
-					<li>Communities</li>
 					<li><a href="../../settings/account/settings.php">Settings</a></li>
 					<li><a href="../../../logout.php">Logout</a></li>
 				</ul>
@@ -230,7 +229,7 @@
 
                                         <div class="segment2">
                                             <div class="result2">
-                                                <h1>'.$friends_acccount_info['first_name'] .' ' . $friends_acccount_info['last_name'] .'</h1>
+                                                <h2>'.$friends_acccount_info['first_name'] .' ' . $friends_acccount_info['last_name'] .'</h2>
                                                 <h3>'.$friends_acccount_info['username'].'</h3>
                                             </div>
                                         </div>
@@ -303,7 +302,7 @@
             
                                         <div class="segment2">
                                             <div class="result2">
-                                                <h1>'.$output['class_name'] .'</h1>
+                                                <h2>'.$output['class_name'] .'</h2>
                                                 <h3>'.$output['class_proctor'].'</h3>
                                             </div>
                                         </div>
