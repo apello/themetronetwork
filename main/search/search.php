@@ -62,6 +62,7 @@
         $user_input = "$search%";
 
         $user_search->bindParam(":input", $user_input);
+        $user_search->bindParam(":id", $row['id']);
 
         $user_search->execute();
 
@@ -75,7 +76,7 @@
 
         //to get around wildcard issue, have to declare var with wildcards
         //idk if i should do it starts with or it has it inside
-        $comm_input = "%$search%";
+        $comm_input = "$search%";
 
         $comm_search->bindParam(":input", $comm_input);
 
@@ -167,31 +168,28 @@
 
                                 while($row = $user_search->fetch(PDO::FETCH_ASSOC)) {
 
-                                    //assign value to position bool
-                                    if($row['position'] == 1){
-                                        $position = "Student";
-                                    } else {
-                                        $position = "Teacher";
-                                    }
-
+                                    global $userid;
+                                    $userid = $row['id'];
 
                                     //CONTENT BOX  - RESULT OUTPUT
                                     echo ' 
                                     <div class="content-box">
                                         <div class="segment1">
                                             <div class="result1">
-                                                <h2>
-                                                    <a href="account/account-view.php?id="'.$row['id'].'">
+                                                <h2>';
+                    ?>
+                                                    <a href="account/account-view.php?id=<?php echo $userid; ?>">
                                                         View
                                                     </a>
-                                                </h2>
+                    <?php
+                                    echo '      </h2>
                                             </div>
                                         </div>
             
                                         <div class="segment2">
                                             <div class="result2">
                                                 <h1>'.$row['first_name'].' '.$row['last_name'] .'</h1>
-                                                <h3>'.$row['username']. ' - ' .$position.'</h3>
+                                                <h3>'.$row['username']. ' - ' .ucwords($row['position']).'</h3>
                                             </div>
                                         </div>
                                     </div>';
@@ -199,12 +197,18 @@
 
                                 // SEE MORE
                                 if($user_search->rowCount() >= 3) {
-                                    echo '<div class="content-box">
+                    ?>
+                                    <div class="content-box"  style="margin-bottom: 30px;">
                                         <div class="full-content">
-                                            <h3 align="center"><a href="communities/communities-view.php">See All Results</a></h3>
+                  
+                                            <h3 align="center"><a href="account/user-see-all.php?search_query=<?php echo trim($search); ?>">See All Results</a></h3>
+
                                         </div>
-                                    </div>';
+                                    </div>
+                    <?php
+
                                 }
+                                
                             }
 
                             //COMMUNITIES RESULTS
@@ -221,16 +225,22 @@
                                 //SELECT RESULTS FROM DB
                                 while($row = $comm_search->fetch(PDO::FETCH_ASSOC)) {
 
+
+                                    global $commid;
+                                    $commid = $row['id'];
+
                                     //CONTENT BOX
                                     echo ' 
                                     <div class="content-box">
                                         <div class="segment1">
                                             <div class="result1">
-                                                <h2>
-                                                    <a href="communities/communities-view.php?id="'.$row['id'].'">
+                                                <h2>';
+                    ?>
+                                                    <a href="communities/communities-view.php?id=<?php echo $commid; ?>">
                                                         View
                                                     </a>
-                                                </h2>
+                    <?php  
+                                            echo '</h2>
                                             </div>
                                         </div>
             
@@ -247,9 +257,12 @@
                                  // SEE MORE
                                  if($comm_search->rowCount() >= 3) {
                                     echo '<div class="content-box">
-                                        <div class="full-content">
-                                            <h3 align="center"><a href="communities/communities-view.php">See All Results</a></h3>
-                                        </div>
+                                        <div class="full-content">';
+                    ?>
+                                            <h3 align="center"><a href="communities/comm-see-all.php?search_query=<?php echo trim($search); ?>">See All Results</a></h3>
+
+                    <?php
+                                    echo '</div>
                                     </div>';
                                 }
                             }

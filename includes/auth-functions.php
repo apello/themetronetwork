@@ -120,19 +120,10 @@ function createUser($user_first_name, $user_last_name, $user_username, $user_ema
     
     //decided to randomly choose picture for user 
     $profile_picture = rand(1,10);
-
-    //checks what select is
-    if($select == "student") {
-        $choice = 1;
-    } else if ($select == "teacher"){
-        $choice = 0;
-    }
-
     
     //sql statement
     $sql = "INSERT INTO users (first_name,last_name, username, email, passwrd, created_at, picture, position) VALUES (:first_name,:last_name,:username,:email,:passwrd, NOW(), :picture, :position)";
     $stmt = $conn->prepare($sql);
-
     
     //to prevent sql injection, paramters are binded here
     $stmt->bindParam(":first_name", $user_first_name);
@@ -140,7 +131,7 @@ function createUser($user_first_name, $user_last_name, $user_username, $user_ema
     $stmt->bindParam(":username", $user_username);
     $stmt->bindParam(":email", $user_email);
     $stmt->bindParam(":picture", $profile_picture);
-    $stmt->bindParam(":position", $choice);
+    $stmt->bindParam(":position", ucwords($select));
     $stmt->bindParam(":passwrd", password_hash($user_pwd, PASSWORD_BCRYPT));
 
 

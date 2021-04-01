@@ -41,8 +41,12 @@
         </header>
 
         <div class="content">
+
+            <div class="container"></div>
+
       
-            <div class="container">
+            <div class="container" style="display: none;">
+                
 
                 <div class="section section1">
 
@@ -80,6 +84,7 @@
                 </div> 
 
             </div>  
+
 
         </div>
 

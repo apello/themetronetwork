@@ -74,8 +74,15 @@
     
                                 echo "</div></div>";
                                 
+                              
                     
                             }
+
+                            echo '<div class="content-box">';
+                            echo '<div class="segment full-content">';
+                            echo '<a href="edit-communities.php">Edit Communities</a>';
+                            echo '</div></div>';
+
                             
                         } else {
                             echo '<div class="content-box"> 
@@ -91,10 +98,7 @@
                     
                         
                         
-                        <div class="content-box">
-                            <div class="segment full-content"><a href="edit-communities.php">Edit Communities</a></div>
-                        </div>
-
+                      
                 
 
                     </div>

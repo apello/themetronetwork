@@ -7,13 +7,19 @@
     require_once("communities-select.php");
 
     $_SESSION['LAST_ACTIVITY'] = time();
-
+  
     if(isset($_POST['submit'])) {
+
         //puts input into an array
         $classid = array();
 
         //cycles through dictionary as isolates key and value
         foreach ($_POST as $name => $id) {
+
+            if(count($_POST) == 1) {
+                $empty = TRUE;
+            }
+
             //adds all values except submit to an array
             if($id != "Leave") {
                 //pushes value to array as $classid
@@ -22,38 +28,50 @@
             }
         }
 
-        print_r($classid);
+        if(!$empty) {
+            for ($iterative = 0; $iterative < count($classid); $iterative++) { 
 
-        for ($iterative = 0; $iterative < count($classid); $iterative++) { 
+                //DELETE USER FROM COMMUNITIES
+                $delete_qry = "DELETE FROM communities where userid = :userid AND classid = :classid";
 
-            //checks to see if user is already in the community to prevent duplicates
-            $delete_qry = "DELETE FROM communities where userid = :userid AND classid = :classid";
+                $delete = $conn->prepare($delete_qry);
 
-            $delete = $conn->prepare($delete_qry);
+                $delete->bindParam(":userid", $row['id']);
+                $delete->bindParam(":classid", $classid[$iterative]);
 
-            $delete->bindParam(":userid", $row['id']);
-            $delete->bindParam(":classid", $classid[$iterative]);
+                $delete->execute();
 
-            $delete->execute();
+                if($delete->rowCount() > 0) {
+                    //SET CLASS SIZE to CLASS SIZE - 1 (MINUS ONE STUDENT)
+                    $update_qry = "UPDATE class SET class_size = (class_size - 1) WHERE id = :classid";
+                    $update = $conn->prepare($update_qry);
+        
+                    $update->bindParam(":classid", $classid[$iterative]);
+        
+                    $update->execute();
+        
+                    if($update->rowCount() > 0) {
+                        $all_query_success = TRUE;
+                    } else {
+                        $error = TRUE;
+                    }
+                } else {
+                    $error = TRUE;
+                }
 
-            if($delete->rowCount() > 0) {
-                $query_sucess = TRUE;
-            } else {
-                $error = TRUE;
-            }
-
-            echo $iterative;
-            echo count($classid);
-
-            if($query_sucess == TRUE && $iterative == (count($classid) - 1)) {
-                header("Location: http://localhost:8888/themetronetwork/main/settings/communities/edit-communities.php");
-                exit();
-            }           
+                if($all_query_success == TRUE && $iterative == (count($classid) - 1)) {
+                    //RELOCATE PAGE BCUZ OF SOME WEIRD BUG - CHECK OUT LATER
+                    header("Location: http://localhost:8888/themetronetwork/main/settings/communities/communities.php");
+                    exit();
+                }           
+            } 
         }
     }
 
     if($error) {
         $alert = "Something went wrong! Please try again.";
+    } else if($empty) {
+        $alert = "Please select a class to continue:";
     } else {
         $alert = "Select communit[ies] you want to leave below:";
     }
@@ -88,20 +106,14 @@
       
                 <div class="container">
                     <div class="section section1">
-
-
                         <div class="links">
                             <a href="communities.php" class="link">Back</a>
                         </div>
-
-
                     </div>
                     
                     <div class="section section2">
                     
                         <div class="section-title">Edit Communities</div>
-
-                     
 
                         <form action="edit-communities.php" method="post">
 
@@ -131,7 +143,7 @@
                                     ';
                                 }
 
-                                echo '<input type="submit" name="submit" value="Leave" class="submit-btn" style="margin-bottom: 5px;">';
+                                echo '<input type="submit" name="submit" value="Leave Class" class="submit-btn" style="margin-bottom: 25px;">';
                                 
 
                             } else {

@@ -72,10 +72,7 @@ function deleteAlert() {
                                 <h1><?php /* outputs name */echo trim($row['first_name']) . " " . trim($row['last_name']);?></h1>
                                 <h3>Username: <?php echo trim($row['username']) ?></h3>
                                 <h3>Email: <?php echo trim($row['email']) ?></h3>
-
-                                <?php if($row['position'] == 1) { $position = "Student"; } else { $position = "Teacher"; } ?>
-
-                                <h3>Position: <?php echo $position; ?></h3>
+                                <h3>Position: <?php echo ucwords($row['position']); ?></h3>
                                 <h3>Password: ***********</h3>
                                 <h3>Account Creation Date: <?php echo date("F j, Y", strtotime($row['created_at'])) ?></h3>
 

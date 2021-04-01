@@ -20,6 +20,10 @@ body {
     color: white;
 }
 
+button {
+    outline: none;
+}
+
 /* ::-webkit-scrollbar {
     width: 10px;
     
@@ -245,7 +249,6 @@ it sits on the left
 .title-top h2 {
     padding: 20px;
     color: rgba(97, 187, 240, 0.6); 
-    text-align: center;
 }
 
 /* for the links */
@@ -324,22 +327,6 @@ results for seach bars
 
 }
 
-.result-box {
-    width: 70%;
-    height: auto;
-    border-radius: 20px;
-
-    word-wrap: break-word;
-
-    background: grey;
-
-    padding: 20px;
-
-    margin: auto;
-    margin-bottom: 20px;
-    margin-top: 20px;
-
-}
 
 /* .hidebar {
 
@@ -425,6 +412,9 @@ it is the blue-ish bar
 /* content-box hold posts and other information */
 
 .content-box {
+
+    z-index: 1;
+
     display: flex;
 
     height: auto;
@@ -449,7 +439,6 @@ it is the blue-ish bar
 }
 
 
-
 /* styles for h1 and links */
 
 .content-box a {
@@ -459,6 +448,10 @@ it is the blue-ish bar
 .content-box h1 {
     color: rgba(97, 187, 240, 0.6); 
     word-break: break-all;
+}
+
+.content-box button {
+    outline: none;
 }
 
 
@@ -487,6 +480,7 @@ it is the blue-ish bar
     border-radius: 20px 0px 0px 20px;
 }
 
+
 /* for links in search */
 
 .segment1 .result1 {
@@ -503,13 +497,21 @@ it is the blue-ish bar
     padding: 15px;
 }
 
-/* see more link on posts */
+/* for drop down uses - used on account-view in search*/
 
-.segment2 .result2 h5 {
-    font-weight: bold;
-    font-size: inherit;
-    color: rgba(97, 187, 240, 0.6); 
-    text-decoration: underline;
+.segment1.dropdown {
+    display: flex;
+
+    align-items:flex-end;
+    justify-content: center;
+
+    background: none;
+    color: rgb(66, 151, 201);
+    font-size: 1.5em;
+
+    padding-right: 30px;
+
+    cursor: pointer;
 }
 
 /* the div style and the three classes are for side icons */
@@ -582,17 +584,26 @@ it is the blue-ish bar
     height: auto;
 }
 
+
 /* styles all headers */
 
 .segment2 h1,h2,h3,h4,h5,h6 {
     box-sizing: border-box;
     padding-top: 10px;
 }
-
 /* makes h1 a diffrent color to diffrentitate */
 
 .segment2 h1 {
     color: rgba(97, 187, 240, 0.6); 
+}
+
+/* see more link on posts */
+
+.segment2 .result2 h5 {
+    font-weight: bold;
+    font-size: inherit;
+    color: rgba(97, 187, 240, 0.6); 
+    text-decoration: underline;
 }
 
 /* for when content-box is being used a link box */
@@ -662,6 +673,20 @@ it is the blue-ish bar
     );
     
     color: white;
+}
+
+/* same thing as error but different use in search so I didnt want there to be confusion */
+
+.content-box.friend {
+    background: linear-gradient(
+        to right bottom,
+        rgba(43, 209, 231, 0.7),
+        rgb(85, 214, 231)
+    );
+    
+    color: white;
+    cursor: pointer;
+    text-align: center;
 }
 
 
