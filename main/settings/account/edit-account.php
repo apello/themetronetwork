@@ -29,6 +29,8 @@
     
     if($_GET['alert'] == 'all-empty') {
         $alert = 'All values seem to be empty. Please try again.';
+    } else if($_GET['alert'] == 'inappropriate-value') {
+        $alert = 'The value entered is inappropriate. Please try again.';
     } else if ($_GET['alert'] == 'name-incorrect-value') {
             $alert = 'The entered first/last name is incorrect. Please try again.';
     } else if ($_GET['alert'] == 'taken-username-email') {

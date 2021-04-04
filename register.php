@@ -11,16 +11,18 @@
 
 <?php
 
-
     $alert;
 
-    
     if($_GET['alert'] == 'missingvalue') {
         $alert = 'There seems to be a missing value.';
     } else if ($_GET['alert'] == 'passwords-do-not-match') {
         $alert = 'The passwords entered do not match. Please try again.';
+    } else if($_GET['alert'] == 'inappropriate-value') {
+            $alert = 'The value entered is inappropriate. Please try again.';
     } else if ($_GET['alert'] == 'taken-username-email') {
         $alert = 'The username/email entered seems to be taken. Please enter another value.';
+    } else if ($_GET['alert'] == 'name-incorrect-value') {
+        $alert = 'The entered first/last name is incorrect. Please try again.';
     } else if ($_GET['alert'] == 'incorrect-username') {
         $alert = 'The username entered seems to be:<br/>
             <ul>
@@ -82,7 +84,7 @@
                         <input type="text" name="user-first-name" placeholder="Enter first name here:">
                         <input type="text" name="user-last-name" placeholder="Enter last name here:">
                         <input type="text" name="user-name" placeholder="Enter username here:">
-                        <input type="email" name="user-email" placeholder="Enter email here:">
+                        <input type="email" name="user-email" placeholder="Ex: adam.1@themetroschool.org">
 
                     </div>
 

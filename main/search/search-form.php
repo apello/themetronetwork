@@ -3,8 +3,13 @@
 
 if(isset($_POST['submit'])){
 
+    require_once("../../includes/functions.php");
+
     //intializes variables
     $search_query = $_POST["search"];
+    $search_param = $_POST['search-param'];
+
+    $bad_words_filepath = "../../includes/bad-words.php";
 
     
     //if empty directs user back with all empty error
@@ -13,43 +18,18 @@ if(isset($_POST['submit'])){
         exit();
     }
 
-    if(filterInput($search_query)) {
+    if(filterInput($search_query, $bad_words_filepath)) {
         header("Location: http://localhost:8888/themetronetwork/main/search/search.php?alert=inappropriate-value");
         exit();
     } else {
-        header("Location: http://localhost:8888/themetronetwork/main/search/search.php?alert=input-set&search=".$search_query);
-        exit();
-    }
-
-}
-
-//checks if  input is empty
-function isEmpty($search_query) {
-
-    $result;
-
-    if(empty($search_query)) {
-        $result = TRUE;
-    } else {
-        $result = FALSE;
-    }
-    
-    return $result;
-}
-
-
-//function checks if passwords are the same
-function filterInput($search_query) {
-
-    $result = false;
-
-    include("../../includes/bad-words.php");
-
-    for ($iterative = 0; $iterative < count($bad_words); $iterative++) { 
-        if($search_query == $bad_words[$iterative]) {
-            $result = true;
+        if(isset($search_param)) {
+            header("Location: http://localhost:8888/themetronetwork/main/search/search.php?alert=input-set&search=".$search_query."&param=".$search_param);
+            exit();
+        } else {
+            header("Location: http://localhost:8888/themetronetwork/main/search/search.php");
+            exit();
         }
     }
 
-    return $result;
 }
+

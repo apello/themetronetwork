@@ -3,14 +3,18 @@
 
 if(isset($_POST['submit'])) {
 
+    //FUNCTION REQUIRE FROM AUTH-FUNC
+    require_once("../../../includes/functions.php");
+
+    $filepath = "../../../includes/db.php";
     $user_pwd = $_POST["user-pwd"]; 
 
-    if(emptyValue($user_pwd)) {
+    if(isEmpty($user_pwd)) {
         header("Location: http://localhost:8888/themetronetwork/main/settings/account/delete-account.php?alert=missing-value");
         exit();
     }
 
-    if(checkPassword($user_pwd)) {
+   if(checkPasswordDB($user_pwd, $filepath)) {
         header("Location: http://localhost:8888/themetronetwork/main/settings/account/delete-account.php?alert=incorrect-password");
         exit();
     }
@@ -21,51 +25,12 @@ if(isset($_POST['submit'])) {
     } else {
         header("Location: http://localhost:8888/themetronetwork/main/account/delete-account.php?alert=error");
         exit(); 
-    }
+    } 
 }
 
-function emptyValue($user_pwd) {
-    $result;
 
-    if(empty($user_pwd)) {
-        $result = TRUE;
-    } else {
-        $result = FALSE;
-    }
 
-    return $result;
-}
-
-function checkPassword ($user_pwd) {
-
-    $result;
-
-    require("../../../includes/db.php");
-
-    $userid = $_POST['user-id'];
-
-    $sql = "SELECT passwrd FROM users WHERE id = :id;";
-    $stmt = $conn->prepare($sql);
-
-    $stmt->bindParam(":id", $userid);
-
-    $stmt->execute();
-
-    if($stmt->rowCount() > 0) {
-        while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            if(password_verify($user_pwd, $row['passwrd'])) {
-                $result = FALSE;
-            } else {
-                $result = TRUE;
-            }
-        }
-    } else {
-        $result = TRUE;
-    }
-
-    return $result;
-}
-
+//this is propreitary to delete-account
 function deleteUser() {
 
     $result;

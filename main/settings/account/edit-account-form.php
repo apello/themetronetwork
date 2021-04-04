@@ -3,6 +3,13 @@
 
 if(isset($_POST['submit'])){
 
+    //FUNCTION REQUIRE FROM AUTH-FUNC
+    require_once("../../../includes/functions.php");
+
+    //FILE PATHs
+    $filepath = "../../../includes/db.php";
+    $bad_word_filepath = "../../../includes/bad-words.php";
+
     //intializes variables
     $user_first_name = $_POST["user-first-name"];
     $user_last_name = $_POST["user-last-name"]; 
@@ -11,23 +18,23 @@ if(isset($_POST['submit'])){
 
     
     //if empty directs user back with all empty error
-    if(isEmpty($user_first_name, $user_last_name, $user_username, $user_email)) {
+    if(allEmpty($user_first_name, $user_last_name, $user_username, $user_email)) {
         header("Location: http://localhost:8888/themetronetwork/main/settings/account/edit-account.php?alert=all-empty");
         exit();
+    }
+
+    //Checks if any of these values have curse words in them
+    if(!empty($user_first_name) || !empty($user_last_name) || !empty($user_username) || !empty($user_email)) {
+        if(filterInputMultiple($user_first_name, $user_last_name, $user_username, $user_email, $bad_word_filepath)){
+            header("Location: http://localhost:8888/themetronetwork/main/settings/account/edit-account.php?alert=inappropriate-value");
+            exit();
+        }
     }
 
     //if name is incorrect directs user back with incorrect name error
     if(!empty($user_first_name) || !empty($user_last_name)) {
         if(checkName($user_first_name, $user_last_name)) {
             header("Location: http://localhost:8888/themetronetwork/main/settings/account/edit-account.php?alert=name-incorrect-value");
-            exit();
-        }
-    }
-
-    //if username or email is taken directs user back with taken username/email error
-    if(!empty($user_username) || !empty($user_email)) {
-        if(takenUsernameEmail($user_username, $user_email)) {
-            header("Location: http://localhost:8888/themetronetwork/main/settings/account/edit-account.php?alert=taken-username-email");
             exit();
         }
     }
@@ -48,6 +55,14 @@ if(isset($_POST['submit'])){
         } 
     }
 
+    //if username or email is taken directs user back with taken username/email error
+    if(!empty($user_username) || !empty($user_email)) {
+        if(takenUsernameEmail($user_username, $user_email, $filepath)) {
+            header("Location: http://localhost:8888/themetronetwork/main/settings/account/edit-account.php?alert=taken-username-email");
+            exit();
+        }
+    }
+
     //if input passes all functions, account is edited and the user is directed back
     //if something goes wrong, user is sent back with error
     if(editUser($user_first_name, $user_last_name, $user_username, $user_email)) {
@@ -57,111 +72,10 @@ if(isset($_POST['submit'])){
         header("Location: http://localhost:8888/themetronetwork/main/settings/account/edit-account.php?alert=unsuccessful-edit");
         exit();
     }
-
-
-
-
-}
-
-//checks if every input is empty
-function isEmpty($user_first_name, $user_last_name, $user_username, $user_email) {
-
-    $result;
-
-    if(empty($user_first_name) && empty($user_last_name) && empty($user_username) && empty($user_email)) {
-        $result = true;
-    } else {
-        $result = false;
-    }
-    
-    return $result;
 }
 
 
-//function checks if the username or email are already taken
-function takenUsernameEmail($user_username, $user_email) {
-
-    //had an issue where the intial require did not work in functions
-
-
-    require("../../../includes/db.php");
-
-    $result;
-
-    $sql = "SELECT username, email FROM users WHERE username = :username OR email = :email;";
-    $stmt = $conn->prepare($sql);
-
-    $stmt->bindParam(":username", $user_username);
-    $stmt->bindParam(":email", $user_email);
-
-    $stmt->execute();
-
-    if($stmt->rowCount() > 0) {
-        $result = true;
-    } else {
-        $result = false;
-    }
-
-    return $result;
-
-    $conn->close();
-    
-
-}
-
-//function runs name thru checks to make sure it is correct
-function checkName($user_first_name, $user_last_name) {
-    
-    $result;
-
-    //checks name was written with ABC 
-    if(!preg_match("/^[a-zA-Z]*$/", $user_first_name) || !preg_match("/^[a-zA-Z]*$/", $user_last_name)) {
-        $result = true;
-    } else {
-        $result = false;
-    }
-
-    return $result;
-    
-} 
-
-
-//function runs usernames thru checks to make sure it is correct
-function checkUsername($user_username) {
-    
-    $result;
-
-    //checks username length and whether it was written with ABC and 123
-    if(strlen($user_username) < 5 || strlen($user_username) > 50 || !preg_match("/^[a-zA-Z0-9]*$/", $user_username)) {
-        $result = true;
-    } else {
-        $result = false;
-    }
-
-    return $result;
-    
-} 
-
-
-//function checks email to see if it ends in the 'metroschool'
-//will eventually edit to add the '.org' part
-function checkEmail($user_email) {
-    
-    $result;
-
-
-    if(!preg_match("/themetroschool/i", $user_email)) {
-        $result = true;
-    } else {
-        $result = false;
-    }
-
-    return $result;
-    
-} 
-
-
-//checks if input is filled in, then updates it
+//ONLY IN USE FOR EDIT ACCOUNT
 function editUser($user_first_name, $user_last_name, $user_username, $user_email) {
 
     require("../../../includes/db.php");

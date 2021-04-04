@@ -60,7 +60,7 @@ function deleteAlert() {
                         <div class="links">
                             <div class="link" style="background-color: rgba(50, 231, 255, 0.7);">Account</div>
                             <a href="../communities/communities.php" class="link">Communities</a>
-                            <div class="link">Friends</div>
+                            <a href="../friends/friends.php" class="link">Friends</a>
                         </div>
 
 

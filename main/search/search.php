@@ -50,19 +50,18 @@
     
     //pull search from get because it doesnt practically exist on this page
     $search = $_GET['search'];
+    $parameter = $_GET['param'];
 
+    //FILTERED INPUT
     if($input_set) {
-        //already know search isnt empty and its been filtered
-
         //USER
         $user_query = "SELECT id,first_name,last_name,username,position FROM users WHERE first_name LIKE :input OR last_name LIKE :input OR username LIKE :input LIMIT 3";
         $user_search = $conn->prepare($user_query);
 
-        //to get around wildcard issue, have to declare var with wildcards
+        //CONCATENATE SEARCH WITH WILDCARD
         $user_input = "$search%";
 
         $user_search->bindParam(":input", $user_input);
-        $user_search->bindParam(":id", $row['id']);
 
         $user_search->execute();
 
@@ -74,8 +73,7 @@
         $comm_query = "SELECT id,class_name,class_size,class_proctor FROM class WHERE class_name LIKE :input OR class_proctor LIKE :input LIMIT 3";
         $comm_search = $conn->prepare($comm_query);
 
-        //to get around wildcard issue, have to declare var with wildcards
-        //idk if i should do it starts with or it has it inside
+        //SAME AS USERS
         $comm_input = "$search%";
 
         $comm_search->bindParam(":input", $comm_input);
@@ -85,10 +83,7 @@
         if($comm_search->rowCount() > 0) {
             $communities = TRUE;
         }
-
     }
-
-
 ?>
 
 
@@ -119,7 +114,16 @@
 
                         <form class="search" action="search-form.php" method="post">
                                 <div class="alert"><?php echo $alert; ?></div>
+
                                 <input type="text" name="search" placeholder="Search here:"/>
+
+                                <select name="search-param">
+                                    <option value="all">Search Options:</option>
+                                    <option value="users">Users</option>
+                                    <option value="posts">Posts</option>
+                                    <option value="communities">Communities</option>
+                                </select>
+                                
                                 <input type="submit" name="submit" class="submit-btn" value="Go">
                         </form>
 
@@ -187,7 +191,7 @@
             
                                         <div class="segment2">
                                             <div class="result2">
-                                                <h1>'.$row['first_name'].' '.$row['last_name'] .'</h1>
+                                                <h2>'.$row['first_name'].' '.$row['last_name'] .'</h2>
                                                 <h3>'.$row['username']. ' - ' .ucwords($row['position']).'</h3>
                                             </div>
                                         </div>
@@ -197,13 +201,17 @@
                                 // SEE MORE
                                 if($user_search->rowCount() >= 3) {
                     ?>
-                                    <div class="content-box"  style="margin-bottom: 30px;">
-                                        <div class="full-content">
-                  
-                                            <h3 align="center"><a href="account/user-see-all.php?search_query=<?php echo trim($search); ?>">See All Results</a></h3>
 
+                                <form method="post" action="account/account-view-all.php">
+                                    <button class="content-box"  style="margin-bottom: 30px; cursor: pointer; text-decoration: underline;">
+                                        <div class="full-content" style="font-size: 1.7em;">
+                                            See All Results
                                         </div>
-                                    </div>
+                                    </button>
+
+                                    <input type="hidden" name="query" value="<?php echo $search; ?>">
+                                </form>
+
                     <?php
 
                                 }
@@ -225,8 +233,8 @@
                                 while($row = $comm_search->fetch(PDO::FETCH_ASSOC)) {
 
 
-                                    global $commid;
-                                    $commid = $row['id'];
+                                    global $community_id;
+                                    $community_id = $row['id'];
 
                                     //CONTENT BOX
                                     echo ' 
@@ -235,7 +243,7 @@
                                             <div class="result1">
                                                 <h2>';
                     ?>
-                                                    <a href="communities/communities-view.php?id=<?php echo $commid; ?>">
+                                                    <a href="communities/communities-view.php?id=<?php echo $community_id; ?>">
                                                         View
                                                     </a>
                     <?php  
@@ -245,7 +253,7 @@
             
                                         <div class="segment2">
                                             <div class="result2">
-                                                <h1>'.$row['class_name'] .'</h1>
+                                                <h2>'.$row['class_name'] .'</h2>
                                                 <h3>'.$row['class_proctor'].'</h3>
                                                 <h3>'.$row['class_size']. ' student[s] are enrolled</h3>
                                             </div>

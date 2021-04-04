@@ -51,7 +51,7 @@
                         <div class="links">
                             <a href="../account/settings.php" class="link">Account</a>
                             <div class="link" style="background-color: rgba(50, 231, 255, 0.7);">Communities</div>
-                            <div class="link">Friends</div>
+                            <a href="../friends/friends.php" class="link">Friends</a>
                         </div>
 
 
@@ -69,35 +69,37 @@
 
                         <?php
                         
-                        if($communities) {
+                            if($communities) {
 
-                            while($output = $query->fetch(PDO::FETCH_ASSOC)) {    
+                                while($output = $query->fetch(PDO::FETCH_ASSOC)) {    
 
-                                echo '<div class="content-box">'; 
-                                echo '<div class="segment full-content">';
-    
-                                echo "<h3>".trim($output['class_name'])." with ".$output['class_proctor']."</h3>";
-                                echo "<h3>Date Joined: ".date("F j, Y", strtotime($output['joined_at']))."</h3>";
-    
-                                echo "</div></div>";
+                                    echo '<div class="content-box">'; 
+                                    echo '<div class="segment full-content">';
+        
+                                    echo "<h3>".trim($output['class_name'])." with ".$output['class_proctor']."</h3>";
+                                    echo "<h3>Date Joined: ".date("F j, Y", strtotime($output['joined_at']))."</h3>";
+        
+                                    echo "</div></div>";
+                                    
                                 
-                              
-                    
-                            }
+                        
+                                }
 
-                            echo '<div class="content-box">';
-                            echo '<div class="segment full-content">';
-                            echo '<a href="edit-communities.php">Edit Communities</a>';
-                            echo '</div></div>';
+                                echo '<div class="content-box">';
+                                echo '<div class="segment full-content">';
+                                echo '<a href="edit-communities.php">Edit Communities</a>';
+                                echo '</div></div>';
 
-                            
-                        } else {
-                            echo '<div class="content-box"> 
+                                
+                            } else {
+                        ?>
+                                <div class="content-box"> 
                                     <div class="segment full-content">
-                                        You have not joined any communities!
+                                        <h4 style="padding: 0px;">You have not joined any communities! To join a new community, use <a href="../../search/search.php">search</a> to find and join a class.</h4>
                                     </div>
-                                </div>'; 
-                        }
+                                </div>
+                        <?php
+                            }
 
 
                         ?>  
