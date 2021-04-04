@@ -180,6 +180,10 @@ styling for login form
 .login-form {
     display: flex;
 
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+
     width: 50%;
     height: 70vh;
 
@@ -190,10 +194,6 @@ styling for login form
         rgba(255,255, 255, 0.7),
         rgba(255, 255, 255, 0.3)
     );
-
-    justify-content: flex-start;
-    align-items: center;
-    flex-direction: column;
 }
 
 
