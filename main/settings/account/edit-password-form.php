@@ -3,6 +3,19 @@
 
 if(isset($_POST['submit'])){
 
+    //FUNCTION REQUIRE FROM FUNC
+    require("../../../includes/functions.php");
+
+    //FILE PATHs
+    $filepath = "../../../includes/db.php";
+    $bad_word_filepath = "../../../includes/bad-words.php";
+
+    //intializes variables
+    $user_first_name = $_POST["user-first-name"];
+    $user_last_name = $_POST["user-last-name"]; 
+    $user_username = $_POST["user-name"];
+    $user_email = $_POST["user-email"];
+
     //intializes variables
     $old_pwd = $_POST["old-user-pwd"];
     $user_pwd = $_POST["user-pwd"]; 
@@ -30,7 +43,7 @@ if(isset($_POST['submit'])){
         exit();
     }
 
-    if(checkOldPassword($old_pwd)) {
+    if(checkPasswordDB($old_pwd, $filepath)) {
         header("Location: http://localhost:8888/themetronetwork/main/settings/account/edit-password.php?alert=old-pwd-does-not-match");
         exit();
     }
@@ -45,100 +58,9 @@ if(isset($_POST['submit'])){
 
 }
 
-//function checks if passwords are the same
-function isSamePassword($user_pwd, $user_rpt_pwd) {
-
-    $result;
-
-    if($user_pwd != $user_rpt_pwd) {
-        $result = true;
-    } else {
-        $result = false;
-    }
-
-    return $result;
-}
-
-function oldEqualNew($user_pwd, $old_pwd) {
-    $result;
-
-    if($user_pwd == $old_pwd) {
-        $result = true;
-    } else {
-        $result = false;
-    }
-
-    return $result;
-}
-
-//checks if every input is empty
-function isEmpty($old_pwd, $user_pwd, $user_rpt_pwd) {
-
-    $result;
-
-    if(empty($old_pwd) || empty($user_pwd) || empty($user_rpt_pwd)) {
-        $result = true;
-    } else {
-        $result = false;
-    }
-    
-    return $result;
-}
 
 
-//function runs password thru checks to make sure it is correct
-function checkPassword($user_pwd) {
-    
-    $result;
-
-    //checks password length and whether it was written with ABC and 123
-    if(strlen($user_pwd) < 6 || strlen($user_pwd) > 50 || !preg_match("/^[a-zA-Z0-9]*$/", $user_pwd)) {
-        $result = true;
-    } else {
-        $result = false;
-    }
-
-    return $result;
-} 
-
-//function checks if password matches pwd in db
-function checkOldPassword($old_pwd) {
-
-    //had an issue where the intial require did not work in functions
-    require("../../../includes/db.php");
-
-    $result;
-
-    $user_id = $_POST['user-id'];
-
-    $sql = "SELECT passwrd FROM users WHERE id = :id;";
-    $stmt = $conn->prepare($sql);
-
-    $stmt->bindParam(":id", $user_id);
-
-    $stmt->execute();
-
-    if($stmt->rowCount() > 0) {
-        while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            if(password_verify($old_pwd, $row['passwrd'])) {
-                $result = FALSE;
-            } else {
-                $result = TRUE;
-            }
-        }
-    } else {
-        $result = TRUE;
-    }
-
-    return $result;
-
-    $conn->close();
-
-}
-
-
-
-
+//ONLY IN EDIT PASSWORD
 //checks if input is filled in, then updates it
 function editPassword($user_pwd) {
 
@@ -148,26 +70,20 @@ function editPassword($user_pwd) {
 
     //had an issue where the global $userid wasnt working
     $user_id = $_POST['user-id'];
-
     
-
     $sql = "UPDATE users SET passwrd = :passwrd WHERE id = :id;";
     $stmt = $conn->prepare($sql);
 
     $stmt->bindParam(":passwrd", password_hash($user_pwd, PASSWORD_BCRYPT));
     $stmt->bindParam(":id", $user_id);
 
-
     $stmt->execute();
-
 
     if($stmt->rowCount() > 0) {
         $result = true;
     } else {
         $result = false;
     }
-    
-
 
     return $result;
 }

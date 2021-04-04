@@ -4,7 +4,7 @@
 if(isset($_POST['submit'])) {
 
     //FUNCTION REQUIRE FROM AUTH-FUNC
-    require_once("../../../includes/functions.php");
+    require("../../../includes/functions.php");
 
     $filepath = "../../../includes/db.php";
     $user_pwd = $_POST["user-pwd"]; 

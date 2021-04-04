@@ -36,6 +36,13 @@ function allEmpty($user_first_name, $user_last_name, $user_username, $user_email
 
 
 //filters input for bad words
+
+/* USED IN:
+- REGISTRATION
+- EDIT ACCOUNT
+
+*/
+
 function filterInputMultiple($a, $b, $c, $d, $bad_word_filepath) {
 
     include($bad_word_filepath);
@@ -251,6 +258,7 @@ function logIn($auth_username, $auth_pwd, $filepath) {
 
 /* USES: 
 - DELETE ACCOUNT
+- EDIT PASSWORD
 */
 
 function checkPasswordDB($user_pwd, $filepath) {
@@ -311,4 +319,20 @@ function filterInput($search_query, $bad_word_filepath) {
     return $result;
 }
 
+//function checks if old password and new password are the same
 
+/* USES: 
+- EDIT PASSWORD
+*/
+
+function oldEqualNew($user_pwd, $old_pwd) {
+    $result;
+
+    if($user_pwd == $old_pwd) {
+        $result = true;
+    } else {
+        $result = false;
+    }
+
+    return $result;
+}
