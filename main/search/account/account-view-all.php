@@ -35,10 +35,20 @@
 		$alert = 'See All Results:';
 	}
 
+    //WRITE FUNC FOR BOTH ON REG ACCOUNT VIEW
+
+    //SEARCH QUERY
     $search_input = $_POST['query'];
 
-
-    $search_query = "SELECT id,first_name,last_name,username,position FROM users WHERE first_name LIKE :input OR last_name LIKE :input OR username LIKE :input";
+    $search_query = "SELECT id,
+                            first_name,
+                            last_name,
+                            username,
+                            position 
+                    FROM users 
+                    WHERE first_name LIKE :input 
+                    OR last_name LIKE :input
+                    OR username LIKE :input";
     $search = $conn->prepare($search_query);
 
     //to get around wildcard issue, have to declare var with wildcards
@@ -53,12 +63,8 @@
     } else {
         $results = FALSE;
     }
-    
-
-
 
 ?>
-
 
 
 <body>

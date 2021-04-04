@@ -5,6 +5,8 @@
     require_once("../../../includes/auth-check.php");
     require_once("../../../includes/session-check.php");
 
+
+    //WRITE FUNC FOR BOTH ON SETTINGS AND SEARCH
     //CODE REPURPOSED FROM SEARCH
     $select_friends_qry = "SELECT u.id,
                                 u.first_name,
@@ -107,14 +109,11 @@
 										</div>
 									</div>
 
-							<?php
-								} else if ($select_friends->rowCount() > 1) {
-
-							?>
+							<?php } else if ($select_friends->rowCount() > 1) { ?>
 
                                     <div class="content-box" style="margin-bottom: 30px;">
 										<div class="full-content" align="center">
-											<a href="edit-friends">Edit Friends</a>
+											<a href="edit-friends.php">Edit Friends</a>
 										</div>
 									</div>
 
@@ -126,34 +125,29 @@
 									</div>
 
                             
-							<?php
-								} //IF END BRACKET
-
-								while($friend_acccount_info = $select_friends->fetch(PDO::FETCH_ASSOC)) {
-
-							?>
+							<?php } while($friend_acccount_info = $select_friends->fetch(PDO::FETCH_ASSOC)) { ?>
 															
-										<div class="content-box">
-											<div class="segment1">
-												<div class="result1">
-													<h2>
-														<!-- LINK TO VIEW PAGE -->
-														<a href="../../search/account/account-view.php?id=<?php echo $friend_acccount_info['id']; ?>">
-															View
-														</a>
-													</h2>
-												</div>
-											</div>
+                                <div class="content-box">
+                                    <div class="segment1">
+                                        <div class="result1">
+                                            <h2>
+                                                <!-- LINK TO VIEW PAGE -->
+                                                <a href="../../search/account/account-view.php?id=<?php echo $friend_acccount_info['id']; ?>">
+                                                    View
+                                                </a>
+                                            </h2>
+                                        </div>
+                                    </div>
 
-											<!-- ACCOUNT INFO -->
+                                    <!-- ACCOUNT INFO -->
 
-											<div class="segment2">
-												<div class="result2">
-													<h2><?php echo $friend_acccount_info['first_name'] .' '. $friend_acccount_info['last_name'];?></h2>
-													<h3><?php echo $friend_acccount_info['username']; ?></h3>
-												</div>
-											</div>
-										</div>
+                                    <div class="segment2">
+                                        <div class="result2">
+                                            <h2><?php echo $friend_acccount_info['first_name'] .' '. $friend_acccount_info['last_name'];?></h2>
+                                            <h3><?php echo $friend_acccount_info['username']; ?></h3>
+                                        </div>
+                                    </div>
+                                </div>
 
 							<?php  	
 									} //WHILE LOOP END BRACKET

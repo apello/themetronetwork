@@ -72,37 +72,36 @@
                             if($communities) {
 
                                 while($output = $query->fetch(PDO::FETCH_ASSOC)) {    
+                        ?>
 
-                                    echo '<div class="content-box">'; 
-                                    echo '<div class="segment full-content">';
-        
-                                    echo "<h3>".trim($output['class_name'])." with ".$output['class_proctor']."</h3>";
-                                    echo "<h3>Date Joined: ".date("F j, Y", strtotime($output['joined_at']))."</h3>";
-        
-                                    echo "</div></div>";
+                                    <div class="content-box">
+                                        <div class="segment full-content">
+
+                                            <h3><?php echo trim($output['class_name'])." with ".$output['class_proctor']; ?></h3>
+                                            <h3>Date Joined: <?php echo date("F j, Y", strtotime($output['joined_at'])); ?></h3>
+                
+                                        </div>
+                                    </div>
                                     
                                 
-                        
-                                }
+                        <?php } ?>
 
-                                echo '<div class="content-box">';
-                                echo '<div class="segment full-content">';
-                                echo '<a href="edit-communities.php">Edit Communities</a>';
-                                echo '</div></div>';
+                                <div class="content-box">
+                                    <div class="segment full-content">
+                                        <a href="edit-communities.php">Edit Communities</a>
+                                    </div>
+                                </div>
 
                                 
-                            } else {
-                        ?>
+                        <?php } else { ?>
+
                                 <div class="content-box"> 
                                     <div class="segment full-content">
                                         <h4 style="padding: 0px;">You have not joined any communities! To join a new community, use <a href="../../search/search.php">search</a> to find and join a class.</h4>
                                     </div>
                                 </div>
-                        <?php
-                            }
-
-
-                        ?>  
+                                
+                        <?php } ?>  
                            
                     
                         

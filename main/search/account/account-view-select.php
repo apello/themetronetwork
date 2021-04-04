@@ -41,6 +41,8 @@ $search_user_id = $_GET['id'];
 //////////////////////
 
 //create more users to test this
+    $id = $search_user_id;
+
     $select_friends_qry = "SELECT u.id,
                                 u.first_name,
                                 u.last_name,
@@ -51,7 +53,7 @@ $search_user_id = $_GET['id'];
                             ON f.user_id1 = :id AND f.user_id2 = u.id";
     $select_friends = $conn->prepare($select_friends_qry);
 
-    $select_friends->bindParam(":id", $search_user_id);
+    $select_friends->bindParam(":id", $id);
 
     $select_friends->execute();
 
