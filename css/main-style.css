@@ -7,6 +7,7 @@
     padding: 0;
     border: 0;
     margin: 0;
+    outline: none;
 }
 
 /* adds blue gradient background */
@@ -154,8 +155,10 @@ this sets up display type, size, and color
         rgba(255,255, 255, 0.7),
         rgba(255, 255, 255, 0.3)
     );
-}
 
+    /* for post overlay */
+    z-index: 1;
+}
 
 
 /* styles input for the whole container */
@@ -171,6 +174,22 @@ this sets up display type, size, and color
 
     /* adds cursor on input to let user know they have selected input */
 
+    cursor: pointer;
+}
+
+.container textarea {
+    min-width: 90%;
+    max-width: 90%;
+
+    min-height: 100px;
+
+    margin: 10px;
+    padding: 25px;
+    font-size: 20px;
+
+    border-radius: 20px;
+
+    outline:none;
     cursor: pointer;
 }
 
@@ -194,6 +213,33 @@ this sets up display type, size, and color
 .container input:focus {
     outline: none;
 }
+
+
+/* ///////////////////// */
+/* ///////////////////// */
+/* ///////////////////// */
+
+
+/* container for postbox */
+
+/* section-title -> title -> content -> button */
+
+
+.container.post {
+    position: absolute;
+    flex-direction: column;
+    z-index: 2;  
+}
+
+.post-overlay {
+    border-radius: 30px;
+}
+
+
+
+/* ///////////////////// */
+/* ///////////////////// */
+/* ///////////////////// */
 
 
 /* 
@@ -358,7 +404,6 @@ it is the blue-ish bar
 /* the input-form holds inputs in section2 */
 
 .input-form {
-
     display: flex;
 
     width: 80%;
@@ -366,14 +411,11 @@ it is the blue-ish bar
 
     border-radius: 30px;
 
-
-
     padding-top: 20px;
 
     justify-content: flex-start;
     align-items: center;
     flex-direction: column;
-
 
     margin: auto;
 }
@@ -387,11 +429,9 @@ it is the blue-ish bar
 /* content-box hold posts and other information */
 
 .content-box {
-
     z-index: 1;
 
     display: flex;
-
     height: auto;
     width: 70%;
 
@@ -609,6 +649,8 @@ button .content-box {
 }
 
 /* for search bar submit */
+
+
 
 .section1 .submit-btn {
     background: white;

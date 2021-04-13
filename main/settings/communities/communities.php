@@ -4,6 +4,7 @@
     require_once("../../../includes/db.php");
     require_once("../../../includes/auth-check.php");
     require_once("../../../includes/session-check.php");
+
     require_once("communities-select.php");
 
     $_SESSION['LAST_ACTIVITY'] = time();
@@ -82,7 +83,6 @@
                 
                                         </div>
                                     </div>
-                                    
                                 
                         <?php } ?>
 
@@ -91,7 +91,6 @@
                                         <a href="edit-communities.php">Edit Communities</a>
                                     </div>
                                 </div>
-
                                 
                         <?php } else { ?>
 
@@ -100,18 +99,10 @@
                                         <h4 style="padding: 0px;">You have not joined any communities! To join a new community, use <a href="../../search/search.php">search</a> to find and join a class.</h4>
                                     </div>
                                 </div>
-                                
+
                         <?php } ?>  
                            
-                    
-                        
-                        
-                      
-                
-
                     </div>
-                
-
                 </div>
             </div>
 

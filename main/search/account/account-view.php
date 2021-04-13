@@ -135,13 +135,26 @@
 						<!-- USER INFO -->
 						<div class="content-box">
 							<div class="segment full-content">
-								<h1><?php echo $user_account_info['first_name'] . ' ' . $user_account_info['last_name']; ?></h1>
+								<h1>
+									<?php 
+										echo $user_account_info['first_name'] . ' ' . $user_account_info['last_name']; 
+										if($own_account) { echo " (You)"; }
+									?>
+								</h1>
 								<h3>Username: <?php echo $user_account_info['username']; ?></h3>
 								<h3>Email: <?php echo $user_account_info['email']; ?></h3>
 								<h3>Position: <?php echo ucwords($user_account_info['position']); ?></h3>
                                 <h3>Account Creation Date: <?php echo date("F j, Y", strtotime($user_account_info['created_at'])) ?></h3>
 							</div>
 						</div> 
+
+						<div class="content-box">
+							<div class="segment full-content">
+								<h1>Bio</h1>
+								<h3><?php echo $user_account_info['bio']; ?></h3>
+							</div>
+						</div> 
+
 
 						<!-- END USER INFO SECTION -->
 

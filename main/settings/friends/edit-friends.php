@@ -5,76 +5,73 @@
     require_once("../../../includes/auth-check.php");
     require_once("../../../includes/session-check.php");
 
-    require_once("communities-select.php");
+    //FRIEND INFO SELECT QRY
+    require("friends-select.php");
 
     $_SESSION['LAST_ACTIVITY'] = time();
+
+
+?>
+
+<!-- SEPARATIOn -->
+
+<?php
   
+    //COPY AND PASTED FROM COMMUNITY EDIT
     if(isset($_POST['submit'])) {
 
         //puts input into an array
-        $classid = array();
+        $friendID = array();
 
         //cycles through dictionary as isolates key and value
         foreach ($_POST as $name => $id) {
-
             if(count($_POST) == 1) {
                 $empty = TRUE;
             }
 
             //adds all values except submit to an array
-            if($id != "Leave") {
-                //pushes value to array as $classid
+            if($id != "Unfriend") {
+                //pushes value to array as $friendID
                 //correlates to the value in the inputs
-                array_push($classid, $id);
+                array_push($friendID, $id);
             }
         }
 
-        if(!$empty) {
-            for ($iterative = 0; $iterative < count($classid); $iterative++) { 
+        print_r($friendID);
 
-                //DELETE USER FROM COMMUNITIES
-                $delete_qry = "DELETE FROM communities where userid = :userid AND classid = :classid";
+       if(!$empty) {
+            for ($iterative = 0; $iterative < count($friendID); $iterative++) { 
+                //DELETE FRIEND 
+                $delete_friend_qry = "DELETE FROM friends where user_id1 = :userid AND user_id2 = :friendid";
 
-                $delete = $conn->prepare($delete_qry);
+                $delete_friend = $conn->prepare($delete_friend_qry);
 
-                $delete->bindParam(":userid", $row['id']);
-                $delete->bindParam(":classid", $classid[$iterative]);
+                $delete_friend->bindParam(":userid", $row['id']);
+                $delete_friend->bindParam(":friendid", $friendID[$iterative]);
 
-                $delete->execute();
+                $delete_friend->execute();
 
-                if($delete->rowCount() > 0) {
-                    //SET CLASS SIZE to CLASS SIZE - 1 (MINUS ONE STUDENT)
-                    $update_qry = "UPDATE class SET class_size = (class_size - 1) WHERE id = :classid";
-                    $update = $conn->prepare($update_qry);
-        
-                    $update->bindParam(":classid", $classid[$iterative]);
-        
-                    $update->execute();
-        
-                    if($update->rowCount() > 0) {
-                        $all_query_success = TRUE;
-                    } else {
-                        $error = TRUE;
-                    }
+                if($delete_friend->rowCount() > 0) {
+                    $all_query_success =  TRUE;
                 } else {
                     $error = TRUE;
                 }
 
-                if($all_query_success == TRUE && $iterative == (count($classid) - 1)) {
+                if($all_query_success == TRUE && $iterative == (count($friendID) - 1)) {
                     //RELOCATE PAGE BCUZ OF SOME WEIRD BUG - CHECK OUT LATER
-                    header("Location: http://localhost:8888/themetronetwork/main/settings/communities/communities.php");
+                    header("Location: http://localhost:8888/themetronetwork/main/settings/friends/friends.php");
                     exit();
-                }           
+                }        
             } 
-        }
+        } 
     }
 
     if($error) {
         $alert = "Something went wrong! Please try again.";
     } else if($empty) {
-        $alert = "Please select a class to continue:";
+        $alert = "Please select a friend to continue:";
     } else {
-        $alert = "Select communit[ies] you want to leave below:";
+        $alert = "Select users you want to unfriend below:";
     }
 
 ?>
@@ -83,7 +80,7 @@
 
 <head>
     <!-- link to stylesheet -->
-    <title>Edit Communities</title>
+    <title>Edit Friends</title>
     <link href="../../../css/main-style.css" rel="stylesheet" type="text/css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
       
@@ -107,7 +104,6 @@
 
                 </ul>
             </nav>
-            
         </header>
 
         <div class="content">
@@ -115,48 +111,46 @@
                 <div class="container">
                     <div class="section section1">
                         <div class="links">
-                            <a href="communities.php" class="link">Back</a>
+                            <a href="friends.php" class="link">Back</a>
                         </div>
                     </div>
                     
                     <div class="section section2">
                     
-                        <div class="section-title">Edit Communities</div>
+                        <div class="section-title">Edit Friends</div>
 
-                        <form action="edit-communities.php" method="post">
+                        <form action="edit-friends.php" method="post">
 
-                        <?php if($communities) { ?>
+                        <?php if($has_friends) { ?>
 
                             <div class="content-box error">
-                                <div class="full-content">
+                                <div class="segment full-content">
                                        <?php echo $alert; ?>
                                 </div>
                             </div>
 
-                            <?php while($output = $query->fetch(PDO::FETCH_ASSOC)){ ?>
+							<?php while($friend_acccount_info = $select_friends->fetch(PDO::FETCH_ASSOC)) { ?>
                                  
                                     <div class="content-box">     
                                         <div class="segment segment1">
-                                            <input type="checkbox" name="<?php echo $output['class_name']; ?>" value="<?php echo $output['id']; ?>">
+                                            <input type="checkbox" name="<?php echo $friend_acccount_info['id']; ?>" value="<?php echo $friend_acccount_info['id']; ?>">
                                         </div>
                                         
                                         <div class="segment segment2">
-                                            <?php echo $output['class_name']; ?>
-                                            <h5>
-                                                <?php echo $output['class_proctor']; ?>
-                                            </h5>
+                                            <h2><?php echo $friend_acccount_info['first_name']; ?></h2>
+                                            <h3><?php echo $friend_acccount_info['username']; ?></h3>
                                         </div>
                                     </div>
                                                                
                             <?php } ?>
 
-                                <input type="submit" name="submit" value="Leave Class" class="submit-btn" style="margin-bottom: 25px;">
+                                <input type="submit" name="submit" value="Unfriend" class="submit-btn" style="margin-bottom: 25px;">
 
                             <?php } else { ?>
 
                                 <div class="content-box">
                                     <div class="full-content">
-                                    You have not joined any communities!
+                                    You do not have any friends!
                                     </div>
                                 </div>    
 

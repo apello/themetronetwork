@@ -41,10 +41,9 @@
 
         <div class="content">
 
-            <div class="container"></div>
-
+          
       
-            <div class="container" style="display: none;">
+            <div class="container">
                 
 
                 <div class="section section1">

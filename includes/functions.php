@@ -21,11 +21,11 @@ function isEmpty() {
 }
 
 //ALL EMPTY - EDIT ACCOUNT
-function allEmpty($user_first_name, $user_last_name, $user_username, $user_email) {
+function allEmpty($user_first_name, $user_last_name, $user_username, $user_email, $user_bio) {
 
     $result;
 
-    if(empty($user_first_name) && empty($user_last_name) && empty($user_username) && empty($user_email)) {
+    if(empty($user_first_name) && empty($user_last_name) && empty($user_username) && empty($user_email) && empty($user_bio)) {
         $result = true;
     } else {
         $result = false;
@@ -39,11 +39,10 @@ function allEmpty($user_first_name, $user_last_name, $user_username, $user_email
 
 /* USED IN:
 - REGISTRATION
-- EDIT ACCOUNT
 
 */
 
-function filterInputMultiple($a, $b, $c, $d, $bad_word_filepath) {
+function filterInputFour($a, $b, $c, $d, $bad_word_filepath) {
 
     include($bad_word_filepath);
 
@@ -52,6 +51,27 @@ function filterInputMultiple($a, $b, $c, $d, $bad_word_filepath) {
     //str pos works very well
     for ($iterative = 0; $iterative < count($bad_words); $iterative++) { 
         if(strpos($a, $bad_words[$iterative]) !== FALSE OR strpos($b, $bad_words[$iterative]) !== FALSE OR strpos($c, $bad_words[$iterative]) !== FALSE OR strpos($d, $bad_words[$iterative]) !== FALSE) {
+            $result = TRUE;
+        }
+    }
+
+    return $result;
+}
+
+/* USED IN:
+- EDIT ACCOUNT
+
+*/
+
+function filterInputFive($a, $b, $c, $d, $e, $bad_word_filepath) {
+
+    include($bad_word_filepath);
+
+    $result = FALSE;
+
+    //str pos works very well
+    for ($iterative = 0; $iterative < count($bad_words); $iterative++) { 
+        if(strpos($a, $bad_words[$iterative]) !== FALSE OR strpos($b, $bad_words[$iterative]) !== FALSE OR strpos($c, $bad_words[$iterative]) !== FALSE OR strpos($d, $bad_words[$iterative]) !== FALSE OR strpos($e, $bad_words[$iterative]) !== FALSE) {
             $result = TRUE;
         }
     }
@@ -329,6 +349,24 @@ function oldEqualNew($user_pwd, $old_pwd) {
     $result;
 
     if($user_pwd == $old_pwd) {
+        $result = true;
+    } else {
+        $result = false;
+    }
+
+    return $result;
+}
+
+//counts words in text
+
+/* USES: 
+- EDIT ACCOUNT for BIO
+*/
+
+function wordCount($a) {
+    $result;
+
+    if(count($a) > 250) {
         $result = true;
     } else {
         $result = false;

@@ -88,8 +88,7 @@
                 <ul>
                     <li>Home</li>
                     <li>Search</li>
-                    <li>Communities</li>
-                    <li>Account</li>
+                    <li>Settings</li>
                     <li>Logout</li>
 
                 </ul>
@@ -97,142 +96,85 @@
         </header>
 
         <div class="content">
-      
-            <div class="content">
-      
-                <div class="container">
 
-                    <div class="section section1">
+            <!-- HIDDEN POST CONTAINER -->
 
-                        <div class="title">Account View</div>
+            <div class="container post">
+                <div class="post-overlay">
 
-                        <div class="links">
-                            <div class="link">Back to Search</div>
+                     <div class="section-title">Compose New Post</div>
+
+
+                    <div class="content">
+                        <textarea></textarea>
+                        
+                        <div class="commun-select">
+                            <select>
+                                <option></option>
+                            </select>
                         </div>
-
-
                     </div>
-                    
-                    <div class="section section2" style="padding-bottom: 20px;">
-                    
-                        <div class="section-title">User Account View</div>
 
-                        <div class="content-box">
-                            <div class="segment full-content">
-                                <h1>Abdirahman Nur</h1>
-                                <h3>Username: Username</h3>
-                                <h3>Email: nur.3@themetroschool.org</h3>
-                                <h3>Position: Student</h3>
-                                <h3>Account Creation Date: 12/31/2003</h3>
-                            </div>
-                        </div> 
-
-                        <div class="content-box friend">
-                            <div class="full-content">
-                                Friend Abdirahman
-                            </div>                   
-                        </div>
-                        
-                        <div class="content-box" id="user-friend-show" style="margin-bottom: 5px;">
-                            <div class="segment2" style="font-size: 1.30em">All Friends:</div>
-                            <div class="segment1 dropdown" id="friend-dropdown-show">+</div>
-
-                        </div>
-
-                        <div class="content-box" id="user-friend-hide" style="margin-bottom: 5px;">
-                            <div class="segment2" style="font-size: 1.30em">All Friends:</div>
-                            <div class="segment1 dropdown" id="friend-dropdown-hide">&#8212;</div>
-
-                        </div>
-
-                        <div id="user-friend-content" style="margin-bottom: 30px;">
-
-                            <div class="content-box">
-                                <div class="full-content">
-                                Abdirahman has friended 1 person
-                                </div>                   
-                            </div>
-                            
-
-                            <div class="content-box">
-                                <div class="segment1">
-                                    <div class="result1">
-                                        <h2>View</h2>
-                                    </div>
-                                </div>
-
-                                <div class="segment2">
-                                    <div class="result2">
-                                        <h1>Abdirahman Nur</h1>
-                                        <h3>Student</h3>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div class="content-box" id="comm-show" style="margin-bottom: 5px;">
-                            <div class="segment2" style="font-size: 1.30em">Communities Joined:</div>
-                            <div class="segment1 dropdown" id="comm-dropdown-show">+</div>
-                        </div>
-
-                        <div class="content-box" id="comm-hide" style="margin-bottom: 5px;">
-                            <div class="segment2" style="font-size: 1.30em">Communities Joined:</div>
-                            <div class="segment1 dropdown" id="comm-dropdown-hide">&#8212;</div>
-                        </div>
-
-                        <div id="communities-content" style="margin-bottom: 30px;">
-
-
-                            <div class="content-box">
-                                <div class="full-content">
-                                Abdirahman has joined 1 community
-                                </div>                   
-                            </div>
-
-
-                            <div class="content-box">
-                                <div class="segment1">
-                                    <div class="result1">
-                                        <h2>View</h2>
-                                    </div>
-                                </div>
-
-                                <div class="segment2">
-                                    <div class="result2">
-                                        <h1>Algebra 2</h1>
-                                        <h3>Carol Van Fossen</h3>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                        
-                        
-                
-
-                
-
-                    </div>
-                
+                    <div class="button">
+                        <button class="post">
+                            <img id="friend" onclick="" src="../pictures/plus.png">      
+                        </button>                    
+                    </div> 
 
                 </div>
             </div>
 
-                
-            </div>
+            <!-- END HIDDEN POST CONTAINER -->
 
-         
+            <button class="outer-button friend">
+                <img id="friend" onclick="" src="../pictures/plus.png">      
+            </button>
 
+      
+            <div class="container">
                 
-         
+
+                <div class="section section1">
+
+                <div class="title">Hi, Abdi!</div>
+
+                <div class="links">
+                    <div class="link" style="background-color: rgba(50, 231, 255, 0.7);">Communities</div>
+                    <div class="link">English 12</div>
+                    <div class="link">Algebra 1</div>
+                </div>
+
+                </div>
+
+                <div class="section section2">
+
+                    <div class="section-title">Posts - Scroll:</div>
+
+                    <div class="content-box">
+                        
+                        <div class="segment segment1">
+                            <button class="heart-outline"></button>
+                            <button class="heart-filled"></button>
+                            <button class="comment"></button>
+                        </div>
+
+                        <div class="segment segment2">
+
+                            <h1>Abdirahman Nur</h1>
+                            <h3>Lorem ipsum dolor sit amet, </h3>
+
+                        </div>
+
+                    </div> 
+
+                </div> 
+
+            </div>  
+
+
         </div>
 
-        <footer>
-            <h1>The Metro Network</h1>
-            <h1>Created by Abdirahman</h1>
 
-        </footer>
     </div>
 
 
@@ -242,6 +184,7 @@
 
 
 </html>   
+
 
 
 
@@ -524,3 +467,120 @@
                     </div>
 
  -->
+
+
+ <!-- 
+
+    ACCOUNT-VIEW
+                    <div class="section section1">
+
+                        <div class="title">Account View</div>
+
+                        <div class="links">
+                            <div class="link">Back to Search</div>
+                        </div>
+
+
+                    </div>
+                    
+                    <div class="section section2" style="padding-bottom: 20px;">
+                    
+                        <div class="section-title">User Account View</div>
+
+                        <div class="content-box">
+                            <div class="segment full-content">
+                                <h1>Abdirahman Nur</h1>
+                                <h3>Username: Username</h3>
+                                <h3>Email: nur.3@themetroschool.org</h3>
+                                <h3>Position: Student</h3>
+                                <h3>Account Creation Date: 12/31/2003</h3>
+                            </div>
+                        </div> 
+
+                        <div class="content-box friend">
+                            <div class="full-content">
+                                Friend Abdirahman
+                            </div>                   
+                        </div>
+                        
+                        <div class="content-box" id="user-friend-show" style="margin-bottom: 5px;">
+                            <div class="segment2" style="font-size: 1.30em">All Friends:</div>
+                            <div class="segment1 dropdown" id="friend-dropdown-show">+</div>
+
+                        </div>
+
+                        <div class="content-box" id="user-friend-hide" style="margin-bottom: 5px;">
+                            <div class="segment2" style="font-size: 1.30em">All Friends:</div>
+                            <div class="segment1 dropdown" id="friend-dropdown-hide">&#8212;</div>
+
+                        </div>
+
+                        <div id="user-friend-content" style="margin-bottom: 30px;">
+
+                            <div class="content-box">
+                                <div class="full-content">
+                                Abdirahman has friended 1 person
+                                </div>                   
+                            </div>
+                            
+
+                            <div class="content-box">
+                                <div class="segment1">
+                                    <div class="result1">
+                                        <h2>View</h2>
+                                    </div>
+                                </div>
+
+                                <div class="segment2">
+                                    <div class="result2">
+                                        <h1>Abdirahman Nur</h1>
+                                        <h3>Student</h3>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="content-box" id="comm-show" style="margin-bottom: 5px;">
+                            <div class="segment2" style="font-size: 1.30em">Communities Joined:</div>
+                            <div class="segment1 dropdown" id="comm-dropdown-show">+</div>
+                        </div>
+
+                        <div class="content-box" id="comm-hide" style="margin-bottom: 5px;">
+                            <div class="segment2" style="font-size: 1.30em">Communities Joined:</div>
+                            <div class="segment1 dropdown" id="comm-dropdown-hide">&#8212;</div>
+                        </div>
+
+                        <div id="communities-content" style="margin-bottom: 30px;">
+
+
+                            <div class="content-box">
+                                <div class="full-content">
+                                Abdirahman has joined 1 community
+                                </div>                   
+                            </div>
+
+
+                            <div class="content-box">
+                                <div class="segment1">
+                                    <div class="result1">
+                                        <h2>View</h2>
+                                    </div>
+                                </div>
+
+                                <div class="segment2">
+                                    <div class="result2">
+                                        <h1>Algebra 2</h1>
+                                        <h3>Carol Van Fossen</h3>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        
+                        
+                
+
+                
+
+                    </div> -->

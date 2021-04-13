@@ -70,28 +70,28 @@ function deleteAlert() {
                     
                         <div class="section-title">Account</div>
 
-
                         <div class="content-box">
-                        
-                           
-                    
                             <div class="segment full-content">
                                 <h1><?php /* outputs name */echo trim($row['first_name']) . " " . trim($row['last_name']);?></h1>
                                 <h3>Username: <?php echo trim($row['username']) ?></h3>
                                 <h3>Email: <?php echo trim($row['email']) ?></h3>
                                 <h3>Position: <?php echo ucwords($row['position']); ?></h3>
-                                <h3>Password: ***********</h3>
                                 <h3>Account Creation Date: <?php echo date("F j, Y", strtotime($row['created_at'])) ?></h3>
-
-
-
-                            </div>
-
-                            
-
-
-                    
+                            </div>                    
                         </div> 
+
+                        <?php if(!empty($row['bio'])){ ?>
+                            <div class="content-box">
+                                <div class="segment full-content">
+                                    <h1>Bio</h1>
+                                    <h3><?php echo trim($row['bio']) ?></h3>
+                                </div>
+                            </div> 
+                        <?php } else { ?>
+                            <div class="content-box">
+                                <div class="segment full-content"><a href="edit-account.php">Add Bio</a></div>
+                            </div> 
+                        <?php }  ?>
 
                         
                         <div class="content-box">
@@ -106,13 +106,7 @@ function deleteAlert() {
                             <div class="segment full-content" onclick="deleteAlert()" style="cursor: pointer; text-decoration:underline;">Delete Account</div>
                         </div>   
 
-                    
-
-                
-
                     </div>
-                
-
                 </div>
             </div>
 

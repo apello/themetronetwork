@@ -4,7 +4,7 @@
 
     if(isset($token)){
 
-        $sql = "SELECT id,first_name,last_name,username,email,position,created_at FROM users WHERE id = :token";
+        $sql = "SELECT id,first_name,last_name,username,email,position,bio,created_at FROM users WHERE id = :token";
         $stmt = $conn->prepare($sql);
 
         $stmt->bindParam(":token", $token);

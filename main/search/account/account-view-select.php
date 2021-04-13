@@ -5,7 +5,7 @@ $search_user_id = $_GET['id'];
 
 
 //SELECT QUERY
-    $account_view_qry = "SELECT first_name,last_name,username,email,position,created_at FROM users WHERE id = :id";
+    $account_view_qry = "SELECT first_name,last_name,username,email,position,bio,created_at FROM users WHERE id = :id";
     $account_view = $conn->prepare($account_view_qry);
 
     $account_view->bindParam(":id", $search_user_id);
@@ -40,28 +40,32 @@ $search_user_id = $_GET['id'];
 
 //////////////////////
 
-//create more users to test this
+//WRITE FUNC FOR BOTH ON SETTINGS AND SEARCH
+
+$select_friends_qry = "SELECT u.id,
+                            u.first_name,
+                            u.last_name,
+                            u.username,
+                            u.position 
+                        FROM users u 
+                        INNER JOIN friends f 
+                        ON f.user_id1 = :id AND f.user_id2 = u.id";
+$select_friends = $conn->prepare($select_friends_qry);
+
+$select_friends->bindParam(":id", $row['id']);
+
+$select_friends->execute();
+
+if($select_friends->rowCount() > 0) {
+    $has_friends = TRUE;
+} else {
+    $has_friends = FALSE;
+}
+
+
+
     $id = $search_user_id;
-
-    $select_friends_qry = "SELECT u.id,
-                                u.first_name,
-                                u.last_name,
-                                u.username,
-                                u.position 
-                            FROM users u 
-                            INNER JOIN friends f 
-                            ON f.user_id1 = :id AND f.user_id2 = u.id";
-    $select_friends = $conn->prepare($select_friends_qry);
-
-    $select_friends->bindParam(":id", $id);
-
-    $select_friends->execute();
-
-    if($select_friends->rowCount() > 0) {
-        $has_friends = TRUE;
-    } else {
-        $has_friends = FALSE;
-    }
+    require_once("../../settings/communities/communities-select.php");
 
 
 /////////////////

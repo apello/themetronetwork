@@ -3,7 +3,7 @@
 
 if(isset($_POST['submit'])){
 
-    //FUNCTION REQUIRE FROM AUTH-FUNC
+    //FUNCTION REQUIRE FROM FUNC
     require("../../../includes/functions.php");
 
     //FILE PATHs
@@ -15,17 +15,18 @@ if(isset($_POST['submit'])){
     $user_last_name = $_POST["user-last-name"]; 
     $user_username = $_POST["user-name"];
     $user_email = $_POST["user-email"];
+    $user_bio = $_POST["user-bio"];
 
     
     //if empty directs user back with all empty error
-    if(allEmpty($user_first_name, $user_last_name, $user_username, $user_email)) {
+    if(allEmpty($user_first_name, $user_last_name, $user_username, $user_email, $user_bio)) {
         header("Location: http://localhost:8888/themetronetwork/main/settings/account/edit-account.php?alert=all-empty");
         exit();
     }
 
     //Checks if any of these values have curse words in them
-    if(!empty($user_first_name) || !empty($user_last_name) || !empty($user_username) || !empty($user_email)) {
-        if(filterInputMultiple($user_first_name, $user_last_name, $user_username, $user_email, $bad_word_filepath)){
+    if(!empty($user_first_name) || !empty($user_last_name) || !empty($user_username) || !empty($user_email) || !empty($user_bio) ) {
+        if(filterInputFive($user_first_name, $user_last_name, $user_username, $user_email, $user_bio, $bad_word_filepath)){
             header("Location: http://localhost:8888/themetronetwork/main/settings/account/edit-account.php?alert=inappropriate-value");
             exit();
         }
@@ -63,9 +64,16 @@ if(isset($_POST['submit'])){
         }
     }
 
+    if(!empty($user_bio)) {
+        if(wordCount($user_bio)) {
+            header("Location: http://localhost:8888/themetronetwork/main/settings/account/edit-account.php?alert=bio-too-long");
+            exit();
+        }
+    }
+
     //if input passes all functions, account is edited and the user is directed back
     //if something goes wrong, user is sent back with error
-    if(editUser($user_first_name, $user_last_name, $user_username, $user_email)) {
+    if(editUser($user_first_name, $user_last_name, $user_username, $user_email, $user_bio)) {
         header("Location: http://localhost:8888/themetronetwork/main/settings/account/edit-account.php?alert=successful-edit");
         exit(); 
     } else {
@@ -76,7 +84,7 @@ if(isset($_POST['submit'])){
 
 
 //ONLY IN USE FOR EDIT ACCOUNT
-function editUser($user_first_name, $user_last_name, $user_username, $user_email) {
+function editUser($user_first_name, $user_last_name, $user_username, $user_email, $user_bio) {
 
     require("../../../includes/db.php");
 
@@ -161,6 +169,26 @@ function editUser($user_first_name, $user_last_name, $user_username, $user_email
             $result = false;
         }
     }
+
+    if(!empty($user_bio)) {
+
+        $sql = "UPDATE users SET bio = :bio WHERE id = :id;";
+        $stmt = $conn->prepare($sql);
+
+        $stmt->bindParam(":bio", $user_bio);
+        $stmt->bindParam(":id", $user_id);
+
+
+        $stmt->execute();
+
+
+        if($stmt->rowCount() > 0) {
+            $result = true;
+        } else {
+            $result = false;
+        }
+    }
+
 
     return $result;
 

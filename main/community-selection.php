@@ -136,8 +136,6 @@ the fourth query increments class size and then updates the class row
                     }
                 } 
 
-                
-  
                 //checks if every query went through for each class by
                 if($all_qry_success == TRUE && $iterative == (count($classid) - 1)) {
                     //sends user to feed page aka home

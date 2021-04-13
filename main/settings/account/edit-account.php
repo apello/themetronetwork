@@ -26,7 +26,6 @@
 
     $alert;
 
-    
     if($_GET['alert'] == 'all-empty') {
         $alert = 'All values seem to be empty. Please try again.';
     } else if($_GET['alert'] == 'inappropriate-value') {
@@ -45,6 +44,8 @@
             <ul/>';
     } else if ($_GET['alert'] == 'incorrect-email') {
         $alert = 'Email entered does not seem to be registered @themetroschool.org. Please try again.';
+    } else if ($_GET['alert'] == 'bio-too-long') {
+        $alert = 'The bio entered is too long. Please re-type it and submit again.';
     } else if ($_GET['alert'] == 'successful-edit') {
         $alert = 'Your information has been successfully edited!';
     } else if ($_GET['alert'] == 'unsuccessful-edit') {
@@ -128,6 +129,9 @@
 
                                 <div class="content-box"><div class="full-content"><?php echo "Email: ".$row['email']; ?></div></div>
                                 <input type="email" name="user-email" placeholder="Enter new email here:">
+
+                                <div class="content-box" style="margin-bottom: 5px;"><div class="full-content">Edit Bio Here:</div></div>
+                                <textarea placeholder="50 word limit:" name="user-bio" maxlength="250"></textarea>
                                 
                                 <?php  echo "<input type='hidden' name='user-id' value=".$row['id'].">";  ?>   
                                 

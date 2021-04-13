@@ -26,7 +26,7 @@ if(isset($_POST['submit'])){
         exit();
     }
 
-    if(filterInputMultiple($user_first_name, $user_last_name, $user_username, $user_email, $bad_word_filepath)){
+    if(filterInputFour($user_first_name, $user_last_name, $user_username, $user_email, $bad_word_filepath)){
         header("Location: http://localhost:8888/themetronetwork/register.php?alert=inappropriate-value");
         exit();
     }
