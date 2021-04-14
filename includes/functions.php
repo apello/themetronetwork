@@ -39,8 +39,26 @@ function allEmpty($user_first_name, $user_last_name, $user_username, $user_email
 
 /* USED IN:
 - REGISTRATION
-
 */
+
+/* USED IN POST-FORM */
+
+
+function filterInputTwo($a, $b, $bad_word_filepath) {
+
+    include($bad_word_filepath);
+
+    $result = FALSE;
+
+    //str pos works very well
+    for ($iterative = 0; $iterative < count($bad_words); $iterative++) { 
+        if(strpos($a, $bad_words[$iterative]) !== FALSE OR strpos($b, $bad_words[$iterative]) !== FALSE) {
+            $result = TRUE;
+        }
+    }
+
+    return $result;
+}
 
 function filterInputFour($a, $b, $c, $d, $bad_word_filepath) {
 

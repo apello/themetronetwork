@@ -198,11 +198,11 @@ this sets up display type, size, and color
 
 .container select {
     width: 90%;
-    height: 50px;
+    height: 65px;
 
     margin: 10px;
     font-size: 20px;
-    padding: 10px;
+    padding: 15px;
 
     border-radius: 20px;
 }
@@ -213,33 +213,6 @@ this sets up display type, size, and color
 .container input:focus {
     outline: none;
 }
-
-
-/* ///////////////////// */
-/* ///////////////////// */
-/* ///////////////////// */
-
-
-/* container for postbox */
-
-/* section-title -> title -> content -> button */
-
-
-.container.post {
-    position: absolute;
-    flex-direction: column;
-    z-index: 2;  
-}
-
-.post-overlay {
-    border-radius: 30px;
-}
-
-
-
-/* ///////////////////// */
-/* ///////////////////// */
-/* ///////////////////// */
 
 
 /* 
@@ -717,9 +690,9 @@ button .content-box {
     z-index: 2;
 }
 
-.outer-button.friend img {
-    width: 40px;
-    height: 40px;
+.outer-button.add img {
+    width: 50px;
+    height: 50px;
 }
 
 .outer-button.unfriend img {
@@ -883,17 +856,10 @@ responsivness
         margin-bottom: 10px;
     }
 
-
-
-/* 
-    .hidebar {
-        display: unset;
-    }
-
-
-    .results {
+    /* used on post page to get rid of extra space */
+    #hide {
         display: none;
-    } */
+    }
 }
 
 
@@ -914,13 +880,10 @@ responsivness
         margin-bottom: 10px;
     }
 
- /*    .hidebar {
-        display: unset;
-    }
-
-    .results {
+  /* used on post page to get rid of extra space */
+    #hide {
         display: none;
-    } */
+    }
 
 }
 

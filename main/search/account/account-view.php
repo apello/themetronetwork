@@ -342,7 +342,7 @@
 							<form action="account-view-form.php" method="post">
 
 
-								<button class="outer-button unfriend">
+								<button class="outer-button add">
 									<img id="unfriend" src="../../../pictures/delete-friend.png">      
 								</button>
 								
@@ -357,7 +357,7 @@
 
 							<form action="account-view-form.php" method="post">
 
-								<button class="outer-button friend">
+								<button class="outer-button unadd">
 									<img id="friend" src="../../../pictures/plus.png">      
 								</button>
 														

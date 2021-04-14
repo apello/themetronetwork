@@ -9,9 +9,7 @@
     $_SESSION['LAST_ACTIVITY'] = time();
 ?>
 
-
 <html>
-
 
 <head>
     <!-- link to stylesheet -->
@@ -19,6 +17,28 @@
     <link href="../css/main-style.css" rel="stylesheet" type="text/css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
+
+<?php 
+
+    $select_post_qry = "SELECT * FROM posts p
+    INNER JOIN friends f 
+    on f.user_id1 = :userid AND p.creatorid = f.user_id2
+    INNER JOIN communities co
+    on co.userid = :userid AND p.classid = co.classid";
+    $select_post = $conn->prepare($select_post_qry);
+
+    $select_post->bindParam(":userid", $row['id']);
+
+    $select_post->execute();
+
+    if($select_post->rowCount() > 0) {
+        $post = TRUE;
+    }
+
+
+
+?>
+
 
 <body>
 
@@ -50,10 +70,10 @@
 
                 <div class="title">Hi, <?php echo $row['first_name']; ?>!</div>
 
-                <div class="links">
-                    <div class="link" style="background-color: rgba(50, 231, 255, 0.7);">Communities</div>
-                    <div class="link">English 12</div>
-                    <div class="link">Algebra 1</div>
+                <div class="links" id="hide">
+                    <div class="link" style="background-color: rgba(50, 231, 255, 0.7);">Things To Do:</div>
+                    <a href="search/search.php" class="link">Search For Friends</a>
+                    <a href="settings/account/edit-account.php" class="link">Change Your Bio</a>
                 </div>
 
                 </div>
@@ -62,31 +82,55 @@
 
                     <div class="section-title">Posts - Scroll:</div>
 
-                    <div class="content-box">
+
+
+                    <?php 
+                        if($post) { 
+                            while($post_info = $select_post->fetch(PDO::FETCH_ASSOC)) {   
+                    ?>
+
+                        <div class="content-box">
                         
-                        <div class="segment segment1">
-                            <button class="heart-outline"></button>
-                            <button class="heart-filled"></button>
-                            <button class="comment"></button>
+                            <div class="segment segment1">
+                                <button class="heart-outline"></button>
+                                <button class="heart-filled"></button>
+                                <button class="comment"></button>
+                            </div>
+
+                            <div class="segment segment2">
+
+                                <h2><?php echo $post_info['title']; ?> - <?php echo $post_info['creator_username']; ?></h2>
+                                <h3><?php echo $post_info['body']; ?></h3>
+
+                            </div>
+
+                        </div> 
+
+
+                    
+                    <?php  } /* WHiLE END BRACKET */ } else { ?>
+
+                        <div class="content-box">
+                            <div class="full-content">
+                                Nobody has seemed to have posted... ever
+                            </div>
                         </div>
 
-                        <div class="segment segment2">
-
-                            <h1>Abdirahman Nur</h1>
-                            <h3>Lorem ipsum dolor sit amet, </h3>
-
-                        </div>
-
-                    </div> 
+                    <?php }  ?>
 
                 </div> 
 
             </div>  
 
-
         </div>
 
             <?php include("../includes/footer.html"); ?>
+
+            <a href="post/post.php">
+                <button class="outer-button add">
+                    <img id="add" src="../pictures/plus.png">      
+                </button>
+            </a>
 
     </div>
 
