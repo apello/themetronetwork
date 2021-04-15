@@ -82,14 +82,13 @@
                             
                             <select name="community">
                                 <option value="question">--Add a community tag?--</option>
-                                <option value="1">Pre-Calculus w/ Carol Van Fossen</option>
-                                <option value="2">English 12 w/ Carlee Beatty</option>
-                                <option value="3">Algebra 2 w/ Robert</option>
+                                <option value="Pre-Calculus">Pre-Calculus w/ Carol Van Fossen</option>
+                                <option value="English 12">English 12 w/ Carlee Beatty</option>
+                                <option value="Algebra 2">Algebra 2 w/ Robert</option>
                             </select> 
 
                             <input type="submit" name="submit" value="Post" class="submit-btn">
                             <input type="hidden" name="user-id" value="<?php echo $row['id'] ?>">
-                            <input type="hidden" name="username" value="<?php echo $row['username'] ?>">
 
 
                         </div>

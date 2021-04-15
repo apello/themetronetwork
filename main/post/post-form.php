@@ -11,8 +11,7 @@ if(isset($_POST['submit'])){
     $bad_word_filepath = "../../includes/bad-words.php";
 
     //intializes variables
-    $userID = $_POST["user-id"];
-    $username = $_POST["username"];
+    $userid = $_POST["user-id"];
 
     $title = $_POST["title"];
     $body = $_POST["body"]; 
@@ -21,6 +20,13 @@ if(isset($_POST['submit'])){
 
     //MAKE IT NULL
     if($community == "question"){ $community = NULL; }
+
+
+    echo $userid;
+    echo $title;
+    echo $body;
+    echo $community;
+
 
     if(isEmpty($title, $body)) {
         header("Location: http://localhost:8888/themetronetwork/main/post/post.php?alert=missing-value");
@@ -32,34 +38,32 @@ if(isset($_POST['submit'])){
         exit();
     } 
 
-     if(createPost($userID, $title, $body, $community, $username, $filepath)) {
+    if(createPost($userid, $title, $body, $community, $filepath)) {
         header("Location: http://localhost:8888/themetronetwork/main/feed.php?alert=successful-post");
         exit(); 
     } else {
         header("Location: http://localhost:8888/themetronetwork/main/feed.php?alert=unsuccessful-post");
         exit();
-    }    
+    }     
 }
 
 
-function createPost($userID, $title, $body, $community, $username, $filepath) {
+function createPost($userid, $title, $body, $community, $filepath) {
 
     $result;
 
     require($filepath);
 
     $sql = "INSERT INTO posts 
-            (creatorid, creator_username, title, body, classid, created_at) 
+            (userid, title, body, community) 
             VALUES 
-            (:userID, :username, :title, :body, :classid, NOW());";
+            (:userid, :title, :body, :community);";
     $stmt = $conn->prepare($sql);
 
-    $stmt->bindParam(":userID", $userID);
-    $stmt->bindParam(":username", $username);
-
+    $stmt->bindParam(":userid", $userid);
     $stmt->bindParam(":title", $title);
     $stmt->bindParam(":body", $body);
-    $stmt->bindParam(":classid", $community);
+    $stmt->bindParam(":community", $community);
   
     $stmt->execute();
 
