@@ -22,12 +22,13 @@
             }
 
             //adds all values except submit to an array
-            if($id != "Leave") {
+            if($id != "Leave Class") {
                 //pushes value to array as $classid
                 //correlates to the value in the inputs
                 array_push($classid, $id);
             }
         }
+
 
         if(!$empty) {
             for ($iterative = 0; $iterative < count($classid); $iterative++) { 
@@ -65,7 +66,7 @@
                     header("Location: http://localhost:8888/themetronetwork/main/settings/communities/communities.php");
                     exit();
                 }           
-            } 
+            }  
         }
     }
 

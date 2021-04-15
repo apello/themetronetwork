@@ -122,18 +122,22 @@
                                     </div>
                                 </div>
 
-							<?php  	
-									} //WHILE LOOP END BRACKET
+							<?php } //WHILE LOOP END BRACKET ?>
 
-								} else {
-							
-							?>
+                                <div class="content-box">
+                                    <div class="full-content">
+                                        <h4 style="padding: 0px;">To find a new friend, use <a href="../../search/search.php">search</a> to look up users.</h4>
+                                    </div>
+                                </div>
+										
+
+                            <?php } else { ?>
 
 								<div class="content-box">
-											<div class="full-content">
-                                                <h4 style="padding: 0px;">You have not friended anyone yet! To find a new friend, use <a href="../../search/search.php">search</a> to look up users.</h4>
-											</div>
-										</div>
+                                    <div class="full-content">
+                                        <h4 style="padding: 0px;">You have not friended anyone yet! To find a new friend, use <a href="../../search/search.php">search</a> to look up users.</h4>
+                                    </div>
+                                </div>
 										
 							<?php } ?>
 						

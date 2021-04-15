@@ -18,6 +18,68 @@ if(isset($_POST['submit'])){
     $user_bio = $_POST["user-bio"];
 
     
+    //if empty directs user back with all empty error
+    if(allEmpty($user_first_name, $user_last_name, $user_username, $user_email, $user_bio)) {
+        header("Location: http://localhost:8888/themetronetwork/main/settings/account/edit-account.php?alert=all-empty");
+        exit();
+    }
+
+    //Checks if any of these values have curse words in them
+    if(!empty($user_first_name) || !empty($user_last_name) || !empty($user_username) || !empty($user_email) || !empty($user_bio) ) {
+        if(filterInputFive($user_first_name, $user_last_name, $user_username, $user_email, $user_bio, $bad_word_filepath)){
+            header("Location: http://localhost:8888/themetronetwork/main/settings/account/edit-account.php?alert=inappropriate-value");
+            exit();
+        }
+    }
+
+    //if name is incorrect directs user back with incorrect name error
+    if(!empty($user_first_name) || !empty($user_last_name)) {
+        if(checkName($user_first_name, $user_last_name)) {
+            header("Location: http://localhost:8888/themetronetwork/main/settings/account/edit-account.php?alert=name-incorrect-value");
+            exit();
+        }
+    }
+
+    //if username is incorrect directs user back with incorrect username error
+    if(!empty($user_username)) {
+        if(checkUsername($user_username)) {
+            header("Location: http://localhost:8888/themetronetwork/main/settings/account/edit-account.php?alert=incorrect-username");
+            exit();
+        } 
+    }
+
+    //if email is incorrect directs user back with incorrect email error
+    if(!empty($user_email)) {
+        if(checkEmail($user_email)) {
+            header("Location: http://localhost:8888/themetronetwork/main/settings/account/edit-account.php?alert=incorrect-email");
+            exit();
+        } 
+    }
+
+    //if username or email is taken directs user back with taken username/email error
+    if(!empty($user_username) || !empty($user_email)) {
+        if(takenUsernameEmail($user_username, $user_email, $filepath)) {
+            header("Location: http://localhost:8888/themetronetwork/main/settings/account/edit-account.php?alert=taken-username-email");
+            exit();
+        }
+    }
+
+    if(!empty($user_bio)) {
+        if(wordCount($user_bio)) {
+            header("Location: http://localhost:8888/themetronetwork/main/settings/account/edit-account.php?alert=bio-too-long");
+            exit();
+        }
+    }
+
+    //if input passes all functions, account is edited and the user is directed back
+    //if something goes wrong, user is sent back with error
+    if(editUser($user_first_name, $user_last_name, $user_username, $user_email, $user_bio)) {
+        header("Location: http://localhost:8888/themetronetwork/main/settings/account/edit-account.php?alert=successful-edit");
+        exit(); 
+    } else {
+        header("Location: http://localhost:8888/themetronetwork/main/settings/account/edit-account.php?alert=unsuccessful-edit");
+        exit();
+    }
   
 }
 

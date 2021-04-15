@@ -342,8 +342,8 @@
 							<form action="account-view-form.php" method="post">
 
 
-								<button class="outer-button add">
-									<img id="unfriend" src="../../../pictures/delete-friend.png">      
+								<button class="outer-button unfriend">
+									<img id="add" src="../../../pictures/delete-friend.png">      
 								</button>
 								
 								<input type="hidden" name="unfriend" value="<?php echo $_GET['id']; ?>">
@@ -357,7 +357,7 @@
 
 							<form action="account-view-form.php" method="post">
 
-								<button class="outer-button unadd">
+								<button class="outer-button add">
 									<img id="friend" src="../../../pictures/plus.png">      
 								</button>
 														

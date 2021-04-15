@@ -150,6 +150,17 @@ inner join comments c on p.id = c.post_id
 inner join users u2 on u2.id = c.user_id
 where id = ?;
 
+
+select 
+	u.first_name,
+    u.username,
+	p.id,
+	p.community,
+	p.title,
+    p.body,
+    p.created_at
+from posts p 
+inner join users u on p.userid = u.id;
 -- first inner join connect users and posts to find user first name using id
 -- second inner join connects comments and posts to find comment using post id
 -- third inner join connects users and comments to find user first name of the
@@ -265,3 +276,9 @@ FROM    T1
 INNER JOIN T2    
 ON T1.student_id=T2.student.id    
 WHERE   T1.student_id=2;  
+
+
+ SELECT * FROM posts p JOIN friends f ON JOIN posts p2 ON p2.userid
+
+    SELECT * FROM posts WHERE userid = 2 ORDER BY created_at DESC;
+SELECT * FROM posts p INNER JOIN friends f ON f.user_id1 = 2 AND p.userid = f.user_id2 ORDER BY created_at DESC;

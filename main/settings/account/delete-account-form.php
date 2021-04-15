@@ -42,7 +42,7 @@ function deleteUser() {
     //one SQL stmt still has problems but idc anymore took me two freaking weeks to figrue this out stupid ur stupid dummy
     $sql = 
     "DELETE FROM users WHERE id = :id;
-    DELETE FROM posts WHERE creatorid = :id;
+    DELETE FROM posts WHERE userid = :id;
     DELETE FROM comments WHERE userid = :id;
     DELETE FROM friends WHERE user_id1 = :id OR user_id2 = :id;
     DELETE FROM favorites WHERE userid = :id;
