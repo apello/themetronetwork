@@ -656,6 +656,27 @@ button .content-box {
     text-decoration: underline;
 }
 
+/* used for post */
+
+
+
+.bottom-bar {
+    display: flex;
+    justify-self: flex-end;
+
+    width: 100%;
+    height: auto;
+
+    background: white;
+    margin-top: 15px;
+
+    box-sizing: border-box;
+    padding: 12px;
+    border-radius: 20px;
+    cursor: pointer;
+
+}
+
 .content-box.error {
     background: linear-gradient(
         to right bottom,
