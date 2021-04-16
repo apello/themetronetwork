@@ -21,9 +21,11 @@
 
 <script>
 
-    /* this qry sends the postCount and loads the feed */
 
     $(document).ready(function() {
+
+        /* this sends the postCount and loads the feed */
+
         var postCount = 4;
 
         $("#showmore").click(function() {
@@ -32,6 +34,8 @@
                 postNewCount: postCount
             });
         });
+
+     
     });
 
 </script>
@@ -69,7 +73,7 @@
                     <li>Home</li>
                     <li><a href="search/search.php">Search</a></li>
                     <li><a href="settings/account/settings.php">Settings</a></li>
-                    <li><a href="../logout.php">Logout</a></li>
+                    <li><a href="../logout.php?id=<?php echo $row['id'] ?>">Logout</a></li>
 
                 </ul>
             </nav>
@@ -106,6 +110,10 @@
                     $alert = 'Something went wrong! Please try again.';
                 } else if ($_GET['alert'] == 'successful-post') {
                     $alert = 'You have successfully posted!';
+                } else if($_GET['alert'] == 'unsuccessful-commment') {
+                    $alert = 'Something went wrong! Please try again.';
+                } else if ($_GET['alert'] == 'successful-comment') {
+                    $alert = 'You have successfully commented!';
                 } else  {
                     $alert = 'Home - Feed Scroll';
                 }
@@ -119,7 +127,6 @@
                     <div id="posts">
 
                         <?php
-
                             //SELECT POSTS LIMIT 4
                             $select_post_qry = 
                             "SELECT 
@@ -156,25 +163,57 @@
                         ?>
 
                             <div class="content-box">
+
+
+                                <?php 
+                                   /*  //checks if user liked post by selected value from table
+                                    $user_liked_post_qry = "SELECT * FROM favorites WHERE userid = :userid AND postid = :postid";
+                                    $user_liked_post = $conn->prepare($user_liked_post_qry);
+
+                                    $user_liked_post->bindParam(":userid", $row['id']);
+                                    $user_liked_post->bindParam(":postid", $post_info['id']);
+
+                                    $user_liked_post->execute();
+
+                                    if($user_liked_post->rowCount > 0) {
+                                        $liked = TRUE;
+                                    } */
+
+                                ?>
                             
                                 <div class="segment segment1">
-                                    <button class="heart-filled"></button>
+
+                                  <!--   <div id="like-qry"></div>
+
+                                    <?php if($liked) { ?>
+                                        <button class="heart-filled" id="unlike"></button>
+                                    <?php } else { ?>
+                                        <button class="heart-outline" id="like"></button>
+                                    <?php }  ?> -->
 
                                     <a href="post/comment/comment.php?title=<?php echo $post_info['title']; ?>&postid=<?php echo $post_info['id']; ?>">
-                                        <button class="comment">
-                                        </button>
+                                        <button class="comment"></button>
                                     </a>
 
                                 </div>
 
-                                <div class="segment segment2">
+                                <div class="postbox">
 
-                                    <div><h4 style="float: right;"><?php echo date("F j, Y", strtotime($post_info['created_at'])) ?></h4></div>
+                                    <div class="segment segment2">
 
-                                    <h2><?php echo $post_info['title']; ?> - <?php echo $post_info['username']; ?></h2>
-                                    <h3><?php echo $post_info['body']; ?></h3>
+                        
 
-                                    <div class="bottom-bar">View Comments And More</div>
+                                        <div><h4 style="float: right;"><?php echo date("F j, Y", strtotime($post_info['created_at'])) ?></h4></div>
+
+                                        <h4><?php echo $post_info['community'];?></h4>
+
+                                        <h2 style="color: white"><?php echo $post_info['title']; ?> - <?php echo $post_info['username']; ?></h2>
+                                        <h3><?php echo $post_info['body']; ?></h3>
+
+
+                                    </div>
+
+                                    <a class="bottom-bar" style="color:white; text-decoration: none;" href="search/posts/post-view.php?id=<?php echo $post_info['id']; ?>&header=feed">View Comments And More</a>
 
                                 </div>
 
@@ -190,6 +229,8 @@
 
                         <?php 
 
+                        echo $count;
+
                             //CHECK COUNT VALUE
                             if($post_count > $limit_post_count) {
                                 $showmore = TRUE;
@@ -198,11 +239,13 @@
                             if($showmore) {
                         ?>
 
+                        <div id="hide-showmore">
                             <button class="content-box" id="showmore">
                                 <div class="full-content">
-                                    <h3 style="text-decoration:underline;">Show More Posts</h3>
+                                    <h3 style="text-decoration:underline; cursor:pointer;">Show More Posts</h3>
                                     </div>
                             </button>
+                        </div>
 
                         <?php } else if($post_count == 0) { ?>
                             <div class="content-box">
@@ -211,9 +254,6 @@
                                 </div>
                             </div>
                         <?php } ?>
-
-
-
 
             </div>
 

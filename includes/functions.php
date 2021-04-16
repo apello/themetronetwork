@@ -267,6 +267,7 @@ function logIn($auth_username, $auth_pwd, $filepath) {
             //hashes entered password and checks against already hashed password
             //also checks if username = username
             if(password_verify($auth_pwd, $row['passwrd']) && $row['username'] == $auth_username) {
+                trackUserActions($row['id'], "LOGIN", $filepath);
                 //makes a session with the user id
                 $_SESSION['USER_ID'] = $row['id'];
                 //to help track activity
@@ -391,4 +392,26 @@ function wordCount($a) {
     }
 
     return $result;
+}
+
+function trackUserActions($userid, $actions, $filepath) {
+
+    $result;
+
+    require($filepath);
+
+    $sql = "INSERT INTO tracking (userid, actions) VALUES (:userid, :actions)";
+    $stmt = $conn->prepare($sql);
+
+    $stmt->bindParam(":userid", $userid);
+    $stmt->bindParam(":actions", $actions);
+
+    $stmt->execute();
+
+    if($stmt->rowCount > 0) {
+        $result = TRUE;
+    } else {
+        $result = FALSE;
+    }
+
 }

@@ -8,6 +8,7 @@
 	$userid = $_POST['userid'];
 
 	$header = $_POST['header'];
+	$postid = $_POST['postid'];
 
 
 
@@ -19,15 +20,18 @@
 			//IF USER ID DOES NOT MATCH FRIEND ID
 			if($unfriend_id != $userid) {
 
-				//IF QRY IS SUCCESSFULL, GO TO ACCOUNT-VIEW WITH ID & SUCCESS ALERT
+				//IF QRY IS SUCCESSFULL, GO TO ACCOUNT-VIEW WITH ID & SUCCESS ALERTs
 				if(unFriendUser($userid, $unfriend_id)) {
-					if(isset($header)) {
-						header("Location: http://localhost:8888/themetronetwork/main/search/account/account-view.php?id=".$unfriend_id."&alert=unfriended&header=friends");
+					if(isset($header) AND !isset($postid)) {
+						header("Location: http://localhost:8888/themetronetwork/main/search/account/account-view.php?id=".$unfriend_id."&alert=unfriended&header=".$header);
+						exit();
+					} else if(isset($header) & isset($postid)) {
+						header("Location: http://localhost:8888/themetronetwork/main/search/account/account-view.php?id=".$unfriend_id."&alert=unfriended&header=".$header."&postid=".$postid);
 						exit();
 					} else {
 						header("Location: http://localhost:8888/themetronetwork/main/search/account/account-view.php?id=".$unfriend_id."&alert=unfriended");
 						exit();
-					}
+					} 
 				} else {
 					header("Location: http://localhost:8888/themetronetwork/main/search/account/account-view.php?id=".$unfriend_id."&alert=error");
 					exit();
@@ -40,9 +44,12 @@
 		
 		if(isset($friend_id)) {
 			if($friend_id != $userid) {
-				if(friendUser($userid, $friend_id)) {
-					if(isset($header)) {
-						header("Location: http://localhost:8888/themetronetwork/main/search/account/account-view.php?id=".$friend_id."&alert=friended&header=friends");
+			 	if(friendUser($userid, $friend_id)) {
+					if(isset($header) AND !isset($postid)) {
+						header("Location: http://localhost:8888/themetronetwork/main/search/account/account-view.php?id=".$friend_id."&alert=friended&header=".$header);
+						exit();
+					} else if(isset($header) AND isset($postid)) {
+						header("Location: http://localhost:8888/themetronetwork/main/search/account/account-view.php?id=".$friend_id."&alert=friended&header=".$header."&postid=".$postid);
 						exit();
 					} else {
 						header("Location: http://localhost:8888/themetronetwork/main/search/account/account-view.php?id=".$friend_id."&alert=friended");
@@ -51,7 +58,7 @@
 				} else {
 					header("Location: http://localhost:8888/themetronetwork/main/search/account/account-view.php?id=".$friend_id."&alert=error");
 					exit();
-				}
+				} 
 			} else {
 				header("Location: http://localhost:8888/themetronetwork/main/search/search.php");
 				exit();

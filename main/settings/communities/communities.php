@@ -69,26 +69,28 @@
                             </div>
                         </div>
 
-                        <div class="content-box" style="margin-bottom: 40px;">
+                    
+
+                        
+
+                        
+                        
+                        <?php if($communities) { ?>
+
+                            <div class="content-box" style="margin-bottom: 40px;">
                             <div class="full-content" align="center">
                                 <a href="edit-communities.php">Edit Communities</a>
                             </div>
                         </div>
 
-                        <div class="content-box"> 
-                            <div class="segment full-content">
-                                <h4 style="padding: 0px;">To join a new community, use <a href="../../search/search.php">search</a> to find and join a class.</h4>
+                            <div class="content-box"> 
+                                <div class="segment full-content">
+                                    <h4 style="padding: 0px;">To join a new community, use <a href="../../search/search.php">search</a> to find and join a class.</h4>
+                                </div>
                             </div>
-                        </div>
 
                         
-
-                        <?php
-                        
-                            if($communities) {
-
-                                while($output = $query->fetch(PDO::FETCH_ASSOC)) {    
-                        ?>
+                            <?php while($output = $query->fetch(PDO::FETCH_ASSOC)) { ?>
 
                                 <div class="content-box">
                                     <div class="segment1">

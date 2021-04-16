@@ -177,7 +177,7 @@ the fourth query increments class size and then updates the class row
 
             <nav>
                 <ul>
-                <li><a href="../logout.php">Logout</a></li>
+                <li><a href="../logout.php?id=<?php echo $row['id'] ?>">Logout</a></li>
                 </ul>
             </nav>
         </header>

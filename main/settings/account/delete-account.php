@@ -48,7 +48,7 @@
                     <li><a href="../../feed.php">Home</a></li>
                     <li><a href="../../search/search.php">Search</a></li>
                     <li><a href="settings.php">Settings</a></li>
-                    <li><a href="../../../logout.php">Logout</a></li>
+                    <li><a href="../../../logout.php?id=<?php echo $row['id'] ?>">Logout</a></li>
 
                 </ul>
             </nav>

@@ -70,7 +70,14 @@
         }
 
         //COMMUNITIES
-        $comm_query = "SELECT id,class_name,class_size,class_proctor FROM class WHERE class_name LIKE :input OR class_proctor LIKE :input LIMIT 3";
+        $comm_query = "SELECT id,
+                            class_name,
+                            class_size,
+                            class_proctor 
+                    FROM class 
+                    WHERE class_name LIKE :input 
+                    OR class_proctor LIKE :input 
+                    LIMIT 3";
         $comm_search = $conn->prepare($comm_query);
 
         //SAME AS USERS
@@ -83,6 +90,30 @@
         if($comm_search->rowCount() > 0) {
             $communities = TRUE;
         }
+
+        //POSTS
+        $post_qry = "SELECT id,
+                            title,
+                            substr(body, 1, 30) AS body, 
+                            community 
+                    FROM posts 
+                    WHERE title LIKE :input 
+                    OR body LIKE :input 
+                    OR community LIKE :input 
+                    LIMIT 3";
+        $post_search = $conn->prepare($post_qry);
+
+        //SAME AS USERS AND COMM
+        $post_input = "$search%";
+
+        $post_search->bindParam(":input", $post_input);
+
+        $post_search->execute();
+
+        if($post_search->rowCount() > 0) {
+            $post = TRUE;
+        }
+
     }
 ?>
 
@@ -125,6 +156,10 @@
                                 </select> -->
                                 
                                 <input type="submit" name="submit" class="submit-btn" value="Go">
+
+                                <div class="alert" style="background: light blue; opacity: 0.8;">Start by searching for a name or post content.</div>
+
+                                
                         </form>
 
 
@@ -136,71 +171,75 @@
                     <?php
                         if($input_set) {
                             //RESULT COUNT
-                            if($user || $communities || $posts) {
+                            if($user || $communities || $post) {
                                 $count = $count + $user_search->rowCount();
                                 $count = $count + $comm_search->rowCount();
-                                //$count = $count + $posts;
+                                $count = $count + $post_search->rowCount();
                             }
 
                             //RESULT OUTPUT
                             if($count > 0) {
-                                echo '<div class="content-box">
+
+                    ?>
+                            <div class="content-box">
                                 <div class="full-content">
-                                    <h3 align="center">'.$count.' result[s] for: '.$search.'</h3>
+                                    <h3 align="center"><?php echo $count; ?> result[s] for: <?php echo $search; ?></h3>
                                 </div>
-                                </div>';
-                            } else {
-                                echo '<div class="content-box">
+                            </div>
+
+                        <?php } else { ?>
+                            <div class="content-box">
                                 <div class="full-content">
-                                    <h3 align="center">0 results for: '.$search.'</h3>
+                                    <h3 align="center">0 results for: <?php echo $search; ?></h3>
                                 </div>
-                                </div>';
-                            }
+                            </div>
 
-                            //USERS SEARCH RESULTS
+                        <?php }  ?>
 
-                            if($user) {
 
-                                //TITLE
-                                echo '<div class="content-box">
-                                        <div class="full-content">
-                                            <h1>Users</h1>
-                                        </div>
-                                    </div>';
+                        <!-- USERS SEARCH RESULTS -->
+
+                        <?php if($user) { ?>
+
+                                <!-- TITLE -->
+                                <div class="content-box">
+                                    <div class="full-content">
+                                        <h1>Users</h1>
+                                    </div>
+                                </div>
         
 
-                                while($row = $user_search->fetch(PDO::FETCH_ASSOC)) {
+                        <?php while($row = $user_search->fetch(PDO::FETCH_ASSOC)) {
 
                                     global $userid;
                                     $userid = $row['id'];
 
                                     //CONTENT BOX  - RESULT OUTPUT
-                                    echo ' 
+                        ?> 
                                     <div class="content-box">
+
                                         <div class="segment1">
                                             <div class="result1">
-                                                <h2>';
-                    ?>
+                                                <h2>
                                                     <a href="account/account-view.php?id=<?php echo $userid; ?>">
                                                         View
                                                     </a>
-                    <?php
-                                    echo '      </h2>
+                                                </h2>
                                             </div>
                                         </div>
             
                                         <div class="segment2">
                                             <div class="result2">
-                                                <h2>'.$row['first_name'].' '.$row['last_name'] .'</h2>
-                                                <h3>'.$row['username']. ' - ' .ucwords($row['position']).'</h3>
+                                                <h2><?php echo $row['first_name'].' '.$row['last_name']?></h2>
+                                                <h3><?php echo $row['username']. ' - ' .$row['position']?></h3>
                                             </div>
                                         </div>
-                                    </div>';
-                                }
+                                    </div>
+                        <?php } 
 
                                 // SEE MORE
                                 if($user_search->rowCount() >= 3) {
-                    ?>
+                        ?>
 
                                 <form method="post" action="account/account-view-all.php">
                                     <button class="content-box"  style="margin-bottom: 30px; cursor: pointer; text-decoration: underline;">
@@ -212,78 +251,148 @@
                                     <input type="hidden" name="query" value="<?php echo $search; ?>">
                                 </form>
 
-                    <?php
+                        <?php
 
-                                }
-                                
-                            }
+                                    } // END IF FOR USER SEARCH
+                                    
+                                } // END IF FOR IF USER
 
-                            //COMMUNITIES RESULTS
+                        ?>
 
-                            if($communities) {
+                                <!-- COMMUNITIES RESULTS --> 
 
-                                //TITLE
-                                echo '<div class="content-box">
-                                        <div class="full-content">
-                                            <h1>Communities</h1>
-                                        </div>
-                                    </div>';
+                        <?php if($communities) { ?>
+
+                                <!-- TITLE -->
+                                <div class="content-box">
+                                    <div class="full-content">
+                                        <h1>Communities</h1>
+                                    </div>
+                                </div>
         
-                                //SELECT RESULTS FROM DB
-                                while($row = $comm_search->fetch(PDO::FETCH_ASSOC)) {
+                                <!-- SELECT RESULTS FROM DB -->
+                        <?php      while($row = $comm_search->fetch(PDO::FETCH_ASSOC)) {
 
 
                                     global $community_id;
                                     $community_id = $row['id'];
-
-                                    //CONTENT BOX
-                                    echo ' 
+                        ?>
+                                    <!-- CONTENT BOX -->
+                                 
                                     <div class="content-box">
                                         <div class="segment1">
                                             <div class="result1">
-                                                <h2>';
-                    ?>
+                                                <h2>
+                   
                                                     <a href="communities/communities-view.php?id=<?php echo $community_id; ?>">
                                                         View
                                                     </a>
-                    <?php  
-                                            echo '</h2>
+                                                </h2>
                                             </div>
                                         </div>
             
                                         <div class="segment2">
                                             <div class="result2">
-                                                <h2>'.$row['class_name'] .'</h2>
-                                                <h3>'.$row['class_proctor'].'</h3>
-                                                <h3>'.$row['class_size']. ' student[s] are enrolled</h3>
+                                                <h2><?php echo $row['class_name']?></h2>
+                                                <h3><?php echo $row['class_proctor']?></h3>
+                                                <h3><?php echo $row['class_size']?> student[s] are enrolled</h3>
                                             </div>
                                         </div>
-                                    </div>';
-                                }
+                                    </div>
+                        <?php } ?>
 
-                                 // SEE MORE
-                                 if($comm_search->rowCount() >= 3) {
-                                    echo '<div class="content-box">
-                                        <div class="full-content">';
-                    ?>
-                                            <h3 align="center"><a href="communities/comm-see-all.php?search_query=<?php echo trim($search); ?>">See All Results</a></h3>
+                                  <!-- SEE MORE -->
+                        <?php if($comm_search->rowCount() >= 3) { ?>
 
-                    <?php
-                                    echo '</div>
-                                    </div>';
-                                }
-                            }
-                        } else {
-                    
-                            echo ' 
+                                <form method="post" action="communities/communities-view-all.php">
+                                    <button class="content-box"  style="margin-bottom: 30px; cursor: pointer; text-decoration: underline;">
+                                        <div class="full-content" style="font-size: 1.7em;">
+                                            See All Results
+                                        </div>
+                                    </button>
+
+                                    <input type="hidden" name="query" value="<?php echo $search; ?>">
+                                </form>
+                        <?php   
+                                } //END IF
+                            } //END COMMUNITIES ?>
+
+
+
+                        <!-- USERS SEARCH RESULTS -->
+
+                        <?php if($post) { ?>
+
+                        <!-- TITLE -->
+                        <div class="content-box">
+                            <div class="full-content">
+                                <h1>Posts</h1>
+                            </div>
+                        </div>
+
+
+                        <?php while($row = $post_search->fetch(PDO::FETCH_ASSOC)) {
+
+                            global $postid;
+                            $postid = $row['id'];
+
+                            //CONTENT BOX  - RESULT OUTPUT
+                        ?> 
+                            <div class="content-box">
+
+                                <div class="segment1">
+                                    <div class="result1">
+                                        <h2>
+                                            <a href="posts/post-view.php?id=<?php echo $postid; ?>">
+                                                View
+                                            </a>
+                                        </h2>
+                                    </div>
+                                </div>
+
+                                <div class="segment2">
+                                    <div class="result2">
+                                        <h4><?php echo $row['community']?></h4>
+                                        <h2>Title: <?php echo $row['title']?></h2>
+                                        <h3>Post: <?php echo $row['body']?>...</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php } 
+
+                        // SEE MORE
+                        if($post_search->rowCount() >= 3) {
+                        ?>
+
+                       
+                            <form method="post" action="posts/post-view-all.php">
+                                <button class="content-box"  style="margin-bottom: 30px; cursor: pointer; text-decoration: underline;">
+                                    <div class="full-content" style="font-size: 1.7em;">
+                                        See All Results
+                                    </div>
+                                </button>
+
+                                <input type="hidden" name="query" value="<?php echo $search; ?>">
+                            </form>
+
+                        <?php
+
+                            } // END IF FOR POST SEARCH
+                            
+                        } // END IF FOR IF POST
+
+                        ?>
+
+
+                        <?php } else { ?>
+
                             <div class="content-box" style="margin-top:30px;">
                                 <div class="full-content">
                                     Use the search bar to discover users, posts and communities!
                                  </div>
-                            </div>';
-                        }
+                            </div>
 
-                    ?>
+                        <?php } ?>
 
                 </div>
             </div>

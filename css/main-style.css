@@ -658,6 +658,16 @@ button .content-box {
 
 /* used for post */
 
+.postbox {
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+}
+
+.postbox .segment2 {
+    width: 100%;
+}
 
 
 .bottom-bar {
@@ -671,10 +681,14 @@ button .content-box {
     margin-top: 15px;
 
     box-sizing: border-box;
-    padding: 12px;
-    border-radius: 20px;
+    padding: 15px;
+    border-radius: 0px 0px 20px 0px;
     cursor: pointer;
 
+    background: rgb(66, 151, 201, 0.6);
+    color: white;
+    opacity: 0.7;
+    font-size: 1.2em;
 }
 
 .content-box.error {

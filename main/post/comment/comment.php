@@ -28,6 +28,10 @@
         $alert = 'There seems to be a missing value. Please try again.';
     } else if($_GET['alert'] == 'inappropriate-value') {
         $alert = 'The value entered is inappropriate. Please try again.';
+    } else if ($_GET['postid'] == ' ' OR $_GET['postid'] == NULL) {
+		$alert = 'Something went wrong! Please return to feed <a style="color:white" href="../../feed.php">here</a> or use the back button.';
+	} else if ($_GET == '' OR $_GET == NULL) {
+		$alert = 'Something went wrong! Please return to feed <a style="color:white" href="../../feed.php">here</a> or use the back button.';
     } else  {
         $alert = 'Compose Comment Here:';
     }

@@ -82,6 +82,7 @@
                             
                             <select name="community">
                                 <option value="question">--Add a community tag?--</option>
+                                <option value="For Everybody">Everybody</option>
                                 <option value="Pre-Calculus">Pre-Calculus w/ Carol Van Fossen</option>
                                 <option value="English 12">English 12 w/ Carlee Beatty</option>
                                 <option value="Algebra 2">Algebra 2 w/ Robert</option>

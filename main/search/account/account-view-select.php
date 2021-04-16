@@ -15,6 +15,8 @@ $search_user_id = $_GET['id'];
     //FETCH VAR
     if($account_view->rowCount() > 0){
         $user_account_info = $account_view->fetch(PDO::FETCH_ASSOC);
+    } else {
+        header("http://localhost:8888/themetronetwork/main/search/posts/post-view.php?alert=error");
     }
 
 //////////////////////////////////////////////////////

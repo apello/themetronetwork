@@ -111,7 +111,7 @@
 					<li><a href="../../feed.php">Home</a></li>
 					<li><a href="../search.php">Search</a></li>
 					<li><a href="../../settings/account/settings.php">Settings</a></li>
-					<li><a href="../../../logout.php">Logout</a></li>
+                    <li><a href="../../../logout.php?id=<?php echo $row['id'] ?>">Logout</a></li>
 				</ul>
 			</nav>
 		</header>
@@ -123,10 +123,18 @@
 					<div class="section section1">
 						<div class="title">Account View</div>
 
-						<?php if($_GET['header']) {  ?>
+						<?php if($_GET['header'] == "friends") {  ?>
 
 							<div class="links">
 								<a href="../../settings/friends/friends.php" class="link">Back to Settings</a>
+							</div>
+
+						<?php } else if($_GET['header'] == "postview") {  ?>
+
+						<?php $postid = $_GET['postid']; ?>
+
+							<div class="links">
+								<a href="../posts/post-view.php?id=<?php echo $postid ?>" class="link">Back to Post View</a>
 							</div>
 
 						<?php } else { ?>
@@ -365,6 +373,11 @@
 									<input type="hidden" name="header" value="<?php echo $_GET['header']; ?>">
 								<?php } //END IF BRACKET ?>
 
+
+								<?php if(isset($_GET['postid'])) { ?>
+									<input type="hidden" name="postid" value="<?php echo $_GET['postid']; ?>">
+								<?php } //END IF BRACKET ?>
+
 							</form>
 
 						<!-- IF NOT FRIENDS AND NOT USER'S OWN ACCOUNT -->
@@ -380,9 +393,15 @@
 								<input type="hidden" name="friend" value="<?php echo $_GET['id']; ?>">
 								<input type="hidden" name="userid" value="<?php echo $row['id']; ?>">
 
-								<!-- header from settings -->
+								<!-- header from settings and postview -->
 								<?php if(isset($_GET['header'])) { ?>
 									<input type="hidden" name="header" value="<?php echo $_GET['header']; ?>">
+								<?php } //END IF BRACKET ?>
+
+								<!-- postid from postview -->
+
+								<?php if(isset($_GET['postid'])) { ?>
+									<input type="hidden" name="postid" value="<?php echo $_GET['postid']; ?>">
 								<?php } //END IF BRACKET ?>
 
 							</form>
