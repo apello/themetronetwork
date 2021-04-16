@@ -111,7 +111,7 @@
                 <div class="container">
                     <div class="section section1">
                         <div class="links">
-                            <a href="friends.php" class="link">Back</a>
+                            <a href="friends.php" class="link">Back to Settings</a>
                         </div>
                     </div>
                     

@@ -50,8 +50,8 @@
     
     //pull search from get because it doesnt practically exist on this page
     $search = $_GET['search'];
-    $parameter = $_GET['param'];
-
+/*     $parameter = $_GET['param'];
+ */
     //FILTERED INPUT
     if($input_set) {
         //USER
@@ -117,12 +117,12 @@
 
                                 <input type="text" name="search" placeholder="Search here:"/>
 
-                                <select name="search-param">
+                              <!--   <select name="search-param">
                                     <option value="all">Search Options:</option>
                                     <option value="users">Users</option>
                                     <option value="posts">Posts</option>
                                     <option value="communities">Communities</option>
-                                </select>
+                                </select> -->
                                 
                                 <input type="submit" name="submit" class="submit-btn" value="Go">
                         </form>

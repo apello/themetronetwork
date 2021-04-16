@@ -60,7 +60,7 @@
                     
                     <div class="section section2">
                     
-                        <div class="section-title">Friends</div>
+                        <div class="section-title">Settings - Friends</div>
 
                         <div class="content-box">
                             <div class="segment full-content">
@@ -105,7 +105,7 @@
                                         <div class="result1">
                                             <h2>
                                                 <!-- LINK TO VIEW PAGE -->
-                                                <a href="../../search/account/account-view.php?id=<?php echo $friend_acccount_info['id']; ?>">
+                                                <a href="../../search/account/account-view.php?id=<?php echo $friend_acccount_info['id']; ?>&header=friends">
                                                     View
                                                 </a>
                                             </h2>

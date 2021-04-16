@@ -5,8 +5,7 @@
 	require_once("../../../includes/auth-check.php");
 	require_once("../../../includes/session-check.php");
 
-    require("community-view-select.php");
-
+	require_once("community-view-select.php");
 
     $_SESSION['LAST_ACTIVITY'] = time();
 
@@ -70,9 +69,20 @@
 					<div class="section section1">
 						<div class="title">Communities</div>
 
-						<div class="links">
-							<a href="../search.php" class="link">Back to Search</a>
-						</div>
+						<?php if($_GET['header']) {  ?>
+							
+							<div class="links">
+								<a href="../../settings/communities/communities.php" class="link">Back to Settings</a>
+							</div>
+
+						<?php } else { ?>
+
+							<div class="links">
+								<a href="../search.php" class="link">Back to Search</a>
+							</div>
+
+						<?php } ?>
+
 					</div>
 
 					<div class="section section2" style="padding-bottom: 20px;">
@@ -90,7 +100,7 @@
 
                             <div class="content-box">
                                 <div class="full-content">
-                                    <h3><?php echo $community_info['class_proctor']; ?></h3>
+                                    <h3>Teacher: <?php echo $community_info['class_proctor']; ?></h3>
                                 </div>
                             </div>
 
@@ -111,41 +121,50 @@
 
                         <!-- ADD BTN -->
 
-						<!-- IF USER HAS FRIENDS AND IS NOT USERS OWN ACCOUNT -->
 						
-						<?php if($friends AND !$own_account) { ?>
+						<?php if($comm_member) { ?>
 
-                        <form action="account-view-form.php" method="post">
+                        <form action="communities-view-form.php" method="post">
 
 
                             <button class="outer-button unfriend">
                                 <img id="unfriend" src="../../../pictures/delete-friend.png">      
                             </button>
                             
-                            <input type="hidden" name="unfriend" value="<?php echo $_GET['id']; ?>">
+                            <input type="hidden" name="unadd" value="<?php echo $_GET['id']; ?>">
                             <input type="hidden" name="userid" value="<?php echo $row['id']; ?>">
+
+							<!-- header from settings -->
+							<?php if(isset($_GET['header'])) { ?>
+								<input type="hidden" name="header" value="<?php echo $_GET['header']; ?>">
+							<?php } //END IF BRACKET ?>
 
                         </form>
 
                         <!-- IF NOT FRIENDS AND NOT USER'S OWN ACCOUNT -->
 
-                        <?php } else if(!$friends AND !$own_account) { ?>
+                        <?php } else { ?>
 
-                        <form action="account-view-form.php" method="post">
+                        <form action="communities-view-form.php" method="post">
 
-                            <button class="outer-button friend">
+                            <button class="outer-button add">
                                 <img id="friend" src="../../../pictures/plus.png">      
                             </button>
                                                     
-                            <input type="hidden" name="friend" value="<?php echo $_GET['id']; ?>">
+                            <input type="hidden" name="add" value="<?php echo $_GET['id']; ?>">
                             <input type="hidden" name="userid" value="<?php echo $row['id']; ?>">
+
+							<!-- header from settings -->
+							<?php if(isset($_GET['header'])) { ?>
+								<input type="hidden" name="header" value="<?php echo $_GET['header']; ?>">
+							<?php } //END IF BRACKET ?>
+
 
                         </form>
 
-
                         <?php } //END IF BRACKET ?>
 
-<!-- END FRIEND BTN -->
+				<!-- END BTNS -->
 
 
 		 

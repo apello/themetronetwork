@@ -116,7 +116,7 @@
                 <div class="container">
                     <div class="section section1">
                         <div class="links">
-                            <a href="communities.php" class="link">Back</a>
+                            <a href="communities.php" class="link">Back to Settings</a>
                         </div>
                     </div>
                     

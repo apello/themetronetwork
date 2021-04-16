@@ -2,71 +2,82 @@
 <?php
 
 //SAME ID; NEEDED FOR ISSET CHECKS
-$friend_id = $_POST['friend'];
-$unfriend_id = $_POST['unfriend'];
+$add_id = $_POST['add'];
+$unadd_id = $_POST['unadd'];
 
 $userid = $_POST['userid'];
+
+$header = $_POST['header'];
+
 
 
 //IF USER ID SET
 if(isset($userid)) {
 
-    //IF FRIEND ID SET
-    if(isset($unfriend_id)) {
-        //IF USER ID DOES NOT MATCH FRIEND ID
-        if($unfriend_id != $userid) {
-
-            //IF QRY IS SUCCESSFULL, GO TO ACCOUNT-VIEW WITH ID & SUCCESS ALERT
-            if(unFriendUser($userid, $unfriend_id)) {
-                header("Location: http://localhost:8888/themetronetwork/main/search/account/account-view.php?id=".$unfriend_id."&alert=unfriended");
+    //IF CLASS ID SET
+    if(isset($unadd_id)) {
+        //IF QRY IS SUCCESSFULL, GO TO ACCOUNT-VIEW WITH ID & SUCCESS ALERT
+        if(unAddComm($userid, $unadd_id)) {
+            if(isset($header)) {
+                header("Location: http://localhost:8888/themetronetwork/main/search/communities/communities-view.php?id=".$unadd_id."&alert=left&header=communities");
+                exit();
             } else {
-                header("Location: http://localhost:8888/themetronetwork/main/search/account/account-view.php?id=".$unfriend_id."&alert=error");
+                header("Location: http://localhost:8888/themetronetwork/main/search/communities/communities-view.php?id=".$unadd_id."&alert=left");
+                exit();
             }
         } else {
-            header("Location: http://localhost:8888/themetronetwork/main/search/search.php");
+            header("Location: http://localhost:8888/themetronetwork/main/search/communities/communities-view.php?id=".$unadd_id."&alert=error");
+            exit(); 
         }
-    }  
+    }
     
-    if(isset($friend_id)) {
-        if($friend_id != $userid) {
-            if(friendUser($userid, $friend_id)) {
-                header("Location: http://localhost:8888/themetronetwork/main/search/account/account-view.php?id=".$friend_id."&alert=friended");
+    if(isset($add_id)) {
+        if(addComm($userid, $add_id)) {
+            if(isset($header)) {
+                header("Location: http://localhost:8888/themetronetwork/main/search/communities/communities-view.php?id=".$add_id."&alert=joined&header=communities");
+                exit();
             } else {
-                header("Location: http://localhost:8888/themetronetwork/main/search/account/account-view.php?id=".$friend_id."&alert=error");
+                header("Location: http://localhost:8888/themetronetwork/main/search/communities/communities-view.php?id=".$add_id."&alert=joined");
+                exit();
             }
         } else {
-            header("Location: http://localhost:8888/themetronetwork/main/search/search.php");
-        } 
-    }
+            header("Location: http://localhost:8888/themetronetwork/main/search/communities/communities-view.php?id=".$add_id."&alert=error");
+            exit();
+        }
+    } 
 
 //ELSE GO TO SEARCH PAGE
 } else {
-    header("Location: http://localhost:8888/themetronetwork/main/search/search.php");
+
+    echo "friend id doesnt work";
+
+   /*  header("Location: http://localhost:8888/themetronetwork/main/search/search.php");
+    exit(); */
 }
 
 
 
 /////////////////////////////////////////////
-//FRIENDING FUNCTIONS
+//ADDING FUNCTIONS
 
 
-//FRIEND USER
+//ADD COMM
 
-function friendUser($userid, $friend_id) {
+function addComm($userid, $add_id) {
 
     require_once("../../../includes/db.php");
 
     $result;
 
-    $friend_qry = "INSERT INTO friends (user_id1, user_id2) VALUES (:userid, :friend_id)";
-    $friend = $conn->prepare($friend_qry);
+    $add_qry = "INSERT INTO communities (userid, joined_at, classid) VALUES (:userid, NOW(), :classid)";
+    $add = $conn->prepare($add_qry);
 
-    $friend->bindParam(":userid", $userid);
-    $friend->bindParam(":friend_id", $friend_id);
+    $add->bindParam(":userid", $userid);
+    $add->bindParam(":classid", $add_id);
 
-    $friend->execute();
+    $add->execute();
 
-    if($friend->rowCount() > 0) {
+    if($add->rowCount() > 0) {
         $result = TRUE;
     } else {
         $result = FALSE;
@@ -76,23 +87,23 @@ function friendUser($userid, $friend_id) {
 }
 
 
-//UNFRIEND USER
+//ADD COMM
 
-function unFriendUser($userid, $unfriend_id) {
+function unAddComm($userid, $unadd_id) {
 
     require_once("../../../includes/db.php");
 
     $result;
 
-    $unfriend_qry = "DELETE FROM friends WHERE user_id1 = :userid AND user_id2 = :unfriend_id";
-    $unfriend = $conn->prepare($unfriend_qry);
+    $unadd_qry = "DELETE FROM communities WHERE userid = :userid AND classid = :classid";
+    $unadd = $conn->prepare($unadd_qry);
 
-    $unfriend->bindParam(":userid", $userid);
-    $unfriend->bindParam(":unfriend_id", $unfriend_id);
+    $unadd->bindParam(":userid", $userid);
+    $unadd->bindParam(":classid", $unadd_id);
 
-    $unfriend->execute();
+    $unadd->execute();
 
-    if($unfriend->rowCount() > 0) {
+    if($unadd->rowCount() > 0) {
         $result = TRUE;
     } else {
         $result = FALSE;

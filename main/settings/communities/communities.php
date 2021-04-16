@@ -61,7 +61,7 @@
                     
                     <div class="section section2">
                     
-                        <div class="section-title">Communities</div>
+                        <div class="section-title">Settings - Communities</div>
 
                         <div class="content-box">
                             <div class="segment full-content">
@@ -69,9 +69,8 @@
                             </div>
                         </div>
 
-
-                        <div class="content-box">
-                            <div class="segment full-content">
+                        <div class="content-box" style="margin-bottom: 40px;">
+                            <div class="full-content" align="center">
                                 <a href="edit-communities.php">Edit Communities</a>
                             </div>
                         </div>
@@ -96,7 +95,7 @@
                                         <div class="result1">
                                             <h2>
                                                 <!-- LINK TO VIEW PAGE -->
-                                                <a href="../../search/communities/communities-view.php?id=<?php echo $output['id']; ?>">
+                                                <a href="../../search/communities/communities-view.php?id=<?php echo $output['id']; ?>&header=communities">
                                                     View
                                                 </a>
                                             </h2>

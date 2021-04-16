@@ -1,6 +1,6 @@
-<?php
+<?php  
 
-    $classid = $_GET['id'];
+   $classid = $_GET['id'];
 
     //SELECT CLASS INFO USING GET ID
     $select_class_qry = 
@@ -30,14 +30,17 @@
         $community_info = $select_class->fetch(PDO::FETCH_ASSOC);
     }
 
-    //FIND OUT WHETHER USER IS IN COMMUNITY ALREADY
 
-
-    $community_member_qry = "SELECT * FROM community WHERE userid = :userid AND classid = :classid";
+    //Select from communities to see whether user is a member
+    $community_member_qry = "SELECT * FROM communities WHERE userid = :userid AND classid = :classid";
     $community_member = $conn->prepare($community_member_qry);
 
     $community_member->bindParam(":userid", $row['id']);
     $community_member->bindParam(":classid", $classid);
 
     $community_member->execute();
+
+    if($community_member->rowCount() > 0) {
+        $comm_member = TRUE;
+    }
 

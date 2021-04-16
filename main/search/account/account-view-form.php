@@ -7,6 +7,9 @@
 
 	$userid = $_POST['userid'];
 
+	$header = $_POST['header'];
+
+
 
 	//IF USER ID SET
 	if(isset($userid)) {
@@ -18,30 +21,47 @@
 
 				//IF QRY IS SUCCESSFULL, GO TO ACCOUNT-VIEW WITH ID & SUCCESS ALERT
 				if(unFriendUser($userid, $unfriend_id)) {
-					header("Location: http://localhost:8888/themetronetwork/main/search/account/account-view.php?id=".$unfriend_id."&alert=unfriended");
+					if(isset($header)) {
+						header("Location: http://localhost:8888/themetronetwork/main/search/account/account-view.php?id=".$unfriend_id."&alert=unfriended&header=friends");
+						exit();
+					} else {
+						header("Location: http://localhost:8888/themetronetwork/main/search/account/account-view.php?id=".$unfriend_id."&alert=unfriended");
+						exit();
+					}
 				} else {
 					header("Location: http://localhost:8888/themetronetwork/main/search/account/account-view.php?id=".$unfriend_id."&alert=error");
+					exit();
 				}
 			} else {
 				header("Location: http://localhost:8888/themetronetwork/main/search/search.php");
+				exit();
 			}
 		}  
 		
 		if(isset($friend_id)) {
 			if($friend_id != $userid) {
 				if(friendUser($userid, $friend_id)) {
-					header("Location: http://localhost:8888/themetronetwork/main/search/account/account-view.php?id=".$friend_id."&alert=friended");
+					if(isset($header)) {
+						header("Location: http://localhost:8888/themetronetwork/main/search/account/account-view.php?id=".$friend_id."&alert=friended&header=friends");
+						exit();
+					} else {
+						header("Location: http://localhost:8888/themetronetwork/main/search/account/account-view.php?id=".$friend_id."&alert=friended");
+						exit();
+					}
 				} else {
 					header("Location: http://localhost:8888/themetronetwork/main/search/account/account-view.php?id=".$friend_id."&alert=error");
+					exit();
 				}
 			} else {
 				header("Location: http://localhost:8888/themetronetwork/main/search/search.php");
+				exit();
 			} 
 		}
 
 	//ELSE GO TO SEARCH PAGE
 	} else {
 		header("Location: http://localhost:8888/themetronetwork/main/search/search.php");
+		exit();
 	}
 
 

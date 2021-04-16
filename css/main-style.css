@@ -711,6 +711,11 @@ button .content-box {
     z-index: 2;
 }
 
+.outer-button:hover {
+    background: #a5fafa;    
+
+}
+
 .outer-button.add img {
     width: 50px;
     height: 50px;

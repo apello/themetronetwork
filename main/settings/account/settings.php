@@ -68,7 +68,7 @@ function deleteAlert() {
                     
                     <div class="section section2">
                     
-                        <div class="section-title">Account</div>
+                        <div class="section-title">Settings - Account</div>
 
                         <div class="content-box">
                             <div class="segment full-content">

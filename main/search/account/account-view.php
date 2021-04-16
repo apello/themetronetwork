@@ -91,7 +91,7 @@
 	} else if ($_GET == '' OR $_GET == NULL) {
 		$alert = 'Something went wrong! Please return to search <a href="../search.php">here</a> or use the back button.';
 	} else  {
-		$alert = 'User Account View';
+		$alert = 'Search - User Account View';
 	}
 
 ?>
@@ -123,9 +123,20 @@
 					<div class="section section1">
 						<div class="title">Account View</div>
 
-						<div class="links">
-							<a href="../search.php" class="link">Back to Search</a>
-						</div>
+						<?php if($_GET['header']) {  ?>
+
+							<div class="links">
+								<a href="../../settings/friends/friends.php" class="link">Back to Settings</a>
+							</div>
+
+						<?php } else { ?>
+
+							<div class="links">
+								<a href="../search.php" class="link">Back to Search</a>
+							</div>
+
+						<?php } ?>
+
 					</div>
 
 					<div class="section section2" style="padding-bottom: 20px;">
@@ -349,6 +360,11 @@
 								<input type="hidden" name="unfriend" value="<?php echo $_GET['id']; ?>">
 								<input type="hidden" name="userid" value="<?php echo $row['id']; ?>">
 
+								<!-- header from settings -->
+								<?php if(isset($_GET['header'])) { ?>
+									<input type="hidden" name="header" value="<?php echo $_GET['header']; ?>">
+								<?php } //END IF BRACKET ?>
+
 							</form>
 
 						<!-- IF NOT FRIENDS AND NOT USER'S OWN ACCOUNT -->
@@ -363,6 +379,11 @@
 														
 								<input type="hidden" name="friend" value="<?php echo $_GET['id']; ?>">
 								<input type="hidden" name="userid" value="<?php echo $row['id']; ?>">
+
+								<!-- header from settings -->
+								<?php if(isset($_GET['header'])) { ?>
+									<input type="hidden" name="header" value="<?php echo $_GET['header']; ?>">
+								<?php } //END IF BRACKET ?>
 
 							</form>
 

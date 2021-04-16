@@ -85,7 +85,7 @@
 
 
                         <div class="links">
-                            <a href="settings.php" class="link">Back</a>
+                            <a href="settings.php" class="link">Back to Settings</a>
                             <a href="edit-password.php" class="link">Edit Password</a>
                         </div>
 

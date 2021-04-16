@@ -81,7 +81,7 @@
 
 
                         <div class="links">
-                            <a href="settings.php" class="link">Back</a>
+                            <a href="settings.php" class="link">Back to Settings</a>
                             <a href="edit-account.php" class="link">Edit Account</a>
                         </div>
 

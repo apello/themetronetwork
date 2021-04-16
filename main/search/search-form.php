@@ -7,8 +7,7 @@ if(isset($_POST['submit'])){
 
     //intializes variables
     $search_query = $_POST["search"];
-    $search_param = $_POST['search-param'];
-
+    /* $search_param = $_POST['search-param']; */
     $bad_words_filepath = "../../includes/bad-words.php";
 
     
@@ -22,13 +21,8 @@ if(isset($_POST['submit'])){
         header("Location: http://localhost:8888/themetronetwork/main/search/search.php?alert=inappropriate-value");
         exit();
     } else {
-        if(isset($search_param)) {
-            header("Location: http://localhost:8888/themetronetwork/main/search/search.php?alert=input-set&search=".$search_query."&param=".$search_param);
-            exit();
-        } else {
-            header("Location: http://localhost:8888/themetronetwork/main/search/search.php");
-            exit();
-        }
+        header("Location: http://localhost:8888/themetronetwork/main/search/search.php?alert=input-set&search=".$search_query);
+        exit();
     }
 
 }

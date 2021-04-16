@@ -87,9 +87,10 @@
                 <div class="title">Hi, <?php echo $row['first_name']; ?>!</div>
 
                 <div class="links" id="hide">
-                    <div class="link" style="background-color: rgba(50, 231, 255, 0.7);">Things To Do:</div>
                     <a href="search/search.php" class="link">Search For Friends</a>
                     <a href="settings/account/edit-account.php" class="link">Change Your Bio</a>
+                    <a href="" class="link">Give Feedback</a>
+
                 </div>
 
             </div>
