@@ -159,7 +159,12 @@
                             
                                 <div class="segment segment1">
                                     <button class="heart-filled"></button>
-                                    <button class="comment"></button>
+
+                                    <a href="post/comment/comment.php?title=<?php echo $post_info['title']; ?>&postid=<?php echo $post_info['id']; ?>">
+                                        <button class="comment">
+                                        </button>
+                                    </a>
+
                                 </div>
 
                                 <div class="segment segment2">

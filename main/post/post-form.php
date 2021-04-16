@@ -22,11 +22,6 @@ if(isset($_POST['submit'])){
     if($community == "question"){ $community = NULL; }
 
 
-    echo $userid;
-    echo $title;
-    echo $body;
-    echo $community;
-
 
     if(isEmpty($title, $body)) {
         header("Location: http://localhost:8888/themetronetwork/main/post/post.php?alert=missing-value");
