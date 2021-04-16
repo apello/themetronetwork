@@ -9,7 +9,6 @@ if(isset($_POST['submit'])){
     $search_query = $_POST["search"];
     /* $search_param = $_POST['search-param']; */
     $bad_words_filepath = "../../includes/bad-words.php";
-
     
     //if empty directs user back with all empty error
     if(isEmpty($search_query)) {
@@ -21,9 +20,11 @@ if(isset($_POST['submit'])){
         header("Location: http://localhost:8888/themetronetwork/main/search/search.php?alert=inappropriate-value");
         exit();
     } else {
+        trackUserActions($_POST["userid"], "SEARCHED", "../../includes/db.php");
+
         header("Location: http://localhost:8888/themetronetwork/main/search/search.php?alert=input-set&search=".$search_query);
         exit();
-    }
+    } 
 
 }
 

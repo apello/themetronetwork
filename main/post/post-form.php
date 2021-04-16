@@ -34,6 +34,7 @@ if(isset($_POST['submit'])){
     } 
 
     if(createPost($userid, $title, $body, $community, $filepath)) {
+        trackUserActions($userid, "POSTED", $filepath);
         header("Location: http://localhost:8888/themetronetwork/main/feed.php?alert=successful-post");
         exit(); 
     } else {

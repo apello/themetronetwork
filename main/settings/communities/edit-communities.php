@@ -4,8 +4,10 @@
     require_once("../../../includes/db.php");
     require_once("../../../includes/auth-check.php");
     require_once("../../../includes/session-check.php");
-
+    //FOR INFO SELECTION
     require_once("communities-select.php");
+
+    //FOR TRACKING
 
     $_SESSION['LAST_ACTIVITY'] = time();
   
@@ -62,6 +64,11 @@
                 }
 
                 if($all_query_success == TRUE && $iterative == (count($classid) - 1)) {
+
+                    require("../../../includes/functions.php");
+
+                    trackUserActions($row['id'], "EDITED COMMUNITIES", "../../../includes/db.php");
+
                     //RELOCATE PAGE BCUZ OF SOME WEIRD BUG - CHECK OUT LATER
                     header("Location: http://localhost:8888/themetronetwork/main/settings/communities/communities.php");
                     exit();
@@ -94,6 +101,8 @@
 <body>
 
     <div class="flexbox-container">
+
+
         <header>
             <div class="logo">
                 <h1>TMN</h1>

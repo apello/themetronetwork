@@ -17,6 +17,10 @@ if(isset($_POST['submit'])){
     $user_email = $_POST["user-email"];
     $user_bio = $_POST["user-bio"];
 
+    //FOR TRACKING
+    $user_id = $_POST['user-id'];
+
+
     
     //if empty directs user back with all empty error
     if(allEmpty($user_first_name, $user_last_name, $user_username, $user_email, $user_bio)) {
@@ -74,7 +78,10 @@ if(isset($_POST['submit'])){
     //if input passes all functions, account is edited and the user is directed back
     //if something goes wrong, user is sent back with error
     if(editUser($user_first_name, $user_last_name, $user_username, $user_email, $user_bio)) {
-        header("Location: http://localhost:8888/themetronetwork/main/settings/account/edit-account.php?alert=successful-edit");
+
+        trackUserActions($user_id, "EDITED ACCOUNT", $filepath);
+
+        header("Location: http://localhost:8888/themetronetwork/main/settings/account/settings.php?alert=successful-edit");
         exit(); 
     } else {
         header("Location: http://localhost:8888/themetronetwork/main/settings/account/edit-account.php?alert=unsuccessful-edit");

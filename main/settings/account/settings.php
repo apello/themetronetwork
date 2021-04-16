@@ -29,6 +29,18 @@ function deleteAlert() {
 }
 </script>
 
+<?php 
+
+    $alert;
+
+    if ($_GET['alert'] == 'successful-edit') {
+        $alert = 'Your information has been successfully edited!';
+    } else  {
+        $alert = 'Settings - Account';
+    }
+
+    ?>
+
 
 <body>
 <div id="demo"></div>
@@ -68,7 +80,7 @@ function deleteAlert() {
                     
                     <div class="section section2">
                     
-                        <div class="section-title">Settings - Account</div>
+                        <div class="section-title"><?php echo $alert; ?></div>
 
                         <div class="content-box">
                             <div class="segment full-content">

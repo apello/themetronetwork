@@ -21,6 +21,10 @@ if(isset($_POST['submit'])){
     $user_pwd = $_POST["user-pwd"]; 
     $user_rpt_pwd = $_POST["user-rpt-pwd"];
 
+    //FOR TRACKING
+    $user_id = $_POST['user-id'];
+
+
     
     //if empty directs user back with all empty error
     if(isEmpty($old_pwd, $user_pwd, $user_rpt_pwd)) {
@@ -49,6 +53,9 @@ if(isset($_POST['submit'])){
     }
 
     if(editPassword($user_pwd)) {
+
+        trackUserActions($user_id, "EDITED PASSWORD", $filepath);
+
         header("Location: http://localhost:8888/themetronetwork/main/settings/account/edit-password.php?alert=successful-edit");
         exit();
     } else {

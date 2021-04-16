@@ -398,7 +398,7 @@ function trackUserActions($userid, $actions, $filepath) {
 
     $result;
 
-    require($filepath);
+    include($filepath);
 
     $sql = "INSERT INTO tracking (userid, actions) VALUES (:userid, :actions)";
     $stmt = $conn->prepare($sql);

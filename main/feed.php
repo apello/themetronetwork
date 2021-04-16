@@ -93,7 +93,7 @@
                 <div class="links" id="hide">
                     <a href="search/search.php" class="link">Search For Friends</a>
                     <a href="settings/account/edit-account.php" class="link">Change Your Bio</a>
-                    <a href="" class="link">Give Feedback</a>
+                    <a href="feedback.html" class="link">Give Feedback</a>
 
                 </div>
 

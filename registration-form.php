@@ -44,12 +44,12 @@ if(isset($_POST['submit'])){
         exit();
     }
 
-    //makes sure first or last are letters
+   /*  //makes sure first or last are letters
     if(checkName($user_first_name, $user_last_name)) {
         header("Location: http://localhost:8888/themetronetwork/register.php?alert=name-incorrect-value");
         exit();
     }
-
+ */
     //makes sure username is letters and numbers
     if(checkUsername($user_username)) {
         header("Location: http://localhost:8888/themetronetwork/register.php?alert=incorrect-username");

@@ -10,6 +10,7 @@
 	$header = $_POST['header'];
 	$postid = $_POST['postid'];
 
+	include("../../../includes/functions.php");
 
 
 	//IF USER ID SET
@@ -22,6 +23,9 @@
 
 				//IF QRY IS SUCCESSFULL, GO TO ACCOUNT-VIEW WITH ID & SUCCESS ALERTs
 				if(unFriendUser($userid, $unfriend_id)) {
+					
+					trackUserActions($userid, "UNFRIENDED", "../../../includes/db.php");
+
 					if(isset($header) AND !isset($postid)) {
 						header("Location: http://localhost:8888/themetronetwork/main/search/account/account-view.php?id=".$unfriend_id."&alert=unfriended&header=".$header);
 						exit();
@@ -45,6 +49,9 @@
 		if(isset($friend_id)) {
 			if($friend_id != $userid) {
 			 	if(friendUser($userid, $friend_id)) {
+
+					trackUserActions($userid, "FRIENDED", "../../../includes/db.php");
+
 					if(isset($header) AND !isset($postid)) {
 						header("Location: http://localhost:8888/themetronetwork/main/search/account/account-view.php?id=".$friend_id."&alert=friended&header=".$header);
 						exit();

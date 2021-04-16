@@ -156,6 +156,8 @@
                                 </select> -->
                                 
                                 <input type="submit" name="submit" class="submit-btn" value="Go">
+                                <!-- FOR TRACKING -->
+                                <input type="hidden" name="userid" value="<?php echo $row['id'];?>">
 
                                 <div class="alert" style="background: light blue; opacity: 0.8;">Start by searching for a name or post content.</div>
 

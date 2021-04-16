@@ -29,6 +29,7 @@ if(isset($_POST['submit'])){
     }  
 
    if(createComment($userid, $postid, $comment, $filepath)) {
+        trackUserActions($userid, "COMMENTED", $filepath);
         header("Location: http://localhost:8888/themetronetwork/main/feed.php?alert=successful-comment");
         exit(); 
     } else {

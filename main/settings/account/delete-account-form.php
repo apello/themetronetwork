@@ -9,6 +9,10 @@ if(isset($_POST['submit'])) {
     $filepath = "../../../includes/db.php";
     $user_pwd = $_POST["user-pwd"]; 
 
+    //FOR TRACKING
+    $userid = $_POST['user-id'];
+
+
     if(isEmpty($user_pwd)) {
         header("Location: http://localhost:8888/themetronetwork/main/settings/account/delete-account.php?alert=missing-value");
         exit();
@@ -20,6 +24,9 @@ if(isset($_POST['submit'])) {
     }
 
     if(deleteUser()) {
+
+        trackUserActions($userid, "DELETED ACCOUNT", $filepath);
+
         header("Location: http://localhost:8888/themetronetwork/index.php?alert=account-deleted");
         exit(); 
     } else {

@@ -58,6 +58,10 @@
                 }
 
                 if($all_query_success == TRUE && $iterative == (count($friendID) - 1)) {
+
+                    require("../../../includes/functions.php");
+
+                    trackUserActions($row['id'], "EDITED FRIENDS", "../../../includes/db.php");
                     //RELOCATE PAGE BCUZ OF SOME WEIRD BUG - CHECK OUT LATER
                     header("Location: http://localhost:8888/themetronetwork/main/settings/friends/friends.php");
                     exit();

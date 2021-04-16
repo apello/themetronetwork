@@ -9,6 +9,8 @@ $userid = $_POST['userid'];
 
 $header = $_POST['header'];
 
+include("../../../includes/functions.php");
+
 
 
 //IF USER ID SET
@@ -18,6 +20,9 @@ if(isset($userid)) {
     if(isset($unadd_id)) {
         //IF QRY IS SUCCESSFULL, GO TO ACCOUNT-VIEW WITH ID & SUCCESS ALERT
         if(unAddComm($userid, $unadd_id)) {
+
+            trackUserActions($userid, "LEFT COMMUNITY", "../../../includes/db.php");
+
             if(isset($header)) {
                 header("Location: http://localhost:8888/themetronetwork/main/search/communities/communities-view.php?id=".$unadd_id."&alert=left&header=communities");
                 exit();
@@ -33,6 +38,9 @@ if(isset($userid)) {
     
     if(isset($add_id)) {
         if(addComm($userid, $add_id)) {
+
+            trackUserActions($userid, "JOINED COMMUNITY", "../../../includes/db.php");
+
             if(isset($header)) {
                 header("Location: http://localhost:8888/themetronetwork/main/search/communities/communities-view.php?id=".$add_id."&alert=joined&header=communities");
                 exit();
